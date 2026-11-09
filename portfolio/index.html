@@ -14,25 +14,46 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
   <style>
     :root {
-      --bg-primary: #0a0e1a;
-      --bg-secondary: #0f1629;
-      --bg-card: #131d35;
-      --bg-card-hover: #1a2645;
-      --accent-blue: #3b82f6;
-      --accent-cyan: #06b6d4;
-      --accent-purple: #8b5cf6;
-      --accent-green: #10b981;
-      --accent-amber: #f59e0b;
-      --accent-red: #ef4444;
-      --text-primary: #f1f5f9;
+      /* Base & Surfaces - Professional Executive Dark Palette */
+      --bg-primary: #090d16;
+      --bg-secondary: #0d1322;
+      --bg-card: #121a2d;
+      --bg-card-hover: #162038;
+      --bg-surface: #1a253f;
+      --bg-inset: rgba(0, 0, 0, 0.25);
+
+      /* Semantic Corporate Accent Palette */
+      --accent-blue: #2563eb;
+      --accent-blue-hover: #1d4ed8;
+      --accent-blue-tint: rgba(37, 99, 235, 0.12);
+      --accent-cyan: #0284c7;
+      --accent-cyan-tint: rgba(2, 132, 199, 0.12);
+      --accent-green: #059669;
+      --accent-green-tint: rgba(5, 150, 105, 0.12);
+      --accent-amber: #d97706;
+      --accent-amber-tint: rgba(217, 119, 6, 0.12);
+      --accent-red: #dc2626;
+      --accent-red-tint: rgba(220, 38, 38, 0.12);
+
+      /* Typography Colors */
+      --text-primary: #f8fafc;
       --text-secondary: #94a3b8;
       --text-muted: #64748b;
-      --border: rgba(59, 130, 246, 0.15);
-      --border-hover: rgba(59, 130, 246, 0.4);
-      --glow-blue: 0 0 30px rgba(59, 130, 246, 0.2);
-      --glow-cyan: 0 0 30px rgba(6, 182, 212, 0.2);
-      --radius-card: 16px;
-      --radius-sm: 8px;
+
+      /* Structural Borders */
+      --border: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(255, 255, 255, 0.18);
+      --border-active: rgba(37, 99, 235, 0.45);
+
+      /* Functional Elevation Shadows - Matte & Disciplined (No Neon Glows) */
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.25);
+      --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.3);
+      --shadow-elevated: 0 12px 32px rgba(0, 0, 0, 0.45);
+
+      /* Architectural Radii - Precise, No Generic AI Pills */
+      --radius-sm: 6px;
+      --radius-card: 10px;
+      --radius-pill: 9999px;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -42,23 +63,33 @@
       color: var(--text-primary);
       line-height: 1.6;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
     /* ─── NAVIGATION ─────────────────────────── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(10, 14, 26, 0.85);
-      backdrop-filter: blur(16px);
+      background: rgba(9, 13, 22, 0.94);
       border-bottom: 1px solid var(--border);
       padding: 0 2rem;
       display: flex; align-items: center; justify-content: space-between;
       height: 64px;
     }
     .nav-brand {
-      font-weight: 700; font-size: 1.1rem;
-      background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      display: flex; align-items: center; gap: 0.5rem;
+      font-weight: 700; font-size: 0.95rem;
+      letter-spacing: -0.01em;
+      color: var(--text-primary);
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .nav-brand-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #93c5fd;
+      background: var(--accent-blue-tint);
+      border: 1px solid rgba(37, 99, 235, 0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
     }
     .nav-right {
       display: flex;
@@ -69,18 +100,18 @@
     .nav-links a {
       color: var(--text-secondary); text-decoration: none;
       font-size: 0.875rem; font-weight: 500;
-      transition: color 0.2s;
+      transition: color 0.15s ease;
     }
-    .nav-links a:hover { color: var(--accent-blue); }
+    .nav-links a:hover { color: var(--text-primary); }
 
     /* Language Switcher */
     .lang-switch-wrap {
       display: inline-flex;
       align-items: center;
-      background: rgba(255, 255, 255, 0.06);
+      background: rgba(255, 255, 255, 0.04);
       border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 3px;
+      border-radius: var(--radius-sm);
+      padding: 2px;
     }
     .lang-btn {
       background: transparent;
@@ -89,82 +120,77 @@
       font-size: 0.75rem;
       font-weight: 600;
       padding: 4px 10px;
-      border-radius: 14px;
+      border-radius: 4px;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.15s ease;
       font-family: 'Inter', sans-serif;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
     }
     .lang-btn.active {
-      background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+      background: var(--bg-surface);
       color: #ffffff;
-      box-shadow: 0 2px 10px rgba(59, 130, 246, 0.4);
+      border: 1px solid var(--border-hover);
+      box-shadow: var(--shadow-sm);
     }
     .lang-btn:hover:not(.active) {
       color: var(--text-primary);
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
     }
 
     /* ─── HERO ───────────────────────────────── */
     .hero {
-      min-height: 100vh;
+      min-height: 85vh;
       display: flex; align-items: center; justify-content: center;
       text-align: center;
       position: relative;
-      padding: 6.5rem 2rem 4rem;
+      padding: 7rem 2rem 4rem;
       overflow: hidden;
     }
     .hero-bg {
       position: absolute; inset: 0; z-index: 0;
-      background:
-        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(59,130,246,0.12) 0%, transparent 70%),
-        radial-gradient(ellipse 60% 40% at 80% 80%, rgba(139,92,246,0.08) 0%, transparent 60%),
-        radial-gradient(ellipse 40% 30% at 20% 60%, rgba(6,182,212,0.06) 0%, transparent 60%);
+      background: linear-gradient(180deg, rgba(14, 21, 36, 0.7) 0%, var(--bg-primary) 100%);
+      pointer-events: none;
     }
-    .hero-grid {
-      position: absolute; inset: 0; z-index: 0;
-      background-image:
-        linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px);
-      background-size: 60px 60px;
-    }
-    .hero-content { position: relative; z-index: 1; max-width: 840px; }
+    .hero-content { position: relative; z-index: 1; max-width: 860px; }
     .hero-badge {
-      display: inline-block;
-      background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.3);
-      color: var(--accent-blue); border-radius: 100px;
-      padding: 6px 18px; font-size: 0.8rem; font-weight: 600;
-      letter-spacing: 0.05em; text-transform: uppercase;
-      margin-bottom: 1.5rem;
-      animation: fadeInUp 0.6s ease both;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(37, 99, 235, 0.08);
+      border: 1px solid rgba(37, 99, 235, 0.25);
+      color: #93c5fd;
+      border-radius: var(--radius-sm);
+      padding: 5px 12px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
     }
     .hero h1 {
-      font-size: clamp(2.3rem, 5.5vw, 3.8rem);
-      font-weight: 800; line-height: 1.15;
-      margin-bottom: 1.5rem;
-      animation: fadeInUp 0.6s 0.1s ease both;
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 800; line-height: 1.18;
+      letter-spacing: -0.025em;
+      color: var(--text-primary);
+      margin-bottom: 1.25rem;
     }
     .hero h1 span {
-      background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      color: #60a5fa;
     }
     .hero-subtitle {
-      font-size: 1.12rem; color: var(--text-secondary);
-      max-width: 650px; margin: 0 auto 2.5rem;
-      animation: fadeInUp 0.6s 0.2s ease both;
+      font-size: 1.05rem; color: var(--text-secondary);
+      max-width: 660px; margin: 0 auto 2.25rem;
+      line-height: 1.65;
     }
     .hero-cta {
-      display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
-      animation: fadeInUp 0.6s 0.3s ease both;
+      display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;
     }
     .btn {
       display: inline-flex; align-items: center; gap: 0.5rem;
-      padding: 12px 28px; border-radius: var(--radius-sm);
-      font-weight: 600; font-size: 0.95rem; cursor: pointer;
-      text-decoration: none; transition: all 0.25s ease;
-      border: none;
+      padding: 10px 22px; border-radius: var(--radius-sm);
+      font-weight: 600; font-size: 0.88rem; cursor: pointer;
+      text-decoration: none; transition: all 0.15s ease;
+      border: 1px solid transparent;
+      font-family: 'Inter', sans-serif;
     }
     .btn:disabled {
       opacity: 0.55;
@@ -172,86 +198,92 @@
       pointer-events: none;
     }
     .btn-primary {
-      background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
-      color: white;
-      box-shadow: 0 4px 20px rgba(59,130,246,0.4);
+      background: var(--accent-blue);
+      color: #ffffff;
+      box-shadow: var(--shadow-sm);
     }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(59,130,246,0.5); }
+    .btn-primary:hover {
+      background: var(--accent-blue-hover);
+    }
     .btn-secondary {
-      background: rgba(255,255,255,0.05); color: var(--text-primary);
-      border: 1px solid var(--border-hover);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-primary);
+      border: 1px solid var(--border);
     }
-    .btn-secondary:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--border-hover);
+    }
 
     /* ─── KPI CARDS ──────────────────────────── */
     .kpi-strip {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
       gap: 1rem; margin-top: 3.5rem;
-      animation: fadeInUp 0.6s 0.4s ease both;
     }
     .kpi-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius-card);
       padding: 1.25rem 1rem;
-      text-align: center;
-      transition: all 0.3s ease;
-      position: relative; overflow: hidden;
+      text-align: left;
+      position: relative;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.15s ease, background 0.15s ease;
     }
-    .kpi-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
-      transform: scaleX(0); transition: transform 0.3s ease;
+    .kpi-card:hover {
+      border-color: var(--border-hover);
+      background: var(--bg-card-hover);
     }
-    .kpi-card:hover { border-color: var(--border-hover); transform: translateY(-4px); box-shadow: var(--glow-blue); }
-    .kpi-card:hover::before { transform: scaleX(1); }
     .kpi-value {
-      font-size: 1.75rem; font-weight: 800;
-      background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      font-size: 1.7rem; font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-primary);
       line-height: 1.1;
     }
-    .kpi-label { font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.4rem; font-weight: 500; }
-    .kpi-card.red .kpi-value { background: linear-gradient(135deg, var(--accent-red), var(--accent-amber)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .kpi-card.green .kpi-value { background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .kpi-card.amber .kpi-value { background: linear-gradient(135deg, var(--accent-amber), #f97316); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .kpi-card.red .kpi-value { color: #f87171; }
+    .kpi-card.green .kpi-value { color: #34d399; }
+    .kpi-card.amber .kpi-value { color: #fbbf24; }
+    .kpi-label { font-size: 0.78rem; color: var(--text-secondary); margin-top: 0.4rem; font-weight: 500; }
+    .kpi-bench { font-size: 0.68rem; color: var(--text-muted); margin-top: 0.2rem; font-family: 'JetBrains Mono', monospace; }
 
     /* ─── SECTION ────────────────────────────── */
-    section { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; }
-    .section-header { text-align: center; margin-bottom: 3rem; }
+    section { padding: 4.5rem 2rem; max-width: 1200px; margin: 0 auto; }
+    .section-header { text-align: center; margin-bottom: 2.75rem; }
     .section-tag {
       display: inline-block;
-      color: var(--accent-cyan); font-size: 0.8rem; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.1em;
-      margin-bottom: 0.75rem;
+      color: #93c5fd; font-size: 0.72rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
     }
     .section-title {
-      font-size: clamp(1.75rem, 4vw, 2.5rem);
-      font-weight: 700; line-height: 1.2;
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      font-weight: 700; line-height: 1.25;
+      letter-spacing: -0.02em;
     }
-    .section-desc { color: var(--text-secondary); max-width: 640px; margin: 0.75rem auto 0; font-size: 0.95rem; }
+    .section-desc { color: var(--text-secondary); max-width: 640px; margin: 0.6rem auto 0; font-size: 0.92rem; }
 
     /* ─── CHARTS GRID ────────────────────────── */
     .charts-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 1.5rem;
+      gap: 1.25rem;
     }
     .chart-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius-card);
       padding: 1.5rem;
-      transition: all 0.3s ease;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.15s ease;
     }
-    .chart-card:hover { border-color: var(--border-hover); box-shadow: var(--glow-blue); }
+    .chart-card:hover { border-color: var(--border-hover); }
     .chart-card.wide { grid-column: 1 / -1; }
     .chart-title {
-      font-size: 0.95rem; font-weight: 600;
-      margin-bottom: 0.4rem; color: var(--text-primary);
+      font-size: 0.92rem; font-weight: 600;
+      margin-bottom: 0.3rem; color: var(--text-primary);
     }
-    .chart-subtitle { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1.25rem; }
+    .chart-subtitle { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 1.25rem; }
     .chart-wrap { position: relative; height: 240px; }
     .chart-wrap.tall { height: 300px; }
 
@@ -263,20 +295,30 @@
     }
     .finding-card {
       background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: var(--radius-card); padding: 1.5rem;
+      border-radius: var(--radius-card); padding: 1.4rem;
       display: flex; gap: 1rem; align-items: flex-start;
-      transition: all 0.3s ease;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.15s ease;
     }
-    .finding-card:hover { border-color: var(--border-hover); transform: translateY(-3px); }
-    .finding-icon {
-      width: 44px; height: 44px; border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.3rem; flex-shrink: 0;
+    .finding-card:hover { border-color: var(--border-hover); }
+    .finding-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 4px;
+      flex-shrink: 0;
+      line-height: 1;
     }
-    .finding-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.4rem; }
-    .finding-card p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
+    .finding-badge.red { background: var(--accent-red-tint); color: #f87171; border: 1px solid rgba(220, 38, 38, 0.25); }
+    .finding-badge.amber { background: var(--accent-amber-tint); color: #fbbf24; border: 1px solid rgba(217, 119, 6, 0.25); }
+    .finding-badge.blue { background: var(--accent-blue-tint); color: #60a5fa; border: 1px solid rgba(37, 99, 235, 0.25); }
+    .finding-badge.purple { background: rgba(139, 92, 246, 0.12); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.25); }
+    .finding-badge.green { background: var(--accent-green-tint); color: #34d399; border: 1px solid rgba(5, 150, 105, 0.25); }
+    .finding-card h3 { font-size: 0.92rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--text-primary); }
+    .finding-card p { font-size: 0.83rem; color: var(--text-secondary); line-height: 1.6; }
 
-    /* ─── SQL SHOWCASE (ANGULAR PATTERN ENHANCED) ──── */
+    /* ─── SQL SHOWCASE ────────────────────────── */
     .sql-control-bar {
       display: flex;
       flex-wrap: wrap;
@@ -293,41 +335,41 @@
     }
     .sql-search-box input {
       width: 100%;
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.04);
       border: 1px solid var(--border);
       border-radius: var(--radius-sm);
-      padding: 8px 14px 8px 36px;
+      padding: 8px 14px 8px 34px;
       color: var(--text-primary);
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-family: 'Inter', sans-serif;
       outline: none;
-      transition: all 0.2s ease;
+      transition: border-color 0.15s ease;
     }
     .sql-search-box input:focus {
       border-color: var(--accent-blue);
-      box-shadow: 0 0 12px rgba(59, 130, 246, 0.3);
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.06);
     }
     .sql-search-icon {
       position: absolute;
-      left: 12px;
+      left: 10px;
       top: 50%;
       transform: translateY(-50%);
-      font-size: 0.85rem;
       color: var(--text-muted);
+      display: flex;
+      align-items: center;
       pointer-events: none;
     }
-    .sql-tabs { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+    .sql-tabs { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1rem; }
     .tab-btn {
-      background: rgba(255,255,255,0.05); border: 1px solid var(--border);
-      color: var(--text-secondary); padding: 6px 14px; border-radius: 6px;
-      font-size: 0.8rem; font-weight: 500; cursor: pointer;
-      transition: all 0.2s ease; font-family: 'Inter', sans-serif;
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      color: var(--text-secondary); padding: 5px 12px; border-radius: var(--radius-sm);
+      font-size: 0.78rem; font-weight: 500; cursor: pointer;
+      transition: all 0.15s ease; font-family: 'Inter', sans-serif;
       display: inline-flex; align-items: center; gap: 6px;
     }
     .tab-btn.active, .tab-btn:hover {
-      background: rgba(59,130,246,0.15); border-color: var(--accent-blue);
-      color: var(--accent-blue);
+      background: var(--bg-surface); border-color: var(--border-active);
+      color: var(--text-primary);
     }
     .sql-block { display: none; }
     .sql-block.active { display: block; }
@@ -335,38 +377,39 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0.5rem 0.8rem;
-      background: rgba(0, 0, 0, 0.3);
+      padding: 0.55rem 0.9rem;
+      background: rgba(0, 0, 0, 0.35);
       border-top-left-radius: var(--radius-card);
       border-top-right-radius: var(--radius-card);
       border: 1px solid var(--border);
       border-bottom: none;
       font-size: 0.75rem;
       color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
     }
     .copy-btn {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
       color: var(--text-secondary);
       padding: 4px 10px;
       border-radius: 4px;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 600;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 4px;
-      transition: all 0.2s ease;
+      gap: 5px;
+      transition: all 0.15s ease;
+      font-family: 'Inter', sans-serif;
     }
     .copy-btn:hover {
-      background: rgba(59, 130, 246, 0.25);
-      border-color: var(--accent-blue);
-      color: #fff;
+      background: rgba(255, 255, 255, 0.12);
+      color: #ffffff;
     }
     .copy-btn.copied {
-      background: rgba(16, 185, 129, 0.25);
-      border-color: var(--accent-green);
-      color: var(--accent-green);
+      background: var(--accent-green-tint);
+      border-color: rgba(5, 150, 105, 0.3);
+      color: #34d399;
     }
     .sql-block pre {
       border-bottom-left-radius: var(--radius-card);
@@ -378,40 +421,93 @@
       max-height: 320px; font-size: 0.82rem;
     }
     .sql-insight {
-      background: rgba(6,182,212,0.05); border: 1px solid rgba(6,182,212,0.2);
-      border-radius: var(--radius-sm); padding: 0.75rem 1rem;
-      margin-top: 0.75rem; font-size: 0.85rem; color: var(--accent-cyan);
-      display: flex; gap: 0.5rem; align-items: flex-start;
+      background: rgba(37, 99, 235, 0.05);
+      border: 1px solid rgba(37, 99, 235, 0.2);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 1rem;
+      margin-top: 0.75rem;
+      font-size: 0.82rem;
+      color: #93c5fd;
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
+      line-height: 1.55;
+    }
+    .sql-insight-label {
+      font-weight: 700;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      background: var(--accent-blue-tint);
+      padding: 1px 6px;
+      border-radius: 3px;
+      flex-shrink: 0;
     }
 
-    /* ─── ANGULAR UI PATTERNS: EMPTY STATE COMPONENT ── */
+    /* ─── EMPTY STATE COMPONENT ──────────────── */
     .empty-state {
-      padding: 3.5rem 1.5rem;
+      padding: 3rem 1.5rem;
       text-align: center;
       background: rgba(255, 255, 255, 0.02);
-      border: 1px dashed var(--border-hover);
+      border: 1px dashed var(--border);
       border-radius: var(--radius-card);
       margin-top: 1rem;
     }
-    .empty-icon {
-      font-size: 2.5rem;
-      margin-bottom: 0.75rem;
-      opacity: 0.8;
-    }
     .empty-state h4 {
-      font-size: 1.1rem;
-      font-weight: 700;
+      font-size: 1rem;
+      font-weight: 600;
       color: var(--text-primary);
       margin-bottom: 0.4rem;
     }
     .empty-state p {
-      font-size: 0.85rem;
+      font-size: 0.83rem;
       color: var(--text-secondary);
       max-width: 440px;
       margin: 0 auto 1.25rem;
     }
 
     /* ─── MEMO SECTION ───────────────────────── */
+    .memo-table-wrap {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 1.5rem 2rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      overflow-x: auto;
+    }
+    .memo-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .memo-table th {
+      padding: 0.75rem 0.6rem;
+      color: var(--text-secondary);
+      font-weight: 600;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border);
+    }
+    .memo-table td {
+      padding: 0.85rem 0.6rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      color: var(--text-secondary);
+    }
+    .status-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      display: inline-block;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .status-badge.danger { background: var(--accent-red-tint); color: #f87171; border: 1px solid rgba(220, 38, 38, 0.25); }
+    .status-badge.warning { background: var(--accent-amber-tint); color: #fbbf24; border: 1px solid rgba(217, 119, 6, 0.25); }
+    .status-badge.success { background: var(--accent-green-tint); color: #34d399; border: 1px solid rgba(5, 150, 105, 0.25); }
+
     .memo-grid {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1rem;
@@ -419,16 +515,24 @@
     .memo-card {
       background: var(--bg-card); border: 1px solid var(--border);
       border-radius: var(--radius-card); padding: 1.5rem;
-      border-left: 3px solid;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.15s ease;
     }
-    .memo-card.red { border-left-color: var(--accent-red); }
-    .memo-card.amber { border-left-color: var(--accent-amber); }
-    .memo-card.blue { border-left-color: var(--accent-blue); }
-    .memo-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; margin-bottom: 0.5rem; }
-    .memo-card.red .memo-label { color: var(--accent-red); }
-    .memo-card.amber .memo-label { color: var(--accent-amber); }
-    .memo-card.blue .memo-label { color: var(--accent-blue); }
-    .memo-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .memo-card:hover { border-color: var(--border-hover); }
+    .memo-card-badge {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+    .memo-card-badge.red { background: var(--accent-red-tint); color: #f87171; border: 1px solid rgba(220, 38, 38, 0.25); }
+    .memo-card-badge.amber { background: var(--accent-amber-tint); color: #fbbf24; border: 1px solid rgba(217, 119, 6, 0.25); }
+    .memo-card-badge.blue { background: var(--accent-blue-tint); color: #60a5fa; border: 1px solid rgba(37, 99, 235, 0.25); }
+    .memo-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary); }
     .memo-card p { font-size: 0.83rem; color: var(--text-secondary); line-height: 1.65; }
 
     /* ─── STRATEGY & SIMULATOR SECTION ──────── */
@@ -438,60 +542,67 @@
       border-radius: var(--radius-card);
       padding: 2rem;
       margin-bottom: 2.5rem;
-      box-shadow: var(--glow-blue);
+      box-shadow: var(--shadow-card);
     }
     .scenario-selector {
       display: flex;
-      gap: 0.75rem;
+      gap: 0.5rem;
       flex-wrap: wrap;
       margin-bottom: 1.5rem;
-      justify-content: center;
+      background: var(--bg-secondary);
+      padding: 6px;
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border);
     }
     .scenario-btn {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border);
+      flex: 1;
+      min-width: 220px;
+      background: transparent;
+      border: 1px solid transparent;
       color: var(--text-secondary);
-      padding: 10px 18px;
-      border-radius: 10px;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
       cursor: pointer;
       font-weight: 600;
-      font-size: 0.85rem;
-      transition: all 0.25s ease;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      font-size: 0.82rem;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.15s ease;
+      text-align: center;
     }
-    .scenario-btn.active, .scenario-btn:hover {
-      background: linear-gradient(135deg, rgba(59,130,246,0.25), rgba(6,182,212,0.25));
-      border-color: var(--accent-cyan);
-      color: #ffffff;
-      box-shadow: 0 4px 15px rgba(6, 182, 212, 0.2);
+    .scenario-btn.active {
+      background: var(--bg-card);
+      border-color: var(--border-active);
+      color: var(--text-primary);
+      box-shadow: var(--shadow-sm);
+    }
+    .scenario-btn:hover:not(.active) {
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.03);
     }
     .sim-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.25rem;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
       margin-top: 1.5rem;
     }
     .sim-card {
-      background: rgba(10, 14, 26, 0.6);
+      background: var(--bg-secondary);
       border: 1px solid var(--border);
       border-radius: var(--radius-sm);
       padding: 1.25rem 1rem;
       text-align: center;
       position: relative;
-      transition: transform 0.25s ease;
     }
     .sim-card.recalculating {
-      animation: pulseShimmer 0.6s ease;
+      animation: pulseShimmer 0.5s ease;
     }
     @keyframes pulseShimmer {
-      0% { opacity: 0.4; transform: scale(0.98); }
+      0% { opacity: 0.5; }
       50% { opacity: 0.8; }
-      100% { opacity: 1; transform: scale(1); }
+      100% { opacity: 1; }
     }
     .sim-card-title {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
       color: var(--text-muted);
@@ -505,84 +616,93 @@
       gap: 6px;
     }
     .sim-val-old {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       color: var(--text-muted);
       text-decoration: line-through;
       font-family: 'JetBrains Mono', monospace;
     }
     .sim-val-new {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: var(--accent-green);
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: #34d399;
       font-family: 'JetBrains Mono', monospace;
     }
     .sim-badge {
       display: inline-block;
       margin-top: 0.4rem;
-      font-size: 0.72rem;
-      padding: 2px 8px;
-      border-radius: 12px;
-      font-weight: 700;
+      font-size: 0.7rem;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-weight: 600;
+      font-family: 'JetBrains Mono', monospace;
     }
     .sim-badge.positive {
-      background: rgba(16, 185, 129, 0.15);
-      color: var(--accent-green);
-      border: 1px solid rgba(16, 185, 129, 0.3);
+      background: var(--accent-green-tint);
+      color: #34d399;
+      border: 1px solid rgba(5, 150, 105, 0.25);
     }
     .sim-badge.neutral {
-      background: rgba(59, 130, 246, 0.15);
-      color: var(--accent-blue);
-      border: 1px solid rgba(59, 130, 246, 0.3);
+      background: var(--accent-blue-tint);
+      color: #60a5fa;
+      border: 1px solid rgba(37, 99, 235, 0.25);
+    }
+    .sim-narrative-box {
+      margin-top: 1.5rem;
+      background: rgba(37, 99, 235, 0.04);
+      border: 1px solid rgba(37, 99, 235, 0.2);
+      border-radius: var(--radius-sm);
+      padding: 1rem 1.25rem;
+      font-size: 0.84rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
     }
 
     /* Pillars Grid */
     .pillars-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
+      gap: 1.25rem;
       margin-bottom: 2.5rem;
     }
     .pillar-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius-card);
-      padding: 1.75rem 1.5rem;
-      transition: all 0.3s ease;
-      position: relative;
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.15s ease;
     }
     .pillar-card:hover {
       border-color: var(--border-hover);
-      transform: translateY(-4px);
-      box-shadow: var(--glow-blue);
     }
     .pillar-number {
-      font-size: 2rem;
-      font-weight: 900;
-      background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      font-size: 1.5rem;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+      color: #60a5fa;
       line-height: 1;
       margin-bottom: 0.75rem;
     }
     .pillar-title {
-      font-size: 1.05rem;
+      font-size: 0.98rem;
       font-weight: 700;
       color: var(--text-primary);
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.5rem;
     }
     .pillar-desc {
-      font-size: 0.85rem;
+      font-size: 0.83rem;
       color: var(--text-secondary);
       line-height: 1.6;
       margin-bottom: 1rem;
     }
     .pillar-meta {
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       background: rgba(255, 255, 255, 0.03);
       padding: 0.6rem 0.8rem;
-      border-radius: 6px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      color: var(--accent-cyan);
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      color: #93c5fd;
+      line-height: 1.5;
     }
 
     /* 12-Week Roadmap Table */
@@ -592,6 +712,7 @@
       border-radius: var(--radius-card);
       padding: 1.5rem;
       overflow-x: auto;
+      box-shadow: var(--shadow-sm);
     }
     .roadmap-table {
       width: 100%;
@@ -605,7 +726,7 @@
       font-weight: 600;
       border-bottom: 1px solid var(--border);
       text-transform: uppercase;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       letter-spacing: 0.05em;
     }
     .roadmap-table td {
@@ -617,14 +738,15 @@
       font-weight: 700;
       padding: 3px 8px;
       border-radius: 4px;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
     }
-    .phase-1 { background: rgba(239, 68, 68, 0.15); color: var(--accent-red); }
-    .phase-2 { background: rgba(245, 158, 11, 0.15); color: var(--accent-amber); }
-    .phase-3 { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); }
+    .phase-1 { background: var(--accent-red-tint); color: #f87171; border: 1px solid rgba(220, 38, 38, 0.25); }
+    .phase-2 { background: var(--accent-amber-tint); color: #fbbf24; border: 1px solid rgba(217, 119, 6, 0.25); }
+    .phase-3 { background: var(--accent-green-tint); color: #34d399; border: 1px solid rgba(5, 150, 105, 0.25); }
 
-    /* ─── ANGULAR UI PATTERNS: TOAST NOTIFICATIONS ─── */
+    /* ─── TOAST NOTIFICATIONS ────────────────── */
     .toast-container {
       position: fixed;
       bottom: 24px;
@@ -632,36 +754,33 @@
       z-index: 9999;
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      max-width: 380px;
+      gap: 8px;
+      max-width: 360px;
       pointer-events: none;
     }
     .toast {
       pointer-events: auto;
-      background: rgba(19, 29, 53, 0.95);
-      backdrop-filter: blur(12px);
+      background: var(--bg-card);
       border: 1px solid var(--border-hover);
       border-radius: var(--radius-sm);
-      padding: 12px 16px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+      padding: 10px 14px;
+      box-shadow: var(--shadow-elevated);
       display: flex;
       align-items: flex-start;
-      gap: 12px;
+      gap: 10px;
       color: var(--text-primary);
-      animation: slideInRight 0.3s ease forwards;
-      overflow: hidden;
-      position: relative;
+      animation: slideInRight 0.25s ease forwards;
     }
-    .toast.success { border-left: 4px solid var(--accent-green); }
-    .toast.info { border-left: 4px solid var(--accent-cyan); }
-    .toast.error { border-left: 4px solid var(--accent-red); }
-    .toast-icon { font-size: 1.2rem; line-height: 1; flex-shrink: 0; }
+    .toast.success { border-left: 3px solid var(--accent-green); }
+    .toast.info { border-left: 3px solid var(--accent-blue); }
+    .toast.error { border-left: 3px solid var(--accent-red); }
+    .toast-icon { display: flex; align-items: center; margin-top: 2px; }
     .toast-content { flex: 1; }
-    .toast-title { font-size: 0.85rem; font-weight: 700; margin-bottom: 2px; }
-    .toast-msg { font-size: 0.78rem; color: var(--text-secondary); line-height: 1.4; }
+    .toast-title { font-size: 0.82rem; font-weight: 600; margin-bottom: 2px; }
+    .toast-msg { font-size: 0.76rem; color: var(--text-secondary); line-height: 1.4; }
     .toast-close {
       background: transparent; border: none; color: var(--text-muted);
-      cursor: pointer; font-size: 1rem; line-height: 1; padding: 2px;
+      cursor: pointer; font-size: 0.9rem; line-height: 1; padding: 2px;
     }
     .toast-close:hover { color: var(--text-primary); }
     @keyframes slideInRight {
@@ -673,19 +792,18 @@
       to { transform: translateX(100%); opacity: 0; }
     }
 
-    /* ─── ANGULAR UI PATTERNS: MODAL DIALOG ──────── */
+    /* ─── MODAL DIALOG ───────────────────────── */
     .modal-backdrop {
       position: fixed;
       inset: 0;
       background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(8px);
       z-index: 1000;
       display: none;
       align-items: center;
       justify-content: center;
       padding: 1.5rem;
       opacity: 0;
-      transition: opacity 0.25s ease;
+      transition: opacity 0.2s ease;
     }
     .modal-backdrop.active {
       display: flex;
@@ -695,87 +813,77 @@
       background: var(--bg-card);
       border: 1px solid var(--border-hover);
       border-radius: var(--radius-card);
-      max-width: 680px;
+      max-width: 660px;
       width: 100%;
       max-height: 90vh;
       overflow-y: auto;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-      transform: translateY(20px);
-      transition: transform 0.25s ease;
+      box-shadow: var(--shadow-elevated);
       position: relative;
     }
-    .modal-backdrop.active .modal-card {
-      transform: translateY(0);
-    }
     .modal-header {
-      padding: 1.5rem;
+      padding: 1.25rem 1.5rem;
       border-bottom: 1px solid var(--border);
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
     .modal-header h3 {
-      font-size: 1.25rem;
+      font-size: 1.1rem;
       font-weight: 700;
-      background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: var(--text-primary);
     }
     .modal-body {
       padding: 1.5rem;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       color: var(--text-secondary);
-      line-height: 1.7;
+      line-height: 1.65;
     }
     .modal-formula-box {
-      background: rgba(0, 0, 0, 0.4);
+      background: var(--bg-inset);
       border: 1px solid var(--border);
       border-radius: var(--radius-sm);
       padding: 1rem 1.25rem;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem;
-      color: var(--accent-cyan);
-      margin: 1rem 0;
+      font-size: 0.82rem;
+      color: #93c5fd;
+      margin: 0.85rem 0;
       overflow-x: auto;
+      line-height: 1.6;
     }
 
     /* ─── TECH STACK ─────────────────────────── */
     .tech-grid {
-      display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+      display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center;
     }
     .tech-badge {
-      display: flex; align-items: center; gap: 0.6rem;
+      display: flex; align-items: center; gap: 0.5rem;
       background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: 100px; padding: 10px 20px;
-      font-size: 0.875rem; font-weight: 600;
-      transition: all 0.25s ease;
+      border-radius: var(--radius-sm); padding: 8px 16px;
+      font-size: 0.82rem; font-weight: 500;
+      transition: border-color 0.15s ease;
     }
-    .tech-badge:hover { border-color: var(--border-hover); transform: translateY(-2px); }
-    .tech-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .tech-badge:hover { border-color: var(--border-hover); }
+    .tech-dot { width: 8px; height: 8px; border-radius: 50%; }
 
     /* ─── FOOTER ─────────────────────────────── */
     footer {
       background: var(--bg-secondary); border-top: 1px solid var(--border);
       text-align: center; padding: 3rem 2rem;
     }
-    footer h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
-    footer p { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem; }
-    .footer-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
+    footer h2 { font-size: 1.35rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--text-primary); }
+    footer p { color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 1.5rem; }
+    .footer-links { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
     .footer-disclaimer {
-      font-size: 0.75rem; color: var(--text-muted);
+      font-size: 0.72rem; color: var(--text-muted);
       max-width: 640px; margin: 2rem auto 0;
-      border-top: 1px solid var(--border); padding-top: 1.5rem;
+      border-top: 1px solid var(--border); padding-top: 1.25rem;
       line-height: 1.6;
     }
 
     /* ─── ANIMATIONS ─────────────────────────── */
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
     .reveal {
-      opacity: 0; transform: translateY(28px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      opacity: 0; transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
@@ -789,7 +897,7 @@
     /* scrollbar */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: var(--bg-primary); }
-    ::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 3px; }
   </style>
 </head>
 <body>
@@ -800,7 +908,8 @@
 <!-- NAVIGATION -->
 <nav>
   <div class="nav-brand">
-    <span>📊</span> PP · SCM Analytics
+    <span class="nav-brand-badge">SCM</span>
+    <span>Pandu Pramana · Supply Chain Analytics</span>
   </div>
   <div class="nav-right">
     <ul class="nav-links">
@@ -815,10 +924,10 @@
     <!-- Language Toggle Switcher -->
     <div class="lang-switch-wrap" role="group" aria-label="Language Selector">
       <button id="lang-btn-id" class="lang-btn" onclick="switchLanguage('id')" title="Bahasa Indonesia">
-        <span>🇮🇩</span> ID
+        ID
       </button>
       <button id="lang-btn-en" class="lang-btn active" onclick="switchLanguage('en')" title="English">
-        <span>🇬🇧</span> EN
+        EN
       </button>
     </div>
   </div>
@@ -827,19 +936,18 @@
 <!-- HERO -->
 <div class="hero">
   <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
   <div class="hero-content">
-    <div class="hero-badge" data-i18n="hero_badge">📦 Supply Chain Analytics Portfolio</div>
+    <div class="hero-badge" data-i18n="hero_badge">Case Study · FMCG Fulfillment Network</div>
     <h1 data-i18n-html="hero_title">FMCG Supply Chain<br /><span>Performance Analysis</span></h1>
     <p class="hero-subtitle" data-i18n="hero_subtitle">
       End-to-end supply chain analytics on a synthetic FMCG dataset — diagnosing
       fulfillment failures across 4,925 orders using SQL, Python, and Power BI.
     </p>
     <div class="hero-cta">
-      <a href="#overview" class="btn btn-primary" data-i18n="hero_cta_analysis">View Analysis ↓</a>
-      <a href="#strategy" class="btn btn-secondary" data-i18n="hero_cta_strategy">Strategic Plan 🚀</a>
+      <a href="#overview" class="btn btn-primary" data-i18n="hero_cta_analysis">View Analysis</a>
+      <a href="#strategy" class="btn btn-secondary" data-i18n="hero_cta_strategy">Strategic Plan</a>
       <a href="https://github.com/pandooat/scm-portfolio" target="_blank" class="btn btn-secondary">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
         GitHub
       </a>
     </div>
@@ -849,26 +957,32 @@
       <div class="kpi-card red">
         <div class="kpi-value" id="kpi-fillrate">0%</div>
         <div class="kpi-label" data-i18n="kpi_fillrate">Fill Rate (Unit)</div>
+        <div class="kpi-bench">Target: ≥ 85.0%</div>
       </div>
       <div class="kpi-card red">
         <div class="kpi-value" id="kpi-otif">0%</div>
         <div class="kpi-label" data-i18n="kpi_otif">OTIF (Order)</div>
+        <div class="kpi-bench">Target: ≥ 60.0%</div>
       </div>
       <div class="kpi-card amber">
         <div class="kpi-value" id="kpi-otd">0%</div>
         <div class="kpi-label" data-i18n="kpi_otd">Supplier OTD</div>
+        <div class="kpi-bench">Target: ≥ 70.0%</div>
       </div>
       <div class="kpi-card amber">
         <div class="kpi-value" id="kpi-stockout">0%</div>
         <div class="kpi-label" data-i18n="kpi_stockout">Stockout Share</div>
+        <div class="kpi-bench">Benchmark: ≤ 8.0%</div>
       </div>
       <div class="kpi-card green">
         <div class="kpi-value" id="kpi-revenue">Rp0</div>
         <div class="kpi-label" data-i18n="kpi_revenue">Revenue Fulfilled</div>
+        <div class="kpi-bench">6-Month Net</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-value" id="kpi-orders">0</div>
         <div class="kpi-label" data-i18n="kpi_orders">Total Orders</div>
+        <div class="kpi-bench">8,534 Lines</div>
       </div>
     </div>
   </div>
@@ -883,35 +997,35 @@
   </div>
   <div class="findings-grid">
     <div class="finding-card reveal">
-      <div class="finding-icon" style="background:rgba(239,68,68,0.15);">🔴</div>
+      <span class="finding-badge red">01</span>
       <div>
         <h3 data-i18n="finding_1_title">Supplier Reliability is the Primary Bottleneck</h3>
         <p data-i18n="finding_1_body">At 35.95% OTD, only 1 in 3 purchase orders arrives on time. Fast-moving SKUs with unreliable suppliers consistently appear in both high-stockout-day and high-unserved-value rankings — the strongest upstream signal in the dataset.</p>
       </div>
     </div>
     <div class="finding-card reveal">
-      <div class="finding-icon" style="background:rgba(245,158,11,0.15);">⚡</div>
+      <span class="finding-badge amber">02</span>
       <div>
         <h3 data-i18n="finding_2_title">OTIF Failure is Dual-Cause, Not Single-Cause</h3>
         <p data-i18n-html="finding_2_body">19% of orders (942 total) fail <em>both</em> completeness and timing simultaneously — compounded failures requiring concurrent supply and delivery interventions. Treating this as a single-dimension problem will underperform.</p>
       </div>
     </div>
     <div class="finding-card reveal">
-      <div class="finding-icon" style="background:rgba(59,130,246,0.15);">🎯</div>
+      <span class="finding-badge blue">03</span>
       <div>
         <h3 data-i18n="finding_3_title">Stockout Risk is Concentrated, Not Universal</h3>
         <p data-i18n="finding_3_body">70 of 144 SKU-warehouse combinations are below the 95% service level reorder threshold. The top 20 by Unserved Order Value account for a disproportionate share — targeted action outperforms blanket safety stock increases by a wide margin.</p>
       </div>
     </div>
     <div class="finding-card reveal">
-      <div class="finding-icon" style="background:rgba(139,92,246,0.15);">📊</div>
+      <span class="finding-badge purple">04</span>
       <div>
         <h3 data-i18n="finding_4_title">ABC Classification Reveals Misaligned Priorities</h3>
         <p data-i18n="finding_4_body">Class A SKUs (top 80% revenue) must be protected with higher service level targets and tighter reorder cycles. Class C items can sustain leaner replenishment policies — inventory policy differentiation by class is the highest-ROI structural fix.</p>
       </div>
     </div>
     <div class="finding-card reveal">
-      <div class="finding-icon" style="background:rgba(16,185,129,0.15);">🔄</div>
+      <span class="finding-badge green">05</span>
       <div>
         <h3 data-i18n="finding_5_title">Turnover Trend Reveals Maldistribution</h3>
         <p data-i18n="finding_5_body">Inventory Turnover analysis combined with stockout data shows some SKU-warehouse combinations hold excess stock while fast movers stock out. This is a distribution and replenishment timing problem as much as a volume problem.</p>
@@ -921,7 +1035,7 @@
 </section>
 
 <!-- CHARTS -->
-<section id="charts" style="background: var(--bg-secondary); max-width: 100%; padding: 5rem 2rem;">
+<section id="charts" style="background: var(--bg-secondary); max-width: 100%; padding: 4.5rem 2rem;">
   <div style="max-width: 1200px; margin: 0 auto;">
     <div class="section-header reveal">
       <div class="section-tag" data-i18n="charts_tag">Data Visualization</div>
@@ -969,7 +1083,7 @@
   </div>
 </section>
 
-<!-- SQL SHOWCASE (ANGULAR PATTERN ENHANCED) -->
+<!-- SQL SHOWCASE -->
 <section id="sql">
   <div class="section-header reveal">
     <div class="section-tag" data-i18n="sql_tag">Technical Skills</div>
@@ -981,10 +1095,12 @@
     <!-- Control Bar with Search & Filter -->
     <div class="sql-control-bar">
       <div class="sql-search-box">
-        <span class="sql-search-icon">🔍</span>
+        <span class="sql-search-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </span>
         <input type="text" id="sql-search-input" placeholder="Search SQL queries (e.g. OTIF, warehouse, turnover)..." oninput="handleSQLSearch(this.value)" data-i18n-placeholder="sql_search_placeholder" />
       </div>
-      <div style="font-size:0.8rem; color:var(--text-muted);" id="sql-counter-label">
+      <div style="font-size:0.78rem; color:var(--text-muted); font-family:'JetBrains Mono',monospace;" id="sql-counter-label">
         Showing 6 featured queries
       </div>
     </div>
@@ -1004,7 +1120,10 @@
       <div class="sql-block active" id="sql-0" data-keywords="category count sku dim_products food beverage home personal care">
         <div class="sql-header-bar">
           <span>sqlite3 · query_01_category_count.sql</span>
-          <button class="copy-btn" onclick="copySQLCode(0, this)">📋 Copy SQL</button>
+          <button class="copy-btn" onclick="copySQLCode(0, this)">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            Copy SQL
+          </button>
         </div>
         <pre><code class="language-sql">-- Q01: SKU count per product category
 SELECT
@@ -1013,13 +1132,19 @@ SELECT
 FROM dim_products
 GROUP BY category
 ORDER BY sku_count DESC, category;</code></pre>
-        <div class="sql-insight" data-i18n="insight_sql_0">💡 Portfolio spans Food, Personal Care, Home Care, Beverage — guides priority-setting for safety stock and demand planning complexity.</div>
+        <div class="sql-insight">
+          <span class="sql-insight-label">Context</span>
+          <span data-i18n="insight_sql_0">Portfolio spans Food, Personal Care, Home Care, Beverage — guides priority-setting for safety stock and demand planning complexity.</span>
+        </div>
       </div>
 
       <div class="sql-block" id="sql-1" data-keywords="fill rate warehouse ordered fulfilled fact_sales_order_lines">
         <div class="sql-header-bar">
           <span>sqlite3 · query_05_fill_rate_warehouse.sql</span>
-          <button class="copy-btn" onclick="copySQLCode(1, this)">📋 Copy SQL</button>
+          <button class="copy-btn" onclick="copySQLCode(1, this)">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            Copy SQL
+          </button>
         </div>
         <pre><code class="language-sql">-- Q05: Fill rate by warehouse (units fulfilled / units ordered)
 SELECT
@@ -1032,13 +1157,19 @@ FROM fact_sales_order_lines s
 JOIN dim_warehouses w ON s.warehouse_id = w.warehouse_id
 GROUP BY w.warehouse_name
 ORDER BY fill_rate_pct;</code></pre>
-        <div class="sql-insight" data-i18n="insight_sql_1">💡 Warehouse-level fill rate isolates whether the fulfillment problem is structural (all locations underperform) or location-specific — determines intervention scope.</div>
+        <div class="sql-insight">
+          <span class="sql-insight-label">Context</span>
+          <span data-i18n="insight_sql_1">Warehouse-level fill rate isolates whether the fulfillment problem is structural (all locations underperform) or location-specific — determines intervention scope.</span>
+        </div>
       </div>
 
       <div class="sql-block" id="sql-2" data-keywords="otif on time in full fact_shipments order grain">
         <div class="sql-header-bar">
           <span>sqlite3 · query_08_otif_warehouse.sql</span>
-          <button class="copy-btn" onclick="copySQLCode(2, this)">📋 Copy SQL</button>
+          <button class="copy-btn" onclick="copySQLCode(2, this)">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            Copy SQL
+          </button>
         </div>
         <pre><code class="language-sql">-- Q08: OTIF rate per warehouse (order grain, not line grain)
 SELECT
@@ -1050,13 +1181,19 @@ FROM fact_shipments s
 JOIN dim_warehouses w ON s.warehouse_id = w.warehouse_id
 GROUP BY w.warehouse_name
 ORDER BY otif_pct;</code></pre>
-        <div class="sql-insight" data-i18n="insight_sql_2">💡 OTIF is measured at order grain (1 order = 1 row in fact_shipments). Averaging line-level metrics would dilute the KPI — this query uses the correct denominator.</div>
+        <div class="sql-insight">
+          <span class="sql-insight-label">Context</span>
+          <span data-i18n="insight_sql_2">OTIF is measured at order grain (1 order = 1 row in fact_shipments). Averaging line-level metrics would dilute the KPI — this query uses the correct denominator.</span>
+        </div>
       </div>
 
       <div class="sql-block" id="sql-3" data-keywords="supplier otd purchase order lead time dim_suppliers">
         <div class="sql-header-bar">
           <span>sqlite3 · query_10_supplier_otd.sql</span>
-          <button class="copy-btn" onclick="copySQLCode(3, this)">📋 Copy SQL</button>
+          <button class="copy-btn" onclick="copySQLCode(3, this)">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            Copy SQL
+          </button>
         </div>
         <pre><code class="language-sql">-- Q10: Supplier OTD for received POs only
 SELECT
@@ -1074,13 +1211,19 @@ JOIN dim_suppliers sup ON sup.supplier_id = po.supplier_id
 WHERE po.actual_receipt_date IS NOT NULL
 GROUP BY sup.supplier_id
 ORDER BY supplier_otd_pct;</code></pre>
-        <div class="sql-insight" data-i18n="insight_sql_3">💡 WHERE filters to received POs only — open POs are excluded from denominator to avoid penalizing future performance. Reported separately.</div>
+        <div class="sql-insight">
+          <span class="sql-insight-label">Context</span>
+          <span data-i18n="insight_sql_3">WHERE filters to received POs only — open POs are excluded from denominator to avoid penalizing future performance. Reported separately.</span>
+        </div>
       </div>
 
       <div class="sql-block" id="sql-4" data-keywords="abc classification pareto cumulative revenue window function">
         <div class="sql-header-bar">
           <span>sqlite3 · query_13_abc_classification.sql</span>
-          <button class="copy-btn" onclick="copySQLCode(4, this)">📋 Copy SQL</button>
+          <button class="copy-btn" onclick="copySQLCode(4, this)">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            Copy SQL
+          </button>
         </div>
         <pre><code class="language-sql">-- Q13: ABC classification using window function
 WITH sku_sales AS (
@@ -1108,13 +1251,19 @@ SELECT
 FROM ranking r
 JOIN dim_products p ON p.product_id = r.product_id
 ORDER BY r.revenue_rp DESC;</code></pre>
-        <div class="sql-insight" data-i18n="insight_sql_4">💡 Window function computes cumulative revenue share without a self-join. ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW ensures exact boundary handling for SKUs at the 80%/95% thresholds.</div>
+        <div class="sql-insight">
+          <span class="sql-insight-label">Context</span>
+          <span data-i18n="insight_sql_4">Window function computes cumulative revenue share without a self-join. ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW ensures exact boundary handling for SKUs at the 80%/95% thresholds.</span>
+        </div>
       </div>
 
       <div class="sql-block" id="sql-5" data-keywords="inventory turnover cogs monthly snapshot average">
         <div class="sql-header-bar">
           <span>sqlite3 · query_15_inventory_turnover.sql</span>
-          <button class="copy-btn" onclick="copySQLCode(5, this)">📋 Copy SQL</button>
+          <button class="copy-btn" onclick="copySQLCode(5, this)">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            Copy SQL
+          </button>
         </div>
         <pre><code class="language-sql">-- Q15: Monthly inventory turnover using daily average method
 WITH daily_inventory AS (
@@ -1141,13 +1290,15 @@ SELECT
 FROM monthly_avg m
 JOIN monthly_cogs c ON c.ym = m.ym
 ORDER BY m.ym;</code></pre>
-        <div class="sql-insight" data-i18n="insight_sql_5">💡 Daily average method (avg across all snapshot days per month) is more accurate than simple beginning/end average. Result is period turnover — not annualized — to avoid overstating efficiency.</div>
+        <div class="sql-insight">
+          <span class="sql-insight-label">Context</span>
+          <span data-i18n="insight_sql_5">Daily average method (avg across all snapshot days per month) is more accurate than simple beginning/end average. Result is period turnover — not annualized — to avoid overstating efficiency.</span>
+        </div>
       </div>
     </div>
 
-    <!-- Empty State (Angular UI Pattern) -->
+    <!-- Empty State -->
     <div id="sql-empty-state" class="empty-state" style="display:none;">
-      <div class="empty-icon">🔍</div>
       <h4 data-i18n="empty_sql_title">No queries match your search</h4>
       <p data-i18n="empty_sql_desc">Try searching for broader keywords like "OTIF", "warehouse", "supplier", or "turnover".</p>
       <button class="btn btn-secondary" onclick="resetSQLFilter()" data-i18n="empty_sql_reset">Reset Filter</button>
@@ -1157,7 +1308,7 @@ ORDER BY m.ym;</code></pre>
 </section>
 
 <!-- EXECUTIVE MEMO -->
-<section id="memo" style="background: var(--bg-secondary); max-width: 100%; padding: 5rem 2rem;">
+<section id="memo" style="background: var(--bg-secondary); max-width: 100%; padding: 4.5rem 2rem;">
   <div style="max-width: 1200px; margin: 0 auto;">
     <div class="section-header reveal">
       <div class="section-tag" data-i18n="memo_tag">Business Communication</div>
@@ -1165,58 +1316,58 @@ ORDER BY m.ym;</code></pre>
       <p class="section-desc" data-i18n="memo_desc">Diagnosis and priority actions for the simulated supply chain</p>
     </div>
 
-    <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-card); padding:1.5rem 2rem; margin-bottom:1.5rem;" class="reveal">
-      <table style="width:100%; border-collapse:collapse; font-size:0.9rem;">
+    <div class="memo-table-wrap reveal">
+      <table class="memo-table">
         <thead>
-          <tr style="border-bottom:1px solid var(--border);">
-            <th style="text-align:left; padding:0.75rem 0.5rem; color:var(--text-secondary); font-weight:600; font-size:0.8rem; text-transform:uppercase; letter-spacing:0.05em;" data-i18n="th_kpi">KPI</th>
-            <th style="text-align:right; padding:0.75rem 0.5rem; color:var(--text-secondary); font-weight:600; font-size:0.8rem; text-transform:uppercase; letter-spacing:0.05em;" data-i18n="th_actual">Actual</th>
-            <th style="text-align:right; padding:0.75rem 0.5rem; color:var(--text-secondary); font-weight:600; font-size:0.8rem; text-transform:uppercase; letter-spacing:0.05em;" data-i18n="th_target">Target</th>
-            <th style="text-align:left; padding:0.75rem 0.5rem; color:var(--text-secondary); font-weight:600; font-size:0.8rem; text-transform:uppercase; letter-spacing:0.05em;" data-i18n="th_signal">Signal</th>
+          <tr>
+            <th style="text-align:left;" data-i18n="th_kpi">KPI</th>
+            <th style="text-align:right;" data-i18n="th_actual">Actual</th>
+            <th style="text-align:right;" data-i18n="th_target">Target</th>
+            <th style="text-align:left;" data-i18n="th_signal">Signal</th>
           </tr>
         </thead>
         <tbody>
-          <tr style="border-bottom:1px solid rgba(255,255,255,0.03);">
-            <td style="padding:0.75rem 0.5rem; font-weight:500;" data-i18n="td_fillrate">Fill Rate (unit)</td>
-            <td style="padding:0.75rem 0.5rem; text-align:right; color:var(--accent-red); font-weight:700; font-family:'JetBrains Mono',monospace;">74.15%</td>
-            <td style="padding:0.75rem 0.5rem; text-align:right; color:var(--text-secondary); font-family:'JetBrains Mono',monospace;">≥ 85%</td>
-            <td style="padding:0.75rem 0.5rem; color:var(--accent-red);" data-i18n="signal_below">⚠ Below target</td>
-          </tr>
-          <tr style="border-bottom:1px solid rgba(255,255,255,0.03);">
-            <td style="padding:0.75rem 0.5rem; font-weight:500;" data-i18n="td_otif">OTIF (order)</td>
-            <td style="padding:0.75rem 0.5rem; text-align:right; color:var(--accent-red); font-weight:700; font-family:'JetBrains Mono',monospace;">42.90%</td>
-            <td style="padding:0.75rem 0.5rem; text-align:right; color:var(--text-secondary); font-family:'JetBrains Mono',monospace;">≥ 60%</td>
-            <td style="padding:0.75rem 0.5rem; color:var(--accent-red);" data-i18n="signal_critical">⚠ Critical gap</td>
-          </tr>
-          <tr style="border-bottom:1px solid rgba(255,255,255,0.03);">
-            <td style="padding:0.75rem 0.5rem; font-weight:500;" data-i18n="td_otd">Supplier OTD</td>
-            <td style="padding:0.75rem 0.5rem; text-align:right; color:var(--accent-amber); font-weight:700; font-family:'JetBrains Mono',monospace;">35.95%</td>
-            <td style="padding:0.75rem 0.5rem; text-align:right; color:var(--text-secondary); font-family:'JetBrains Mono',monospace;">≥ 70%</td>
-            <td style="padding:0.75rem 0.5rem; color:var(--accent-amber);" data-i18n="signal_risk">⚠ Highest risk</td>
+          <tr>
+            <td style="font-weight:500;" data-i18n="td_fillrate">Fill Rate (unit)</td>
+            <td style="text-align:right; color:#f87171; font-weight:700; font-family:'JetBrains Mono',monospace;">74.15%</td>
+            <td style="text-align:right; color:var(--text-secondary); font-family:'JetBrains Mono',monospace;">≥ 85%</td>
+            <td><span class="status-badge danger" data-i18n="signal_below">Below target</span></td>
           </tr>
           <tr>
-            <td style="padding:0.75rem 0.5rem; font-weight:500;" data-i18n="td_stockout">Stockout Snapshot Share</td>
-            <td style="padding:0.75rem 0.5rem; text-align:right; color:var(--accent-amber); font-weight:700; font-family:'JetBrains Mono',monospace;">14.31%</td>
-            <td style="padding:0.75rem 0.5rem; text-align:right; color:var(--text-secondary); font-family:'JetBrains Mono',monospace;">≤ 8%</td>
-            <td style="padding:0.75rem 0.5rem; color:var(--accent-amber);" data-i18n="signal_concentrated">⚠ Concentrated</td>
+            <td style="font-weight:500;" data-i18n="td_otif">OTIF (order)</td>
+            <td style="text-align:right; color:#f87171; font-weight:700; font-family:'JetBrains Mono',monospace;">42.90%</td>
+            <td style="text-align:right; color:var(--text-secondary); font-family:'JetBrains Mono',monospace;">≥ 60%</td>
+            <td><span class="status-badge danger" data-i18n="signal_critical">Critical gap</span></td>
+          </tr>
+          <tr>
+            <td style="font-weight:500;" data-i18n="td_otd">Supplier OTD</td>
+            <td style="text-align:right; color:#fbbf24; font-weight:700; font-family:'JetBrains Mono',monospace;">35.95%</td>
+            <td style="text-align:right; color:var(--text-secondary); font-family:'JetBrains Mono',monospace;">≥ 70%</td>
+            <td><span class="status-badge warning" data-i18n="signal_risk">Highest risk</span></td>
+          </tr>
+          <tr>
+            <td style="font-weight:500;" data-i18n="td_stockout">Stockout Snapshot Share</td>
+            <td style="text-align:right; color:#fbbf24; font-weight:700; font-family:'JetBrains Mono',monospace;">14.31%</td>
+            <td style="text-align:right; color:var(--text-secondary); font-family:'JetBrains Mono',monospace;">≤ 8%</td>
+            <td><span class="status-badge warning" data-i18n="signal_concentrated">Concentrated</span></td>
           </tr>
         </tbody>
       </table>
     </div>
 
     <div class="memo-grid">
-      <div class="memo-card red reveal">
-        <div class="memo-label" data-i18n="memo_card1_label">🔴 Priority 1 — Strongest Signal</div>
+      <div class="memo-card reveal">
+        <div class="memo-card-badge red" data-i18n="memo_card1_label">Priority 1 · Primary Bottleneck</div>
         <h3 data-i18n="memo_card1_title">Upstream Supply Reliability</h3>
         <p data-i18n="memo_card1_body">Supplier OTD of 35.95% is the most acute upstream risk. When POs arrive late, safety stock erodes faster than it replenishes — directly causing stockouts on fast-moving SKUs. Begin with weekly PO exception tracking and SLA review for bottom-2 OTD suppliers.</p>
       </div>
-      <div class="memo-card amber reveal">
-        <div class="memo-label" data-i18n="memo_card2_label">🟡 Priority 2 — Structural Signal</div>
+      <div class="memo-card reveal">
+        <div class="memo-card-badge amber" data-i18n="memo_card2_label">Priority 2 · Structural Signal</div>
         <h3 data-i18n="memo_card2_title">Inventory Positioning</h3>
         <p data-i18n="memo_card2_body">14.31% stockout snapshot share is concentrated in specific SKU-warehouse combinations — 68/144 combos below 95% ROP threshold. Recalibrate reorder points for top-20 Unserved Order Value SKUs at 95% service level target. Pilot one warehouse before rollout.</p>
       </div>
-      <div class="memo-card blue reveal">
-        <div class="memo-label" data-i18n="memo_card3_label">🔵 Priority 3 — Secondary Signal</div>
+      <div class="memo-card reveal">
+        <div class="memo-card-badge blue" data-i18n="memo_card3_label">Priority 3 · Secondary Signal</div>
         <h3 data-i18n="memo_card3_title">Last-Mile Delivery Execution</h3>
         <p data-i18n="memo_card3_body">848 orders (17%) were complete but delivered late. Carrier performance review should compare on-time %, freight cost per shipped order, and volume per route to identify renegotiation or reallocation opportunities with underperforming providers.</p>
       </div>
@@ -1236,24 +1387,24 @@ ORDER BY m.ym;</code></pre>
   <div class="sim-container reveal">
     <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; margin-bottom:1.5rem;">
       <div>
-        <span style="font-size:0.78rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--accent-cyan); font-weight:700;" data-i18n="sim_select_title">🎮 Select Strategic Simulation Scenario</span>
-        <h3 style="font-size:1.2rem; margin-top:0.3rem;" data-i18n="sim_select_desc">Interactive Supply Chain Impact Calculator</h3>
+        <span style="font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:#93c5fd; font-weight:700;" data-i18n="sim_select_title">Strategic Simulation Scenarios</span>
+        <h3 style="font-size:1.15rem; margin-top:0.3rem;" data-i18n="sim_select_desc">Supply Chain Impact Calculator</h3>
       </div>
-      <button class="btn btn-secondary" onclick="openFormulaModal()" style="font-size:0.8rem; padding:8px 16px;">
-        📐 <span data-i18n="btn_view_formula">View Math & ROP Formulas</span>
+      <button class="btn btn-secondary" onclick="openFormulaModal()" style="font-size:0.78rem; padding:7px 14px;">
+        <span data-i18n="btn_view_formula">View Math & ROP Formulas</span>
       </button>
     </div>
 
     <!-- Scenario Buttons -->
     <div class="scenario-selector" role="group">
       <button class="scenario-btn active" id="btn-scen-rec" onclick="applyScenario('rec')">
-        <span>⭐</span> <span data-i18n="scen_rec_btn">Scenario B: Recommended (95% ROP + SLA Restructuring)</span>
+        <span data-i18n="scen_rec_btn">Scenario B: Recommended (95% ROP + SLA Restructuring)</span>
       </button>
       <button class="scenario-btn" id="btn-scen-quick" onclick="applyScenario('quick')">
-        <span>⚡</span> <span data-i18n="scen_quick_btn">Scenario A: Fast Stabilization (90% ROP + Carrier Fix)</span>
+        <span data-i18n="scen_quick_btn">Scenario A: Fast Stabilization (90% ROP + Carrier Fix)</span>
       </button>
       <button class="scenario-btn" id="btn-scen-agg" onclick="applyScenario('agg')">
-        <span>🚀</span> <span data-i18n="scen_agg_btn">Scenario C: Full Scale Transformation (98% ROP + Dual Sourcing)</span>
+        <span data-i18n="scen_agg_btn">Scenario C: Full Scale Transformation (98% ROP + Dual Sourcing)</span>
       </button>
     </div>
 
@@ -1288,7 +1439,7 @@ ORDER BY m.ym;</code></pre>
       <div class="sim-card" id="card-sim-carry">
         <div class="sim-card-title" data-i18n="sim_lbl_carry">Incremental Carrying Cost</div>
         <div class="sim-val-wrap">
-          <span class="sim-val-new" id="sim-val-carry" style="color:var(--accent-amber);">+Rp 6.36 M</span>
+          <span class="sim-val-new" id="sim-val-carry" style="color:#fbbf24;">+Rp 6.36 M</span>
         </div>
         <span class="sim-badge neutral" data-i18n="sim_badge_carry">20% Annual Holding Rate</span>
       </div>
@@ -1296,7 +1447,7 @@ ORDER BY m.ym;</code></pre>
       <div class="sim-card" id="card-sim-roi">
         <div class="sim-card-title" data-i18n="sim_lbl_roi">Commercial ROI Ratio</div>
         <div class="sim-val-wrap">
-          <span class="sim-val-new" id="sim-val-roi" style="color:var(--accent-cyan);">92.4x</span>
+          <span class="sim-val-new" id="sim-val-roi" style="color:#60a5fa;">92.4x</span>
         </div>
         <span class="sim-badge positive" data-i18n="sim_badge_roi">Benefit / Holding Cost</span>
       </div>
@@ -1312,15 +1463,15 @@ ORDER BY m.ym;</code></pre>
     </div>
 
     <!-- Scenario Summary Note -->
-    <div style="margin-top:1.5rem; background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.2); border-radius:var(--radius-sm); padding:1rem 1.25rem; font-size:0.85rem; color:var(--text-secondary);" id="sim-narrative" data-i18n-html="scen_rec_narrative">
-      💡 <strong>Strategic Rationale:</strong> By calibrating the 68 SKU-warehouse combinations currently below the 95% service level threshold ($Z = 1.645$) and enforcing supplier SLAs on the bottom-3 vendors (<6% OTD), the business protects an estimated ~Rp 587.9M in demand for a modest inventory holding investment of Rp 6.36M/year. Reallocating freight from underperforming Mitra Trucking (48.88% On-Time) recaptures ~257 complete shipments.
+    <div class="sim-narrative-box" id="sim-narrative" data-i18n-html="scen_rec_narrative">
+      <strong>Strategic Rationale:</strong> By calibrating the 68 SKU-warehouse combinations currently below the 95% service level threshold ($Z = 1.645$) and enforcing supplier SLAs on the bottom-3 vendors (<6% OTD), the business protects an estimated ~Rp 587.9M in demand for a modest inventory holding investment of Rp 6.36M/year. Reallocating freight from underperforming Mitra Trucking (48.88% On-Time) recaptures ~257 complete shipments.
     </div>
   </div>
 
   <!-- 4 STRATEGIC PILLARS -->
   <div style="margin-bottom:2rem; text-align:center;">
-    <span style="font-size:0.78rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--accent-cyan); font-weight:700;" data-i18n="strat_pillars_tag">Four Operational Workstreams</span>
-    <h3 style="font-size:1.6rem; margin-top:0.3rem;" data-i18n="strat_pillars_title">Pillars of Execution</h3>
+    <span style="font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:#93c5fd; font-weight:700;" data-i18n="strat_pillars_tag">Four Operational Workstreams</span>
+    <h3 style="font-size:1.45rem; margin-top:0.3rem;" data-i18n="strat_pillars_title">Pillars of Execution</h3>
   </div>
 
   <div class="pillars-grid">
@@ -1329,7 +1480,7 @@ ORDER BY m.ym;</code></pre>
       <div class="pillar-number">01</div>
       <div class="pillar-title" data-i18n="p1_title">Dynamic ROP & Buffer Recalibration</div>
       <p class="pillar-desc" data-i18n="p1_desc">Upgrade static reorder points to dynamic equations accounting for both daily demand variance (σD) and lead time volatility (σL). Target the 68 identified vulnerable SKU-warehouse pairs at a 95% service level threshold ($Z = 1.645$).</p>
-      <div class="pillar-meta" data-i18n="p1_meta">🎯 Impact: Unit Fill Rate 74.15% ➔ ~88.6% | Stockout Share 14.31% ➔ <4.5%</div>
+      <div class="pillar-meta" data-i18n="p1_meta">Impact: Unit Fill Rate 74.15% ➔ ~88.6% | Stockout Share 14.31% ➔ &lt;4.5%</div>
     </div>
 
     <!-- Pillar 2 -->
@@ -1337,7 +1488,7 @@ ORDER BY m.ym;</code></pre>
       <div class="pillar-number">02</div>
       <div class="pillar-title" data-i18n="p2_title">Upstream Vendor SLA Enforcement</div>
       <p class="pillar-desc" data-i18n="p2_desc">Address bottom-3 suppliers (PT Niaga Mitra, PT Karya Maju Industri, PT Surya Ritelindo) suffering from <6% OTD and 4+ days average delay. Institute weekly open-PO exception audits, progressive delay penalties, and volume reallocation to tier-1 suppliers.</p>
-      <div class="pillar-meta" data-i18n="p2_meta">🎯 Impact: Vendor OTD 35.95% ➔ ~65.0% | Lead Time Variance reduced by 35%</div>
+      <div class="pillar-meta" data-i18n="p2_meta">Impact: Vendor OTD 35.95% ➔ ~65.0% | Lead Time Variance reduced by 35%</div>
     </div>
 
     <!-- Pillar 3 -->
@@ -1345,7 +1496,7 @@ ORDER BY m.ym;</code></pre>
       <div class="pillar-number">03</div>
       <div class="pillar-title" data-i18n="p3_title">3PL Fleet Reallocation & Route SLA</div>
       <p class="pillar-desc" data-i18n="p3_desc">Mitra Trucking delivers only 48.88% on-time despite costing Rp 32,461/shipment (comparable to SiCepat GOKIL at 69.79%). Reallocate 70% of Mitra Trucking's volume to high-performing carriers and confine them to short-haul inner-city routes.</p>
-      <div class="pillar-meta" data-i18n="p3_meta">🎯 Impact: Carrier On-Time 63.65% ➔ ~72.0% | 848 Late-but-Full orders recovered</div>
+      <div class="pillar-meta" data-i18n="p3_meta">Impact: Carrier On-Time 63.65% ➔ ~72.0% | 848 Late-but-Full orders recovered</div>
     </div>
 
     <!-- Pillar 4 -->
@@ -1353,14 +1504,14 @@ ORDER BY m.ym;</code></pre>
       <div class="pillar-number">04</div>
       <div class="pillar-title" data-i18n="p4_title">Daily Control Tower & Early Warning Triggers</div>
       <p class="pillar-desc" data-i18n="p4_desc">Deploy automated daily alerting across all 144 SKU-warehouse nodes. Trigger automated purchase requisitions whenever Days of Supply (DOS) drops below 7 days or when PO receipt dates slip by >48 hours past expected window.</p>
-      <div class="pillar-meta" data-i18n="p4_meta">🎯 Impact: Zero unmonitored stockout days | 100% data reconcile integrity</div>
+      <div class="pillar-meta" data-i18n="p4_meta">Impact: Zero unmonitored stockout days | 100% data reconcile integrity</div>
     </div>
   </div>
 
   <!-- 12-WEEK ROADMAP -->
   <div style="margin-bottom:1.5rem; text-align:center;">
-    <span style="font-size:0.78rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--accent-cyan); font-weight:700;" data-i18n="strat_roadmap_tag">Phased Execution Timeline</span>
-    <h3 style="font-size:1.6rem; margin-top:0.3rem;" data-i18n="strat_roadmap_title">12-Week Strategic Implementation Roadmap</h3>
+    <span style="font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:#93c5fd; font-weight:700;" data-i18n="strat_roadmap_tag">Phased Execution Timeline</span>
+    <h3 style="font-size:1.45rem; margin-top:0.3rem;" data-i18n="strat_roadmap_title">12-Week Strategic Implementation Roadmap</h3>
   </div>
 
   <div class="roadmap-table-wrap reveal">
@@ -1378,19 +1529,19 @@ ORDER BY m.ym;</code></pre>
           <td><span class="roadmap-phase-tag phase-1" data-i18n="p_tag_1">Phase 1 (W1–W4)</span><br /><small style="color:var(--text-muted);" data-i18n="p_name_1">Quick Wins & Stabilize</small></td>
           <td style="font-weight:600; color:var(--text-primary);" data-i18n="w_stream_1">Fleet Realignment & High-Risk Buffer Pilot</td>
           <td data-i18n="w_action_1">• Reallocate 500+ orders from Mitra Trucking to SiCepat/J&T.<br />• Deploy pilot ROP for Top 20 Unserved Value SKUs at Jakarta DC.<br />• Implement weekly supplier open-PO scorecard.</td>
-          <td><strong style="color:var(--accent-green);" data-i18n="w_gate_1">Carrier On-Time ≥ 68%<br />Zero balance reconcile errors</strong></td>
+          <td><strong style="color:#34d399;" data-i18n="w_gate_1">Carrier On-Time ≥ 68%<br />Zero balance reconcile errors</strong></td>
         </tr>
         <tr>
           <td><span class="roadmap-phase-tag phase-2" data-i18n="p_tag_2">Phase 2 (W5–W8)</span><br /><small style="color:var(--text-muted);" data-i18n="p_name_2">Systematic Recalibration</small></td>
           <td style="font-weight:600; color:var(--text-primary);" data-i18n="w_stream_2">Dynamic ROP Scale & Supplier SLA Enforce</td>
           <td data-i18n="w_action_2">• Scale dynamic ROP to all 68 below-threshold SKU-warehouse pairs.<br />• Execute renegotiation meetings with bottom-3 OTD suppliers.<br />• Introduce automated safety stock monitoring in Power BI.</td>
-          <td><strong style="color:var(--accent-green);" data-i18n="w_gate_2">Fill Rate ≥ 82%<br />Stockout Snapshot ≤ 8%</strong></td>
+          <td><strong style="color:#34d399;" data-i18n="w_gate_2">Fill Rate ≥ 82%<br />Stockout Snapshot ≤ 8%</strong></td>
         </tr>
         <tr>
           <td><span class="roadmap-phase-tag phase-3" data-i18n="p_tag_3">Phase 3 (W9–W12)</span><br /><small style="color:var(--text-muted);" data-i18n="p_name_3">Scale & Network Governance</small></td>
           <td style="font-weight:600; color:var(--text-primary);" data-i18n="w_stream_3">Network-Wide Optimization & Control Tower</td>
           <td data-i18n="w_action_3">• Deploy automated cross-docking rules between 3 distribution centers.<br />• Dual-sourcing contracts signed for critical Class A categories.<br />• Handover of executive dashboard & operational SOPs.</td>
-          <td><strong style="color:var(--accent-green);" data-i18n="w_gate_3">OTIF ≥ 65%<br />Carrying cost growth < 10%</strong></td>
+          <td><strong style="color:#34d399;" data-i18n="w_gate_3">OTIF ≥ 65%<br />Carrying cost growth &lt; 10%</strong></td>
         </tr>
       </tbody>
     </table>
@@ -1419,7 +1570,7 @@ ORDER BY m.ym;</code></pre>
 <div class="modal-backdrop" id="formula-modal" onclick="closeFormulaModalOnBackdrop(event)">
   <div class="modal-card">
     <div class="modal-header">
-      <h3 data-i18n="modal_math_title">📐 Supply Chain Math & Formula Definitions</h3>
+      <h3 data-i18n="modal_math_title">Supply Chain Math & Formula Definitions</h3>
       <button class="toast-close" onclick="closeFormulaModal()">✕</button>
     </div>
     <div class="modal-body">
@@ -1455,14 +1606,17 @@ ORDER BY m.ym;</code></pre>
   <h2>Pandu Pramana</h2>
   <p data-i18n="footer_role">Data Analyst · Supply Chain Analytics · FMCG Domain</p>
   <div class="footer-links">
-    <a href="mailto:apandoop@gmail.com" class="btn btn-primary">📧 apandoop@gmail.com</a>
+    <a href="mailto:apandoop@gmail.com" class="btn btn-primary">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+      apandoop@gmail.com
+    </a>
     <a href="https://github.com/pandooat/scm-portfolio" target="_blank" class="btn btn-secondary">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
       github.com/pandooat
     </a>
   </div>
   <div class="footer-disclaimer" data-i18n-html="footer_disclaimer">
-    ⚠️ <strong>Synthetic Data Disclaimer:</strong> All data, company names, supplier names, customer names, orders, and financial figures in this project are entirely fictional and generated for educational purposes. This is a portfolio demonstration artifact only — not an operational business document or industry benchmark.
+    <strong>Notice: Synthetic Dataset —</strong> All data, company names, supplier names, customer names, orders, and financial figures in this project are synthetic and generated for educational demonstration purposes. This is a portfolio artifact illustrating data analytics competence — not an operational business document or industry benchmark.
   </div>
 </footer>
 
@@ -1476,7 +1630,11 @@ ORDER BY m.ym;</code></pre>
       const toast = document.createElement('div');
       toast.className = `toast ${type}`;
       
-      const icon = type === 'success' ? '✅' : type === 'error' ? '❌' : 'ℹ️';
+      const icon = type === 'success' 
+        ? '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>'
+        : type === 'error'
+        ? '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>'
+        : '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>';
 
       toast.innerHTML = `
         <div class="toast-icon">${icon}</div>
@@ -1484,7 +1642,7 @@ ORDER BY m.ym;</code></pre>
           <div class="toast-title">${title}</div>
           <div class="toast-msg">${message}</div>
         </div>
-        <button class="toast-close" onclick="this.parentElement.remove()">✕</button>
+        <button class="toast-close" onclick="this.parentElement.remove()" aria-label="Close notification">✕</button>
       `;
 
       container.appendChild(toast);
@@ -1497,7 +1655,7 @@ ORDER BY m.ym;</code></pre>
     }
   };
 
-  // ─── I18N DICTIONARY ─────────────────────────────────────
+  // ─── I18N DICTIONARY (Anti-Slop Clean Professional Copy) ──
   const i18n = {
     en: {
       nav_overview: "Overview",
@@ -1507,11 +1665,11 @@ ORDER BY m.ym;</code></pre>
       nav_memo: "Memo",
       nav_strategy: "Strategy & Impact",
       nav_contact: "Contact",
-      hero_badge: "📦 Supply Chain Analytics Portfolio",
+      hero_badge: "Case Study · FMCG Fulfillment Network",
       hero_title: "FMCG Supply Chain<br /><span>Performance Analysis</span>",
       hero_subtitle: "End-to-end supply chain analytics on a synthetic FMCG dataset — diagnosing fulfillment failures across 4,925 orders using SQL, Python, and Power BI.",
-      hero_cta_analysis: "View Analysis ↓",
-      hero_cta_strategy: "Strategic Plan 🚀",
+      hero_cta_analysis: "View Analysis",
+      hero_cta_strategy: "Strategic Plan",
       kpi_fillrate: "Fill Rate (Unit)",
       kpi_otif: "OTIF (Order)",
       kpi_otd: "Supplier OTD",
@@ -1556,13 +1714,13 @@ ORDER BY m.ym;</code></pre>
       tab_5: "15 · Inventory Turnover",
       empty_sql_title: "No queries match your search",
       empty_sql_desc: "Try searching for broader keywords like 'OTIF', 'warehouse', 'supplier', or 'turnover'.",
-      empty_sql_reset: "Reset Search",
-      insight_sql_0: "💡 Portfolio spans Food, Personal Care, Home Care, Beverage — guides priority-setting for safety stock and demand planning complexity.",
-      insight_sql_1: "💡 Warehouse-level fill rate isolates whether the fulfillment problem is structural (all locations underperform) or location-specific — determines intervention scope.",
-      insight_sql_2: "💡 OTIF is measured at order grain (1 order = 1 row in fact_shipments). Averaging line-level metrics would dilute the KPI — this query uses the correct denominator.",
-      insight_sql_3: "💡 WHERE filters to received POs only — open POs are excluded from denominator to avoid penalizing future performance. Reported separately.",
-      insight_sql_4: "💡 Window function computes cumulative revenue share without a self-join. ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW ensures exact boundary handling for SKUs at the 80%/95% thresholds.",
-      insight_sql_5: "💡 Daily average method (avg across all snapshot days per month) is more accurate than simple beginning/end average. Result is period turnover — not annualized — to avoid overstating efficiency.",
+      empty_sql_reset: "Reset Filter",
+      insight_sql_0: "Portfolio spans Food, Personal Care, Home Care, Beverage — guides priority-setting for safety stock and demand planning complexity.",
+      insight_sql_1: "Warehouse-level fill rate isolates whether the fulfillment problem is structural (all locations underperform) or location-specific — determines intervention scope.",
+      insight_sql_2: "OTIF is measured at order grain (1 order = 1 row in fact_shipments). Averaging line-level metrics would dilute the KPI — this query uses the correct denominator.",
+      insight_sql_3: "WHERE filters to received POs only — open POs are excluded from denominator to avoid penalizing future performance. Reported separately.",
+      insight_sql_4: "Window function computes cumulative revenue share without a self-join. ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW ensures exact boundary handling for SKUs at the 80%/95% thresholds.",
+      insight_sql_5: "Daily average method (avg across all snapshot days per month) is more accurate than simple beginning/end average. Result is period turnover — not annualized — to avoid overstating efficiency.",
       memo_tag: "Business Communication",
       memo_title: "Executive Memo Highlights",
       memo_desc: "Diagnosis and priority actions for the simulated supply chain",
@@ -1574,25 +1732,25 @@ ORDER BY m.ym;</code></pre>
       td_otif: "OTIF (order)",
       td_otd: "Supplier OTD",
       td_stockout: "Stockout Snapshot Share",
-      signal_below: "⚠ Below target",
-      signal_critical: "⚠ Critical gap",
-      signal_risk: "⚠ Highest risk",
-      signal_concentrated: "⚠ Concentrated",
-      memo_card1_label: "🔴 Priority 1 — Strongest Signal",
+      signal_below: "Below target",
+      signal_critical: "Critical gap",
+      signal_risk: "Highest risk",
+      signal_concentrated: "Concentrated",
+      memo_card1_label: "Priority 1 · Primary Bottleneck",
       memo_card1_title: "Upstream Supply Reliability",
       memo_card1_body: "Supplier OTD of 35.95% is the most acute upstream risk. When POs arrive late, safety stock erodes faster than it replenishes — directly causing stockouts on fast-moving SKUs. Begin with weekly PO exception tracking and SLA review for bottom-2 OTD suppliers.",
-      memo_card2_label: "🟡 Priority 2 — Structural Signal",
+      memo_card2_label: "Priority 2 · Structural Signal",
       memo_card2_title: "Inventory Positioning",
       memo_card2_body: "14.31% stockout snapshot share is concentrated in specific SKU-warehouse combinations — 68/144 combos below 95% ROP threshold. Recalibrate reorder points for top-20 Unserved Order Value SKUs at 95% service level target. Pilot one warehouse before rollout.",
-      memo_card3_label: "🔵 Priority 3 — Secondary Signal",
+      memo_card3_label: "Priority 3 · Secondary Signal",
       memo_card3_title: "Last-Mile Delivery Execution",
       memo_card3_body: "848 orders (17%) were complete but delivered late. Carrier performance review should compare on-time %, freight cost per shipped order, and volume per route to identify renegotiation or reallocation opportunities with underperforming providers.",
       strat_tag: "Strategic Roadmap & Quantified Value",
       strat_title: "Strategic Action Plan & Business Impact Simulation",
       strat_desc: "A 12-week data-driven transformation model translating diagnostic analytics into quantified ROI, service-level recovery, and operational resilience.",
       btn_view_formula: "View Math & ROP Formulas",
-      sim_select_title: "🎮 Select Strategic Simulation Scenario",
-      sim_select_desc: "Interactive Supply Chain Impact Calculator",
+      sim_select_title: "Strategic Simulation Scenarios",
+      sim_select_desc: "Supply Chain Impact Calculator",
       scen_rec_btn: "Scenario B: Recommended (95% ROP + SLA Restructuring)",
       scen_quick_btn: "Scenario A: Fast Stabilization (90% ROP + Carrier Fix)",
       scen_agg_btn: "Scenario C: Full Scale Transformation (98% ROP + Dual Sourcing)",
@@ -1604,23 +1762,23 @@ ORDER BY m.ym;</code></pre>
       sim_lbl_stockout: "Daily Stockout Share",
       sim_badge_carry: "20% Annual Holding Rate",
       sim_badge_roi: "Benefit / Holding Cost",
-      scen_rec_narrative: "💡 <strong>Strategic Rationale:</strong> By calibrating the 68 SKU-warehouse combinations currently below the 95% service level threshold ($Z = 1.645$) and enforcing supplier SLAs on the bottom-3 vendors (<6% OTD), the business protects an estimated ~Rp 587.9M in demand for a modest inventory holding investment of Rp 6.36M/year. Reallocating freight from underperforming Mitra Trucking (48.88% On-Time) recaptures ~257 complete shipments.",
-      scen_quick_narrative: "⚡ <strong>Strategic Rationale:</strong> Scenario A focuses on low-capital rapid recovery: reallocating shipments away from Mitra Trucking immediately to SiCepat and J&T Cargo, combined with minimum buffer stock at 90% service level ($Z = 1.282$). Minimizes capital commitment while solving last-mile delays.",
-      scen_agg_narrative: "🚀 <strong>Strategic Rationale:</strong> Scenario C targets industry-leading SLA reliability: dual-sourcing contracts for chronic late vendors, dedicated freight line haul, and 98% service level safety stocks ($Z = 2.054$). Captures maximal unserved value (~Rp 780M) with manageable carrying cost of Rp 13.58M/year.",
+      scen_rec_narrative: "<strong>Strategic Rationale:</strong> By calibrating the 68 SKU-warehouse combinations currently below the 95% service level threshold ($Z = 1.645$) and enforcing supplier SLAs on the bottom-3 vendors (<6% OTD), the business protects an estimated ~Rp 587.9M in demand for a modest inventory holding investment of Rp 6.36M/year. Reallocating freight from underperforming Mitra Trucking (48.88% On-Time) recaptures ~257 complete shipments.",
+      scen_quick_narrative: "<strong>Strategic Rationale:</strong> Scenario A focuses on low-capital rapid recovery: reallocating shipments away from Mitra Trucking immediately to SiCepat and J&T Cargo, combined with minimum buffer stock at 90% service level ($Z = 1.282$). Minimizes capital commitment while solving last-mile delays.",
+      scen_agg_narrative: "<strong>Strategic Rationale:</strong> Scenario C targets industry-leading SLA reliability: dual-sourcing contracts for chronic late vendors, dedicated freight line haul, and 98% service level safety stocks ($Z = 2.054$). Captures maximal unserved value (~Rp 780M) with manageable carrying cost of Rp 13.58M/year.",
       strat_pillars_tag: "Four Operational Workstreams",
       strat_pillars_title: "Pillars of Execution",
       p1_title: "Dynamic ROP & Buffer Recalibration",
       p1_desc: "Upgrade static reorder points to dynamic equations accounting for both daily demand variance (σD) and lead time volatility (σL). Target the 68 identified vulnerable SKU-warehouse pairs at a 95% service level threshold ($Z = 1.645$).",
-      p1_meta: "🎯 Impact: Unit Fill Rate 74.15% ➔ ~88.6% | Stockout Share 14.31% ➔ <4.5%",
+      p1_meta: "Impact: Unit Fill Rate 74.15% ➔ ~88.6% | Stockout Share 14.31% ➔ <4.5%",
       p2_title: "Upstream Vendor SLA Enforcement",
       p2_desc: "Address bottom-3 suppliers (PT Niaga Mitra, PT Karya Maju Industri, PT Surya Ritelindo) suffering from <6% OTD and 4+ days average delay. Institute weekly open-PO exception audits, progressive delay penalties, and volume reallocation to tier-1 suppliers.",
-      p2_meta: "🎯 Impact: Vendor OTD 35.95% ➔ ~65.0% | Lead Time Variance reduced by 35%",
+      p2_meta: "Impact: Vendor OTD 35.95% ➔ ~65.0% | Lead Time Variance reduced by 35%",
       p3_title: "3PL Fleet Reallocation & Route SLA",
       p3_desc: "Mitra Trucking delivers only 48.88% on-time despite costing Rp 32,461/shipment (comparable to SiCepat GOKIL at 69.79%). Reallocate 70% of Mitra Trucking's volume to high-performing carriers and confine them to short-haul inner-city routes.",
-      p3_meta: "🎯 Impact: Carrier On-Time 63.65% ➔ ~72.0% | 848 Late-but-Full orders recovered",
+      p3_meta: "Impact: Carrier On-Time 63.65% ➔ ~72.0% | 848 Late-but-Full orders recovered",
       p4_title: "Daily Control Tower & Early Warning Triggers",
       p4_desc: "Deploy automated daily alerting across all 144 SKU-warehouse nodes. Trigger automated purchase requisitions whenever Days of Supply (DOS) drops below 7 days or when PO receipt dates slip by >48 hours past expected window.",
-      p4_meta: "🎯 Impact: Zero unmonitored stockout days | 100% data reconcile integrity",
+      p4_meta: "Impact: Zero unmonitored stockout days | 100% data reconcile integrity",
       strat_roadmap_tag: "Phased Execution Timeline",
       strat_roadmap_title: "12-Week Strategic Implementation Roadmap",
       th_phase: "Phase & Horizon",
@@ -1642,7 +1800,7 @@ ORDER BY m.ym;</code></pre>
       w_stream_3: "Network-Wide Optimization & Control Tower",
       w_action_3: "• Deploy automated cross-docking rules between 3 distribution centers.<br />• Dual-sourcing contracts signed for critical Class A categories.<br />• Handover of executive dashboard & operational SOPs.",
       w_gate_3: "OTIF ≥ 65%<br />Carrying cost growth < 10%",
-      modal_math_title: "📐 Supply Chain Math & Formula Definitions",
+      modal_math_title: "Supply Chain Math & Formula Definitions",
       modal_rop_heading: "1. Dynamic Reorder Point (ROP) with Joint Uncertainty",
       modal_rop_text: "Accounts for both daily sales volatility and supplier delivery variance without assuming zero lead-time standard deviation:",
       modal_otif_heading: "2. OTIF (On-Time In-Full) Strict B2B Definition",
@@ -1653,7 +1811,7 @@ ORDER BY m.ym;</code></pre>
       tech_tag: "Tools & Methods",
       tech_title: "Tech Stack",
       footer_role: "Data Analyst · Supply Chain Analytics · FMCG Domain",
-      footer_disclaimer: "⚠️ <strong>Synthetic Data Disclaimer:</strong> All data, company names, supplier names, customer names, orders, and financial figures in this project are entirely fictional and generated for educational purposes. This is a portfolio demonstration artifact only — not an operational business document or industry benchmark."
+      footer_disclaimer: "<strong>Notice: Synthetic Dataset —</strong> All data, company names, supplier names, customer names, orders, and financial figures in this project are synthetic and generated for educational demonstration purposes. This is a portfolio artifact illustrating data analytics competence — not an operational business document or industry benchmark."
     },
     id: {
       nav_overview: "Ringkasan",
@@ -1663,11 +1821,11 @@ ORDER BY m.ym;</code></pre>
       nav_memo: "Memo Eksekutif",
       nav_strategy: "Strategi & Dampak",
       nav_contact: "Kontak",
-      hero_badge: "📦 Portofolio Analisis Rantai Pasok",
+      hero_badge: "Studi Kasus · Jaringan Distribusi FMCG",
       hero_title: "Rantai Pasok FMCG<br /><span>Analisis Kinerja & Pemenuhan</span>",
       hero_subtitle: "Analisis rantai pasok end-to-end berbasis dataset sintetis FMCG — mendiagnosis kegagalan fulfillment pada 4.925 pesanan menggunakan SQL, Python, dan Power BI.",
-      hero_cta_analysis: "Lihat Analisis ↓",
-      hero_cta_strategy: "Rencana Strategis 🚀",
+      hero_cta_analysis: "Lihat Analisis",
+      hero_cta_strategy: "Rencana Strategis",
       kpi_fillrate: "Fill Rate (Unit)",
       kpi_otif: "OTIF (Pesanan)",
       kpi_otd: "OTD Pemasok",
@@ -1712,13 +1870,13 @@ ORDER BY m.ym;</code></pre>
       tab_5: "15 · Perputaran Stok",
       empty_sql_title: "Kueri SQL tidak ditemukan",
       empty_sql_desc: "Coba gunakan kata kunci pencarian yang lebih umum seperti 'OTIF', 'gudang', 'pemasok', atau 'turnover'.",
-      empty_sql_reset: "Reset Pencarian",
-      insight_sql_0: "💡 Portofolio mencakup Food, Personal Care, Home Care, Beverage — memandu penentuan prioritas stok pengaman dan kompleksitas perencanaan permintaan.",
-      insight_sql_1: "💡 Fill rate tingkat gudang membedakan apakah masalah pemenuhan bersifat struktural (seluruh lokasi rendah) atau lokal — menentukan cakupan intervensi.",
-      insight_sql_2: "💡 OTIF diukur pada grain pesanan (1 order = 1 baris fact_shipments). Merata-ratakan metrik baris order akan mendistorsi KPI — kueri ini memakai penyebut yang tepat.",
-      insight_sql_3: "💡 Klausul WHERE hanya menyaring PO yang sudah diterima — PO terbuka dikeluarkan dari penyebut agar tidak mendistorsi pengukuran performa masa lalu.",
-      insight_sql_4: "💡 Window function menghitung pangsa kumulatif omzet tanpa self-join. ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW menjamin presisi batas SKU pada ambang 80% dan 95%.",
-      insight_sql_5: "💡 Metode rata-rata harian (seluruh hari snapshot per bulan) jauh lebih akurat daripada rata-rata saldo awal/akhir. Hasilnya adalah turnover periode — tidak di-tahunan-kan — agar tidak melebih-lebihkan efisiensi.",
+      empty_sql_reset: "Reset Filter",
+      insight_sql_0: "Portofolio mencakup Food, Personal Care, Home Care, Beverage — memandu penentuan prioritas stok pengaman dan kompleksitas perencanaan permintaan.",
+      insight_sql_1: "Fill rate tingkat gudang membedakan apakah masalah pemenuhan bersifat struktural (seluruh lokasi rendah) atau lokal — menentukan cakupan intervensi.",
+      insight_sql_2: "OTIF diukur pada grain pesanan (1 order = 1 baris fact_shipments). Merata-ratakan metrik baris order akan mendistorsi KPI — kueri ini memakai penyebut yang tepat.",
+      insight_sql_3: "Klausul WHERE hanya menyaring PO yang sudah diterima — PO terbuka dikeluarkan dari penyebut agar tidak mendistorsi pengukuran performa masa lalu.",
+      insight_sql_4: "Window function menghitung pangsa kumulatif omzet tanpa self-join. ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW menjamin presisi batas SKU pada ambang 80% dan 95%.",
+      insight_sql_5: "Metode rata-rata harian (seluruh hari snapshot per bulan) jauh lebih akurat daripada rata-rata saldo awal/akhir. Hasilnya adalah turnover periode — tidak di-tahunan-kan — agar tidak melebih-lebihkan efisiensi.",
       memo_tag: "Komunikasi Bisnis",
       memo_title: "Poin Kunci Memo Eksekutif",
       memo_desc: "Diagnosis dan rekomendasi tindakan terukur untuk rantai pasok simulasi",
@@ -1730,25 +1888,25 @@ ORDER BY m.ym;</code></pre>
       td_otif: "OTIF (pesanan)",
       td_otd: "OTD Pemasok",
       td_stockout: "Pangsa Habis Stok Harian",
-      signal_below: "⚠ Di bawah target",
-      signal_critical: "⚠ Kesenjangan kritis",
-      signal_risk: "⚠ Risiko tertinggi",
-      signal_concentrated: "⚠ Terkonsentrasi",
-      memo_card1_label: "🔴 Prioritas 1 — Sinyal Terkuat",
+      signal_below: "Di bawah target",
+      signal_critical: "Kesenjangan kritis",
+      signal_risk: "Risiko tertinggi",
+      signal_concentrated: "Terkonsentrasi",
+      memo_card1_label: "Prioritas 1 · Hambatan Utama",
       memo_card1_title: "Keandalan Pasokan Hulu (Pemasok)",
       memo_card1_body: "OTD pemasok sebesar 35,95% adalah risiko hulu paling akut. Keterlambatan PO mengikis stok pengaman lebih cepat daripada pengisian ulang — langsung memicu kehabisan stok pada SKU fast-moving. Mulai dengan monitoring deviasi PO mingguan dan audit SLA untuk 2 pemasok terbawah.",
-      memo_card2_label: "🟡 Prioritas 2 — Sinyal Struktural",
+      memo_card2_label: "Prioritas 2 · Sinyal Struktural",
       memo_card2_title: "Posisi & Alokasi Persediaan",
       memo_card2_body: "14,31% snapshot habis stok terkonsentrasi pada kombinasi SKU-gudang tertentu — 68 dari 144 kombinasi berada di bawah batas ROP 95%. Kalibrasi ulang titik pemesanan ulang (ROP) untuk 20 SKU teratas penghasil Unserved Order Value pada target service level 95%. Uji coba di 1 gudang percontohan.",
-      memo_card3_label: "🔵 Prioritas 3 — Sinyal Sekunder",
+      memo_card3_label: "Prioritas 3 · Sinyal Sekunder",
       memo_card3_title: "Eksekusi Pengiriman Last-Mile",
       memo_card3_body: "848 pesanan (17%) dikemas lengkap namun tiba terlambat. Evaluasi performa ekspedisi perlu membandingkan persentase ketepatan waktu, biaya ongkir per pesanan terkirim, serta volume rute guna menegosiasikan ulang kontrak atau mengalihkan volume ke ekspedisi berkinerja unggul.",
       strat_tag: "Roadmap Strategis & Kuantifikasi Nilai",
       strat_title: "Rencana Aksi Strategis & Simulasi Dampak Bisnis",
       strat_desc: "Model transformasi berbasis data 12 minggu yang menerjemahkan diagnosis analitik menjadi estimasi ROI terukur, pemulihan service level, dan ketahanan operasional.",
       btn_view_formula: "Lihat Rumus ROP & Matematika SCM",
-      sim_select_title: "🎮 Pilih Skenario Simulasi Strategis",
-      sim_select_desc: "Kalkulator Interaktif Dampak Rantai Pasok",
+      sim_select_title: "Pilihan Skenario Simulasi",
+      sim_select_desc: "Kalkulator Dampak Rantai Pasok",
       scen_rec_btn: "Skenario B: Rekomendasi Utama (ROP 95% + Restrukturisasi SLA)",
       scen_quick_btn: "Skenario A: Stabilisasi Cepat (ROP 90% + Perbaikan Ekspedisi)",
       scen_agg_btn: "Skenario C: Transformasi Skala Penuh (ROP 98% + Dual Sourcing)",
@@ -1760,23 +1918,23 @@ ORDER BY m.ym;</code></pre>
       sim_lbl_stockout: "Pangsa Habis Stok Harian",
       sim_badge_carry: "Asumsi 20% Biaya Simpan Tahunan",
       sim_badge_roi: "Rasio Manfaat / Biaya Simpan",
-      scen_rec_narrative: "💡 <strong>Rasional Strategis:</strong> Mengkalibrasi 68 kombinasi SKU-gudang yang saat ini di bawah ambang batas level layanan 95% ($Z = 1,645$) dan menegakkan SLA untuk 3 pemasok terbawah (OTD <6%) memproteksi estimasi permintaan senilai ~Rp 587,9 Juta dengan investasi holding persediaan hanya Rp 6,36 Juta/tahun. Mengalihkan pengiriman dari Mitra Trucking (On-Time 48,88%) memulihkan ~257 pesanan tiba tepat waktu.",
-      scen_quick_narrative: "⚡ <strong>Rasional Strategis:</strong> Skenario A memprioritaskan pemulihan cepat dengan modal minimal: realokasi pengiriman dari Mitra Trucking ke SiCepat dan J&T Cargo secara langsung, dikombinasikan dengan batas stok pengaman 90% ($Z = 1,282$). Menghindari komitmen modal berlebih sambil mengeliminasi keterlambatan last-mile.",
-      scen_agg_narrative: "🚀 <strong>Rasional Strategis:</strong> Skenario C menargetkan standar keandalan pasar tertinggi: kontrak dual-sourcing untuk pemasok kronis, jalur pengiriman khusus antarkota, dan stok pengaman 98% ($Z = 2,054$). Memulihkan potensi permintaan maksimal (~Rp 780 Juta) dengan biaya simpan yang tetap efisien di Rp 13,58 Juta/tahun.",
+      scen_rec_narrative: "<strong>Rasional Strategis:</strong> Mengkalibrasi 68 kombinasi SKU-gudang yang saat ini di bawah ambang batas level layanan 95% ($Z = 1,645$) dan menegakkan SLA untuk 3 pemasok terbawah (OTD <6%) memproteksi estimasi permintaan senilai ~Rp 587,9 Juta dengan investasi holding persediaan hanya Rp 6,36 Juta/tahun. Mengalihkan pengiriman dari Mitra Trucking (On-Time 48,88%) memulihkan ~257 pesanan tiba tepat waktu.",
+      scen_quick_narrative: "<strong>Rasional Strategis:</strong> Skenario A memprioritaskan pemulihan cepat dengan modal minimal: realokasi pengiriman dari Mitra Trucking ke SiCepat dan J&T Cargo secara langsung, dikombinasikan dengan batas stok pengaman 90% ($Z = 1,282$). Menghindari komitmen modal berlebih sambil mengeliminasi keterlambatan last-mile.",
+      scen_agg_narrative: "<strong>Rasional Strategis:</strong> Skenario C menargetkan standar keandalan pasar tertinggi: kontrak dual-sourcing untuk pemasok kronis, jalur pengiriman khusus antarkota, dan stok pengaman 98% ($Z = 2,054$). Memulihkan potensi permintaan maksimal (~Rp 780 Juta) dengan biaya simpan yang tetap efisien di Rp 13,58 Juta/tahun.",
       strat_pillars_tag: "Empat Pilar Operasional",
       strat_pillars_title: "Pilar Eksekusi Strategis",
       p1_title: "Kalibrasi Ulang ROP Dinamis & Stok Pengaman",
       p1_desc: "Tingkatkan titik pemesanan ulang statis ke rumus dinamis yang memperhitungkan variansi permintaan harian (σD) dan volatilitas lead time (σL). Terapkan pada 68 kombinasi SKU-gudang rentan pada ambang batas service level 95% ($Z = 1,645$).",
-      p1_meta: "🎯 Dampak: Fill Rate 74,15% ➔ ~88,6% | Habis Stok 14,31% ➔ <4,5%",
+      p1_meta: "Dampak: Fill Rate 74,15% ➔ ~88,6% | Habis Stok 14,31% ➔ <4,5%",
       p2_title: "Penegakan SLA Pemasok Hulu & Audit Deviasi",
       p2_desc: "Tangani 3 pemasok terbawah (PT Niaga Mitra, PT Karya Maju Industri, PT Surya Ritelindo) dengan OTD <6% dan rata-rata keterlambatan 4+ hari. Berlakukan audit PO terbuka mingguan, penalti progresif, dan pengalihan alokasi volume ke pemasok andal.",
-      p2_meta: "🎯 Dampak: OTD Pemasok 35,95% ➔ ~65,0% | Variansi Lead Time berkurang 35%",
+      p2_meta: "Dampak: OTD Pemasok 35,95% ➔ ~65,0% | Variansi Lead Time berkurang 35%",
       p3_title: "Realokasi Armada 3PL & SLA Rute Pengiriman",
       p3_desc: "Mitra Trucking hanya mencatat 48,88% ketepatan waktu dengan biaya Rp 32.461/pesanan (setara SiCepat GOKIL di 69,79%). Alihkan 70% volume pesanan Mitra Trucking ke ekspedisi berkinerja tinggi dan batasi rute mereka hanya pada jarak dekat.",
-      p3_meta: "🎯 Dampak: On-Time Ekspedisi 63,65% ➔ ~72,0% | 848 pesanan tertunda diselamatkan",
+      p3_meta: "Dampak: On-Time Ekspedisi 63,65% ➔ ~72,0% | 848 pesanan tertunda diselamatkan",
       p4_title: "Control Tower Harian & Pemicu Peringatan Dini",
       p4_desc: "Pasang sistem peringatan otomatis harian di seluruh 144 node SKU-gudang. Memicu order pembelian darurat otomatis saat Days of Supply (DOS) jatuh di bawah 7 hari atau ketika jadwal PO terlambat melampaui 48 jam.",
-      p4_meta: "🎯 Dampak: Nol hari kehabisan stok tanpa terpantau | Integritas rekonsiliasi data 100%",
+      p4_meta: "Dampak: Nol hari kehabisan stok tanpa terpantau | Integritas rekonsiliasi data 100%",
       strat_roadmap_tag: "Jadwal Eksekusi Bertahap",
       strat_roadmap_title: "Roadmap Implementasi Strategis 12 Minggu",
       th_phase: "Fase & Horizon",
@@ -1798,7 +1956,7 @@ ORDER BY m.ym;</code></pre>
       w_stream_3: "Optimalisasi Jaringan & Menara Kendali (Control Tower)",
       w_action_3: "• Terapkan aturan cross-docking otomatis antar 3 pusat distribusi regional.<br />• Finalisasi kontrak dual-sourcing untuk kategori kritis Kelas A.<br />• Serah terima dashboard eksekutif dan SOP operasional terstandarisasi.",
       w_gate_3: "OTIF ≥ 65%<br />Pertumbuhan biaya simpan < 10%",
-      modal_math_title: "📐 Rumus Matematika & Definisi Metrik SCM",
+      modal_math_title: "Rumus Matematika & Definisi Metrik SCM",
       modal_rop_heading: "1. Reorder Point (ROP) Dinamis dengan Ketidakpastian Bersama",
       modal_rop_text: "Memperhitungkan variansi penjualan harian sekaligus deviasi keterlambatan pemasok tanpa mengasumsikan lead-time konstan:",
       modal_otif_heading: "2. Definisi Ketat OTIF (On-Time In-Full) Standar B2B",
@@ -1809,7 +1967,7 @@ ORDER BY m.ym;</code></pre>
       tech_tag: "Perangkat & Metodologi",
       tech_title: "Stack Teknologi",
       footer_role: "Data Analyst · Analisis Rantai Pasok · Sektor FMCG",
-      footer_disclaimer: "⚠️ <strong>Disclaimer Data Sintetis:</strong> Seluruh data, nama perusahaan, pemasok, pelanggan, pesanan, dan angka keuangan dalam proyek ini sepenuhnya fiktif dan dibuat untuk keperluan portofolio edukatif. Ini adalah artefak demonstrasi kompetensi analitis — bukan dokumen operasional bisnis nyata atau tolok ukur industri."
+      footer_disclaimer: "<strong>Notice: Disclaimer Data Sintetis —</strong> Seluruh data, nama perusahaan, pemasok, pelanggan, pesanan, dan angka keuangan dalam proyek ini sepenuhnya fiktif dan dibuat untuk keperluan portofolio demonstrasi edukatif analitik data — bukan dokumen operasional bisnis nyata atau tolok ukur industri."
     }
   };
 
@@ -1870,10 +2028,10 @@ ORDER BY m.ym;</code></pre>
     const activeBtn = document.getElementById(`btn-scen-${scenKey}`);
     if (activeBtn) activeBtn.classList.add('active');
 
-    // Trigger Angular UI Pattern: Visual Recalculation Pulse
+    // Visual Recalculation Pulse
     const cards = document.querySelectorAll('.sim-card');
     cards.forEach(c => c.classList.add('recalculating'));
-    setTimeout(() => cards.forEach(c => c.classList.remove('recalculating')), 600);
+    setTimeout(() => cards.forEach(c => c.classList.remove('recalculating')), 500);
 
     // Update values
     document.getElementById('sim-val-fillrate').textContent = scen.fillrate;
@@ -1893,22 +2051,20 @@ ORDER BY m.ym;</code></pre>
       narrEl.innerHTML = i18n[currentLang][scen.narrativeKey];
     }
 
-    // Trigger toast notification feedback
-    const toastTitle = currentLang === 'id' ? 'Skenario Berhasil Dihitung' : 'Scenario Recalculated';
+    // Toast notification feedback
+    const toastTitle = currentLang === 'id' ? 'Skenario Dihitung' : 'Scenario Recalculated';
     const toastMsg = currentLang === 'id' 
-      ? `Model simulasi diperbarui ke ${scenKey.toUpperCase()}.` 
+      ? `Parameter dampak dialihkan ke model ${scenKey.toUpperCase()}.` 
       : `Impact parameters updated to ${scenKey.toUpperCase()} model.`;
     ToastService.show({ type: 'info', title: toastTitle, message: toastMsg });
   }
 
-  // ─── SQL SEARCH & FILTER PATTERN (ANGULAR @EMPTY) ────────
+  // ─── SQL SEARCH & FILTER PATTERN ─────────────────────────
   function handleSQLSearch(query) {
     const q = query.trim().toLowerCase();
     const blocks = document.querySelectorAll('.sql-block');
     const tabs = document.querySelectorAll('.tab-btn[data-index]');
     const emptyState = document.getElementById('sql-empty-state');
-    const blocksWrapper = document.getElementById('sql-blocks-wrapper');
-    const tabsContainer = document.getElementById('sql-tabs-container');
     const counterLabel = document.getElementById('sql-counter-label');
 
     let visibleCount = 0;
@@ -1933,14 +2089,13 @@ ORDER BY m.ym;</code></pre>
     if (visibleCount === 0) {
       blocks.forEach(b => b.classList.remove('active'));
       emptyState.style.display = 'block';
-      counterLabel.textContent = currentLang === 'id' ? '0 kueri ditemukan' : '0 queries found';
+      counterLabel.textContent = currentLang === 'id' ? '0 kueri cocok' : '0 queries found';
     } else {
       emptyState.style.display = 'none';
       counterLabel.textContent = currentLang === 'id' 
         ? `${visibleCount} kueri cocok` 
         : `${visibleCount} matching queries`;
 
-      // Select first visible tab if active one is hidden
       const currentActiveTab = document.querySelector('.tab-btn.active');
       if (!currentActiveTab || currentActiveTab.style.display === 'none') {
         const firstTab = document.querySelector(`.tab-btn[data-index="${firstVisibleIndex}"]`);
@@ -1957,43 +2112,333 @@ ORDER BY m.ym;</code></pre>
     if (firstTab) showSQL(0, firstTab);
   }
 
-  // ─── COPY CODE WITH TOAST (Angular UI Pattern) ───────────
+  // ─── COPY CODE WITH OPTIMISTIC FEEDBACK ──────────────────
   function copySQLCode(index, btn) {
     const block = document.getElementById(`sql-${index}`);
     if (!block) return;
     const code = block.querySelector('code').innerText;
 
-    // Disabled during operation (Angular Pattern)
     btn.disabled = true;
 
     navigator.clipboard.writeText(code).then(() => {
       btn.classList.add('copied');
-      btn.textContent = '✓ Copied!';
+      btn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Copied`;
 
       const toastTitle = currentLang === 'id' ? 'Tersalin ke Clipboard' : 'Copied to Clipboard';
       const toastMsg = currentLang === 'id' 
-        ? `Kueri SQL #${index + 1} siap dijalankan di DB Browser / SQLite.` 
-        : `SQL query #${index + 1} copied and ready to run in SQLite.`;
+        ? `Kueri SQL #${index + 1} siap dieksekusi di SQLite.` 
+        : `SQL query #${index + 1} ready to run in SQLite.`;
       
       ToastService.show({ type: 'success', title: toastTitle, message: toastMsg });
 
       setTimeout(() => {
         btn.classList.remove('copied');
-        btn.textContent = '📋 Copy SQL';
+        btn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Copy SQL`;
         btn.disabled = false;
       }, 1800);
-    }).catch(err => {
+    }).catch(() => {
       btn.disabled = false;
       ToastService.show({ type: 'error', title: 'Copy Failed', message: 'Please allow clipboard permissions.' });
     });
   }
 
-  // ─── MODAL DIALOG CONTROLLER (Angular UI Pattern) ────────
+  // ─── MODAL DIALOG CONTROLLER ─────────────────────────────
   function openFormulaModal() {
     const modal = document.getElementById('formula-modal');
     if (modal) modal.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
+
+  function closeFormulaModal() {
+    const modal = document.getElementById('formula-modal');
+    if (modal) modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function closeFormulaModalOnBackdrop(e) {
+    if (e.target.id === 'formula-modal') {
+      closeFormulaModal();
+    }
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeFormulaModal();
+  });
+
+  // ─── KPI COUNTER ANIMATION ───────────────────────────────
+  function animateCounter(el, target, suffix, duration = 1600, decimals = 0, prefix = '') {
+    const start = performance.now();
+    const update = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const value = target * eased;
+      el.textContent = prefix + value.toFixed(decimals) + suffix;
+      if (progress < 1) requestAnimationFrame(update);
+    };
+    requestAnimationFrame(update);
+  }
+
+  window.addEventListener('load', () => {
+    animateCounter(document.getElementById('kpi-fillrate'), 74.15, '%', 1600, 2);
+    animateCounter(document.getElementById('kpi-otif'), 42.90, '%', 1600, 2);
+    animateCounter(document.getElementById('kpi-otd'), 35.95, '%', 1600, 2);
+    animateCounter(document.getElementById('kpi-stockout'), 14.31, '%', 1600, 2);
+    animateCounter(document.getElementById('kpi-revenue'), 3.32, 'B', 1600, 2, 'Rp');
+    animateCounter(document.getElementById('kpi-orders'), 4925, '', 1600, 0);
+
+    const savedLang = localStorage.getItem('preferred_lang') || 'id';
+    switchLanguage(savedLang);
+  });
+
+  // ─── SCROLL REVEAL ────────────────────────────────────────
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ─── CHART DEFAULTS ───────────────────────────────────────
+  Chart.defaults.color = '#94a3b8';
+  Chart.defaults.borderColor = 'rgba(255,255,255,0.06)';
+  Chart.defaults.font.family = "'Inter', sans-serif";
+  Chart.defaults.font.size = 11;
+
+  // ─── CHART 1: Fill Rate & OTIF per Warehouse ─────────────
+  const chartWarehouse = new Chart(document.getElementById('chartWarehouse'), {
+    type: 'bar',
+    data: {
+      labels: ['Warehouse A\n(Jakarta)', 'Warehouse B\n(Surabaya)', 'Warehouse C\n(Bandung)'],
+      datasets: [
+        {
+          label: 'Fill Rate %',
+          data: [71.4, 76.3, 74.9],
+          backgroundColor: 'rgba(37, 99, 235, 0.75)',
+          borderColor: '#2563eb', borderWidth: 1, borderRadius: 4,
+        },
+        {
+          label: 'OTIF %',
+          data: [39.5, 46.2, 43.1],
+          backgroundColor: 'rgba(220, 38, 38, 0.75)',
+          borderColor: '#dc2626', borderWidth: 1, borderRadius: 4,
+        },
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'bottom' } },
+      scales: {
+        y: { beginAtZero: true, max: 100, grid: { color: 'rgba(255,255,255,0.04)' },
+             ticks: { callback: v => v + '%' } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+
+  // ─── CHART 2: OTIF Decomposition Doughnut ────────────────
+  const chartOTIF = new Chart(document.getElementById('chartOTIF'), {
+    type: 'doughnut',
+    data: {
+      labels: ['OTIF (Fulfilled On-Time)', 'On-Time, Incomplete', 'Complete, Late Delivery', 'Dual Failure (Both Failed)'],
+      datasets: [{
+        data: [2113, 1022, 848, 942],
+        backgroundColor: ['#059669','#2563eb','#d97706','#dc2626'],
+        borderColor: '#121a2d', borderWidth: 3,
+        hoverOffset: 6,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false, cutout: '65%',
+      plugins: {
+        legend: { position: 'bottom', labels: { padding: 14 } },
+        tooltip: { callbacks: {
+          label: ctx => `${ctx.label}: ${ctx.parsed.toLocaleString()} orders (${((ctx.parsed/4925)*100).toFixed(1)}%)`
+        }}
+      }
+    }
+  });
+
+  // ─── CHART 3: Supplier OTD ───────────────────────────────
+  const chartSupplier = new Chart(document.getElementById('chartSupplier'), {
+    type: 'bar',
+    data: {
+      labels: ['Supplier H','Supplier G','Supplier F','Supplier E','Supplier D','Supplier C','Supplier B','Supplier A'],
+      datasets: [{
+        label: 'OTD %',
+        data: [18.2, 24.5, 29.8, 35.1, 38.7, 44.2, 51.6, 58.3],
+        backgroundColor: ctx => ctx.parsed.x < 35 ? 'rgba(220,38,38,0.75)' : ctx.parsed.x < 50 ? 'rgba(217,119,6,0.75)' : 'rgba(5,150,105,0.75)',
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { beginAtZero: true, max: 100, grid: { color: 'rgba(255,255,255,0.04)' },
+             ticks: { callback: v => v + '%' } },
+        y: { grid: { display: false } }
+      }
+    }
+  });
+
+  // ─── CHART 4: ABC Classification ─────────────────────────
+  const chartABC = new Chart(document.getElementById('chartABC'), {
+    type: 'pie',
+    data: {
+      labels: ['Class A (Top 80% Rev)', 'Class B (Next 15% Rev)', 'Class C (Bottom 5% Rev)'],
+      datasets: [{
+        data: [19, 14, 15],
+        backgroundColor: ['rgba(37,99,235,0.85)','rgba(2,132,199,0.75)','rgba(100,116,139,0.5)'],
+        borderColor: '#121a2d', borderWidth: 3,
+        hoverOffset: 6,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'bottom' },
+        tooltip: { callbacks: {
+          label: ctx => `${ctx.label}: ${ctx.parsed} SKUs`
+        }}
+      }
+    }
+  });
+
+  // ─── CHART 5: Monthly Revenue ────────────────────────────
+  const monthsEN = ['Apr 2026','May 2026','Jun 2026','Jul 2026','Aug 2026','Sep 2026'];
+  const monthsID = ['Apr 2026','Mei 2026','Jun 2026','Jul 2026','Agu 2026','Sep 2026'];
+
+  const chartRevenue = new Chart(document.getElementById('chartRevenue'), {
+    type: 'line',
+    data: {
+      labels: monthsEN,
+      datasets: [
+        {
+          label: 'Revenue (Rp M)',
+          data: [512.3, 548.6, 561.2, 573.8, 549.4, 579.3],
+          borderColor: '#2563eb', backgroundColor: 'rgba(37,99,235,0.08)',
+          borderWidth: 2, tension: 0.3, fill: true,
+          pointBackgroundColor: '#2563eb', pointRadius: 3.5,
+        },
+        {
+          label: 'COGS (Rp M)',
+          data: [340.2, 365.1, 374.5, 382.7, 366.2, 388.1],
+          borderColor: '#64748b', backgroundColor: 'transparent',
+          borderWidth: 1.5, tension: 0.3, fill: false,
+          pointBackgroundColor: '#64748b', pointRadius: 3,
+        },
+        {
+          label: 'Gross Profit (Rp M)',
+          data: [172.1, 183.5, 186.7, 191.1, 183.2, 191.2],
+          borderColor: '#059669', backgroundColor: 'rgba(5,150,105,0.06)',
+          borderWidth: 2, tension: 0.3, fill: false,
+          pointBackgroundColor: '#059669', pointRadius: 3.5,
+          borderDash: [4, 4],
+        },
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'bottom' } },
+      scales: {
+        y: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { callback: v => 'Rp ' + v + 'M' } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+
+  // ─── SWITCH LANGUAGE FUNCTION ────────────────────────────
+  function switchLanguage(lang) {
+    if (!i18n[lang]) return;
+    currentLang = lang;
+
+    // 1. Text elements
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (i18n[lang][key]) {
+        el.textContent = i18n[lang][key];
+      }
+    });
+
+    // 2. HTML elements
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const key = el.getAttribute('data-i18n-html');
+      if (i18n[lang][key]) {
+        el.innerHTML = i18n[lang][key];
+      }
+    });
+
+    // 3. Placeholders
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      const key = el.getAttribute('data-i18n-placeholder');
+      if (i18n[lang][key]) {
+        el.placeholder = i18n[lang][key];
+      }
+    });
+
+    // 4. Update Toggle Buttons
+    document.getElementById('lang-btn-id').classList.toggle('active', lang === 'id');
+    document.getElementById('lang-btn-en').classList.toggle('active', lang === 'en');
+    document.documentElement.lang = lang;
+
+    // 5. Update Scenario Narrative
+    applyScenario(activeScenario);
+
+    // 6. Update Charts
+    if (chartWarehouse) {
+      chartWarehouse.data.labels = (lang === 'id')
+        ? ['Gudang A\n(Jakarta)', 'Gudang B\n(Surabaya)', 'Gudang C\n(Bandung)']
+        : ['Warehouse A\n(Jakarta)', 'Warehouse B\n(Surabaya)', 'Warehouse C\n(Bandung)'];
+      chartWarehouse.data.datasets[0].label = 'Fill Rate %';
+      chartWarehouse.data.datasets[1].label = 'OTIF %';
+      chartWarehouse.update();
+    }
+
+    if (chartOTIF) {
+      chartOTIF.data.labels = (lang === 'id')
+        ? ['OTIF (Tepat Waktu & Lengkap)', 'Tepat Waktu, Tidak Lengkap', 'Lengkap, Terlambat', 'Keduanya Gagal']
+        : ['OTIF (Fulfilled On-Time)', 'On-Time, Incomplete', 'Complete, Late Delivery', 'Dual Failure (Both Failed)'];
+      chartOTIF.options.plugins.tooltip.callbacks.label = (ctx) => {
+        const orderText = (lang === 'id') ? 'pesanan' : 'orders';
+        return `${ctx.label}: ${ctx.parsed.toLocaleString()} ${orderText} (${((ctx.parsed/4925)*100).toFixed(1)}%)`;
+      };
+      chartOTIF.update();
+    }
+
+    if (chartSupplier) {
+      chartSupplier.data.datasets[0].label = (lang === 'id') ? 'Tingkat OTD %' : 'OTD %';
+      chartSupplier.update();
+    }
+
+    if (chartABC) {
+      chartABC.data.labels = (lang === 'id')
+        ? ['Kelas A (80% Omzet Teratas)', 'Kelas B (15% Omzet Berikutnya)', 'Kelas C (5% Terbawah)']
+        : ['Class A (Top 80% Rev)', 'Class B (Next 15% Rev)', 'Class C (Bottom 5% Rev)'];
+      chartABC.update();
+    }
+
+    if (chartRevenue) {
+      chartRevenue.data.labels = (lang === 'id') ? monthsID : monthsEN;
+      chartRevenue.data.datasets[0].label = (lang === 'id') ? 'Pendapatan (Juta Rp)' : 'Revenue (Rp M)';
+      chartRevenue.data.datasets[1].label = (lang === 'id') ? 'HPP / COGS (Juta Rp)' : 'COGS (Rp M)';
+      chartRevenue.data.datasets[2].label = (lang === 'id') ? 'Laba Kotor (Juta Rp)' : 'Gross Profit (Rp M)';
+      chartRevenue.update();
+    }
+
+    // 7. Save preference
+    localStorage.setItem('preferred_lang', lang);
+  }
+
+  // ─── SQL TABS ─────────────────────────────────────────────
+  function showSQL(index, btn) {
+    document.querySelectorAll('.sql-block').forEach((b, i) => {
+      b.classList.toggle('active', parseInt(b.id.replace('sql-', '')) === index);
+    });
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  // ─── SYNTAX HIGHLIGHT ─────────────────────────────────────
+  document.addEventListener('DOMContentLoaded', () => hljs.highlightAll());
+</script>
 
   function closeFormulaModal() {
     const modal = document.getElementById('formula-modal');

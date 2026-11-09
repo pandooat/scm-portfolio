@@ -14,3 +14,4 @@ For UI, copy, people, mobile layout, or code comments work, read these installed
 ## Project Context
 FMCG Supply Chain Management Analytics & Optimization Portfolio by Pandu Pramana.
 Refer to `CLAUDE.md` for ground truth metrics and star schema integrity rules.
+
