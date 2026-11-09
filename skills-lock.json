@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "data-analyst": {
+      "source": "ComeOnOliver/skillshub",
+      "sourceType": "github",
+      "skillPath": "skills/jeremylongshore/claude-code-plugins-plus-skills/data-analyst/SKILL.md",
+      "computedHash": "5f0b5e98fbfa1db20e01951fa7cf74fb6a7418c2d89ac2d3d9e62ece4d173b9f"
+    }
+  }
+}

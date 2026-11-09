@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pandu Pramana | Supply Chain Data Analyst Portfolio</title>
+  <meta name="description" content="Supply Chain Analytics portfolio by Pandu Pramana — FMCG fulfillment analysis using SQL, Python, and Power BI on a synthetic dataset." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <style>
+    :root {
+      --bg-primary: #0a0e1a;
+      --bg-secondary: #0f1629;
+      --bg-card: #131d35;
+      --bg-card-hover: #1a2645;
+      --accent-blue: #3b82f6;
+      --accent-cyan: #06b6d4;
+      --accent-purple: #8b5cf6;
+      --accent-green: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-red: #ef4444;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --border: rgba(59, 130, 246, 0.15);
+      --border-hover: rgba(59, 130, 246, 0.4);
+      --glow-blue: 0 0 30px rgba(59, 130, 246, 0.2);
+      --glow-cyan: 0 0 30px rgba(6, 182, 212, 0.2);
+      --radius-card: 16px;
+      --radius-sm: 8px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAVIGATION ─────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(10, 14, 26, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .nav-brand {
+      font-weight: 700; font-size: 1.1rem;
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--text-secondary); text-decoration: none;
+      font-size: 0.875rem; font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent-blue); }
+
+    /* ─── HERO ───────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      position: relative;
+      padding: 6rem 2rem 4rem;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(59,130,246,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 40% at 80% 80%, rgba(139,92,246,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 30% at 20% 60%, rgba(6,182,212,0.06) 0%, transparent 60%);
+    }
+    /* animated grid lines */
+    .hero-grid {
+      position: absolute; inset: 0; z-index: 0;
+      background-image:
+        linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 800px; }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.3);
+      color: var(--accent-blue); border-radius: 100px;
+      padding: 6px 18px; font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      animation: fadeInUp 0.6s ease both;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 800; line-height: 1.1;
+      margin-bottom: 1.5rem;
+      animation: fadeInUp 0.6s 0.1s ease both;
+    }
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero-subtitle {
+      font-size: 1.15rem; color: var(--text-secondary);
+      max-width: 600px; margin: 0 auto 2.5rem;
+      animation: fadeInUp 0.6s 0.2s ease both;
+    }
+    .hero-cta {
+      display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+      animation: fadeInUp 0.6s 0.3s ease both;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 12px 28px; border-radius: var(--radius-sm);
+      font-weight: 600; font-size: 0.95rem; cursor: pointer;
+      text-decoration: none; transition: all 0.25s ease;
+      border: none;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+      color: white;
+      box-shadow: 0 4px 20px rgba(59,130,246,0.4);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(59,130,246,0.5); }
+    .btn-secondary {
+      background: rgba(255,255,255,0.05); color: var(--text-primary);
+      border: 1px solid var(--border-hover);
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+
+    /* ─── KPI CARDS ──────────────────────────── */
+    .kpi-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem; margin-top: 4rem;
+      animation: fadeInUp 0.6s 0.4s ease both;
+    }
+    .kpi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 1.25rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      position: relative; overflow: hidden;
+    }
+    .kpi-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+      transform: scaleX(0); transition: transform 0.3s ease;
+    }
+    .kpi-card:hover { border-color: var(--border-hover); transform: translateY(-4px); box-shadow: var(--glow-blue); }
+    .kpi-card:hover::before { transform: scaleX(1); }
+    .kpi-value {
+      font-size: 1.8rem; font-weight: 800;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      line-height: 1.1;
+    }
+    .kpi-label { font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.4rem; font-weight: 500; }
+    .kpi-card.red .kpi-value { background: linear-gradient(135deg, var(--accent-red), var(--accent-amber)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .kpi-card.green .kpi-value { background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .kpi-card.amber .kpi-value { background: linear-gradient(135deg, var(--accent-amber), #f97316); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    /* ─── SECTION ────────────────────────────── */
+    section { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; }
+    .section-header { text-align: center; margin-bottom: 3rem; }
+    .section-tag {
+      display: inline-block;
+      color: var(--accent-cyan); font-size: 0.8rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 700; line-height: 1.2;
+    }
+    .section-desc { color: var(--text-secondary); max-width: 600px; margin: 0.75rem auto 0; }
+
+    /* ─── CHARTS GRID ────────────────────────── */
+    .charts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 1.5rem;
+    }
+    .chart-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+    }
+    .chart-card:hover { border-color: var(--border-hover); box-shadow: var(--glow-blue); }
+    .chart-card.wide { grid-column: 1 / -1; }
+    .chart-title {
+      font-size: 0.95rem; font-weight: 600;
+      margin-bottom: 0.4rem; color: var(--text-primary);
+    }
+    .chart-subtitle { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1.25rem; }
+    .chart-wrap { position: relative; height: 240px; }
+    .chart-wrap.tall { height: 300px; }
+
+    /* ─── FINDINGS CARDS ─────────────────────── */
+    .findings-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.25rem;
+    }
+    .finding-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-card); padding: 1.5rem;
+      display: flex; gap: 1rem; align-items: flex-start;
+      transition: all 0.3s ease;
+    }
+    .finding-card:hover { border-color: var(--border-hover); transform: translateY(-3px); }
+    .finding-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; flex-shrink: 0;
+    }
+    .finding-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.4rem; }
+    .finding-card p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
+
+    /* ─── SQL SHOWCASE ───────────────────────── */
+    .sql-tabs { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+    .tab-btn {
+      background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+      color: var(--text-secondary); padding: 6px 14px; border-radius: 6px;
+      font-size: 0.8rem; font-weight: 500; cursor: pointer;
+      transition: all 0.2s ease; font-family: 'Inter', sans-serif;
+    }
+    .tab-btn.active, .tab-btn:hover {
+      background: rgba(59,130,246,0.15); border-color: var(--accent-blue);
+      color: var(--accent-blue);
+    }
+    .sql-block { display: none; }
+    .sql-block.active { display: block; }
+    .sql-block pre {
+      border-radius: var(--radius-card); overflow: auto;
+      max-height: 320px; font-size: 0.82rem;
+    }
+    .sql-insight {
+      background: rgba(6,182,212,0.05); border: 1px solid rgba(6,182,212,0.2);
+      border-radius: var(--radius-sm); padding: 0.75rem 1rem;
+      margin-top: 0.75rem; font-size: 0.85rem; color: var(--accent-cyan);
+      display: flex; gap: 0.5rem; align-items: flex-start;
+    }
+
+    /* ─── TECH STACK ─────────────────────────── */
+    .tech-grid {
+      display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+    }
+    .tech-badge {
+      display: flex; align-items: center; gap: 0.6rem;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 100px; padding: 10px 20px;
+      font-size: 0.875rem; font-weight: 600;
+      transition: all 0.25s ease;
+    }
+    .tech-badge:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+    .tech-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+    /* ─── MEMO SECTION ───────────────────────── */
+    .memo-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    .memo-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-card); padding: 1.5rem;
+      border-left: 3px solid;
+    }
+    .memo-card.red { border-left-color: var(--accent-red); }
+    .memo-card.amber { border-left-color: var(--accent-amber); }
+    .memo-card.blue { border-left-color: var(--accent-blue); }
+    .memo-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; margin-bottom: 0.5rem; }
+    .memo-card.red .memo-label { color: var(--accent-red); }
+    .memo-card.amber .memo-label { color: var(--accent-amber); }
+    .memo-card.blue .memo-label { color: var(--accent-blue); }
+    .memo-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .memo-card p { font-size: 0.83rem; color: var(--text-secondary); line-height: 1.65; }
+
+    /* ─── FOOTER ─────────────────────────────── */
+    footer {
+      background: var(--bg-secondary); border-top: 1px solid var(--border);
+      text-align: center; padding: 3rem 2rem;
+    }
+    footer h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+    footer p { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem; }
+    .footer-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
+    .footer-disclaimer {
+      font-size: 0.75rem; color: var(--text-muted);
+      max-width: 600px; margin: 2rem auto 0;
+      border-top: 1px solid var(--border); padding-top: 1.5rem;
+    }
+
+    /* ─── ANIMATIONS ─────────────────────────── */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── RESPONSIVE ─────────────────────────── */
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .charts-grid { grid-template-columns: 1fr; }
+    }
+
+    /* scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-primary); }
+    ::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <div class="nav-brand">PP · SCM Analytics</div>
+  <ul class="nav-links">
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#insights">Key Insights</a></li>
+    <li><a href="#charts">Analysis</a></li>
+    <li><a href="#sql">SQL</a></li>
+    <li><a href="#memo">Memo</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">📦 Supply Chain Analytics Portfolio</div>
+    <h1>FMCG Supply Chain<br /><span>Performance Analysis</span></h1>
+    <p class="hero-subtitle">
+      End-to-end supply chain analytics on a synthetic FMCG dataset — diagnosing
+      fulfillment failures across 4,925 orders using SQL, Python, and Power BI.
+    </p>
+    <div class="hero-cta">
+      <a href="#overview" class="btn btn-primary">View Analysis ↓</a>
+      <a href="https://github.com/pandupramana" target="_blank" class="btn btn-secondary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub
+      </a>
+    </div>
+
+    <!-- KPI STRIP -->
+    <div class="kpi-strip" id="overview">
+      <div class="kpi-card red">
+        <div class="kpi-value" id="kpi-fillrate">0%</div>
+        <div class="kpi-label">Fill Rate (Unit)</div>
+      </div>
+      <div class="kpi-card red">
+        <div class="kpi-value" id="kpi-otif">0%</div>
+        <div class="kpi-label">OTIF (Order)</div>
+      </div>
+      <div class="kpi-card amber">
+        <div class="kpi-value" id="kpi-otd">0%</div>
+        <div class="kpi-label">Supplier OTD</div>
+      </div>
+      <div class="kpi-card amber">
+        <div class="kpi-value" id="kpi-stockout">0%</div>
+        <div class="kpi-label">Stockout Share</div>
+      </div>
+      <div class="kpi-card green">
+        <div class="kpi-value" id="kpi-revenue">Rp0</div>
+        <div class="kpi-label">Revenue Fulfilled</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value" id="kpi-orders">0</div>
+        <div class="kpi-label">Total Orders</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- KEY INSIGHTS -->
+<section id="insights">
+  <div class="section-header reveal">
+    <div class="section-tag">Analysis Summary</div>
+    <h2 class="section-title">5 Key Findings</h2>
+    <p class="section-desc">What the simulated data reveals about supply chain failure patterns</p>
+  </div>
+  <div class="findings-grid">
+    <div class="finding-card reveal">
+      <div class="finding-icon" style="background:rgba(239,68,68,0.15);">🔴</div>
+      <div>
+        <h3>Supplier Reliability is the Primary Bottleneck</h3>
+        <p>At 35.95% OTD, only 1 in 3 purchase orders arrives on time. Fast-moving SKUs with unreliable suppliers consistently appear in both high-stockout-day and high-unserved-value rankings — the strongest upstream signal in the dataset.</p>
+      </div>
+    </div>
+    <div class="finding-card reveal">
+      <div class="finding-icon" style="background:rgba(245,158,11,0.15);">⚡</div>
+      <div>
+        <h3>OTIF Failure is Dual-Cause, Not Single-Cause</h3>
+        <p>19% of orders (942 total) fail <em>both</em> completeness and timing simultaneously — compounded failures requiring concurrent supply and delivery interventions. Treating this as a single-dimension problem will underperform.</p>
+      </div>
+    </div>
+    <div class="finding-card reveal">
+      <div class="finding-icon" style="background:rgba(59,130,246,0.15);">🎯</div>
+      <div>
+        <h3>Stockout Risk is Concentrated, Not Universal</h3>
+        <p>70 of 144 SKU-warehouse combinations are below the 95% service level reorder threshold. The top 20 by Unserved Order Value account for a disproportionate share — targeted action outperforms blanket safety stock increases by a wide margin.</p>
+      </div>
+    </div>
+    <div class="finding-card reveal">
+      <div class="finding-icon" style="background:rgba(139,92,246,0.15);">📊</div>
+      <div>
+        <h3>ABC Classification Reveals Misaligned Priorities</h3>
+        <p>Class A SKUs (top 80% revenue) must be protected with higher service level targets and tighter reorder cycles. Class C items can sustain leaner replenishment policies — inventory policy differentiation by class is the highest-ROI structural fix.</p>
+      </div>
+    </div>
+    <div class="finding-card reveal">
+      <div class="finding-icon" style="background:rgba(16,185,129,0.15);">🔄</div>
+      <div>
+        <h3>Turnover Trend Reveals Maldistribution</h3>
+        <p>Inventory Turnover analysis combined with stockout data shows some SKU-warehouse combinations hold excess stock while fast movers stock out. This is a distribution and replenishment timing problem as much as a volume problem.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHARTS -->
+<section id="charts" style="background: var(--bg-secondary); max-width: 100%; padding: 5rem 2rem;">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <div class="section-header reveal">
+      <div class="section-tag">Data Visualization</div>
+      <h2 class="section-title">Interactive Analysis</h2>
+      <p class="section-desc">Supply chain KPIs across 3 warehouses, 8 suppliers, 4 carrier types</p>
+    </div>
+    <div class="charts-grid">
+
+      <!-- Fill Rate & OTIF per Warehouse -->
+      <div class="chart-card reveal">
+        <div class="chart-title">Fill Rate & OTIF by Warehouse</div>
+        <div class="chart-subtitle">Unit fill rate vs. order-level OTIF per location (%)</div>
+        <div class="chart-wrap"><canvas id="chartWarehouse"></canvas></div>
+      </div>
+
+      <!-- OTIF Decomposition -->
+      <div class="chart-card reveal">
+        <div class="chart-title">OTIF Failure Decomposition</div>
+        <div class="chart-subtitle">Breakdown of 4,925 orders by fulfillment outcome</div>
+        <div class="chart-wrap"><canvas id="chartOTIF"></canvas></div>
+      </div>
+
+      <!-- Supplier OTD -->
+      <div class="chart-card reveal">
+        <div class="chart-title">Supplier OTD Rate (Received POs Only)</div>
+        <div class="chart-subtitle">On-time delivery % per supplier — ordered by worst performer</div>
+        <div class="chart-wrap tall"><canvas id="chartSupplier"></canvas></div>
+      </div>
+
+      <!-- ABC Classification -->
+      <div class="chart-card reveal">
+        <div class="chart-title">ABC SKU Classification</div>
+        <div class="chart-subtitle">Revenue contribution segments across 48 SKUs</div>
+        <div class="chart-wrap"><canvas id="chartABC"></canvas></div>
+      </div>
+
+      <!-- Monthly Revenue Trend -->
+      <div class="chart-card wide reveal">
+        <div class="chart-title">Monthly Revenue & Gross Profit Trend</div>
+        <div class="chart-subtitle">Fulfilled revenue vs. COGS across 6-month simulation period (Rp Millions)</div>
+        <div class="chart-wrap"><canvas id="chartRevenue"></canvas></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SQL SHOWCASE -->
+<section id="sql">
+  <div class="section-header reveal">
+    <div class="section-tag">Technical Skills</div>
+    <h2 class="section-title">SQL Analysis Showcase</h2>
+    <p class="section-desc">16 analytical queries built to answer business questions — select a query to view</p>
+  </div>
+  <div class="reveal" style="background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-card); padding:1.5rem;">
+    <div class="sql-tabs">
+      <button class="tab-btn active" onclick="showSQL(0, this)">01 · Category Count</button>
+      <button class="tab-btn" onclick="showSQL(1, this)">05 · Fill Rate / Warehouse</button>
+      <button class="tab-btn" onclick="showSQL(2, this)">08 · OTIF / Warehouse</button>
+      <button class="tab-btn" onclick="showSQL(3, this)">10 · Supplier OTD</button>
+      <button class="tab-btn" onclick="showSQL(4, this)">13 · ABC Classification</button>
+      <button class="tab-btn" onclick="showSQL(5, this)">15 · Inventory Turnover</button>
+    </div>
+
+    <div class="sql-block active" id="sql-0">
+      <pre><code class="language-sql">-- Q01: SKU count per product category
+SELECT
+    category,
+    COUNT(*) AS sku_count
+FROM dim_products
+GROUP BY category
+ORDER BY sku_count DESC, category;</code></pre>
+      <div class="sql-insight">💡 Portfolio spans Food, Personal Care, Home Care, Beverage — guides priority-setting for safety stock and demand planning complexity.</div>
+    </div>
+
+    <div class="sql-block" id="sql-1">
+      <pre><code class="language-sql">-- Q05: Fill rate by warehouse (units fulfilled / units ordered)
+SELECT
+    w.warehouse_name,
+    SUM(s.ordered_qty)   AS units_requested,
+    SUM(s.fulfilled_qty) AS units_fulfilled,
+    ROUND(100.0 * SUM(s.fulfilled_qty)
+        / NULLIF(SUM(s.ordered_qty), 0), 2) AS fill_rate_pct
+FROM fact_sales_order_lines s
+JOIN dim_warehouses w ON s.warehouse_id = w.warehouse_id
+GROUP BY w.warehouse_name
+ORDER BY fill_rate_pct;</code></pre>
+      <div class="sql-insight">💡 Warehouse-level fill rate isolates whether the fulfillment problem is structural (all locations underperform) or location-specific — determines intervention scope.</div>
+    </div>
+
+    <div class="sql-block" id="sql-2">
+      <pre><code class="language-sql">-- Q08: OTIF rate per warehouse (order grain, not line grain)
+SELECT
+    w.warehouse_name,
+    COUNT(*)           AS total_orders,
+    SUM(s.otif_flag)   AS otif_orders,
+    ROUND(100.0 * SUM(s.otif_flag) / COUNT(*), 2) AS otif_pct
+FROM fact_shipments s
+JOIN dim_warehouses w ON s.warehouse_id = w.warehouse_id
+GROUP BY w.warehouse_name
+ORDER BY otif_pct;</code></pre>
+      <div class="sql-insight">💡 OTIF is measured at order grain (1 order = 1 row in fact_shipments). Averaging line-level metrics would dilute the KPI — this query uses the correct denominator.</div>
+    </div>
+
+    <div class="sql-block" id="sql-3">
+      <pre><code class="language-sql">-- Q10: Supplier OTD for received POs only
+SELECT
+    sup.supplier_name,
+    COUNT(*) AS received_po,
+    SUM(CASE WHEN po.actual_receipt_date <= po.expected_date
+             THEN 1 ELSE 0 END) AS on_time_po,
+    ROUND(100.0 *
+        SUM(CASE WHEN po.actual_receipt_date <= po.expected_date
+                 THEN 1 ELSE 0 END) / COUNT(*), 2) AS supplier_otd_pct,
+    ROUND(AVG(julianday(po.actual_receipt_date)
+            - julianday(po.order_date)), 1) AS avg_lead_time_days
+FROM fact_purchase_order_lines po
+JOIN dim_suppliers sup ON sup.supplier_id = po.supplier_id
+WHERE po.actual_receipt_date IS NOT NULL
+GROUP BY sup.supplier_id
+ORDER BY supplier_otd_pct;</code></pre>
+      <div class="sql-insight">💡 WHERE filters to received POs only — open POs are excluded from denominator to avoid penalizing future performance. Reported separately.</div>
+    </div>
+
+    <div class="sql-block" id="sql-4">
+      <pre><code class="language-sql">-- Q13: ABC classification using window function
+WITH sku_sales AS (
+    SELECT product_id, SUM(revenue) AS revenue_rp
+    FROM fact_sales_order_lines
+    GROUP BY product_id
+),
+ranking AS (
+    SELECT product_id, revenue_rp,
+        SUM(revenue_rp) OVER (
+            ORDER BY revenue_rp DESC, product_id
+            ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+        ) AS cumulative_revenue_rp,
+        SUM(revenue_rp) OVER () AS grand_total_rp
+    FROM sku_sales
+)
+SELECT
+    p.sku, p.product_name, r.revenue_rp,
+    ROUND(100.0 * r.cumulative_revenue_rp / r.grand_total_rp, 1) AS cumulative_pct,
+    CASE
+        WHEN 1.0 * r.cumulative_revenue_rp / r.grand_total_rp <= 0.80 THEN 'A'
+        WHEN 1.0 * r.cumulative_revenue_rp / r.grand_total_rp <= 0.95 THEN 'B'
+        ELSE 'C'
+    END AS abc_class
+FROM ranking r
+JOIN dim_products p ON p.product_id = r.product_id
+ORDER BY r.revenue_rp DESC;</code></pre>
+      <div class="sql-insight">💡 Window function computes cumulative revenue share without a self-join. ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW ensures exact boundary handling for SKUs at the 80%/95% thresholds.</div>
+    </div>
+
+    <div class="sql-block" id="sql-5">
+      <pre><code class="language-sql">-- Q15: Monthly inventory turnover using daily average method
+WITH daily_inventory AS (
+    SELECT substr(snapshot_date, 1, 7) AS ym,
+           snapshot_date,
+           SUM(inventory_value) AS daily_inventory_value
+    FROM fact_inventory_daily
+    GROUP BY ym, snapshot_date
+),
+monthly_avg AS (
+    SELECT ym, AVG(daily_inventory_value) AS avg_inventory_value
+    FROM daily_inventory GROUP BY ym
+),
+monthly_cogs AS (
+    SELECT substr(order_date, 1, 7) AS ym, SUM(cogs) AS cogs_rp
+    FROM fact_sales_order_lines GROUP BY ym
+)
+SELECT
+    m.ym,
+    ROUND(m.avg_inventory_value, 0) AS avg_inventory_rp,
+    c.cogs_rp,
+    ROUND(1.0 * c.cogs_rp
+        / NULLIF(m.avg_inventory_value, 0), 3) AS inventory_turnover_in_month
+FROM monthly_avg m
+JOIN monthly_cogs c ON c.ym = m.ym
+ORDER BY m.ym;</code></pre>
+      <div class="sql-insight">💡 Daily average method (avg across all snapshot days per month) is more accurate than simple beginning/end average. Result is period turnover — not annualized — to avoid overstating efficiency.</div>
+    </div>
+  </div>
+</section>
+
+<!-- EXECUTIVE MEMO -->
+<section id="memo" style="background: var(--bg-secondary); max-width: 100%; padding: 5rem 2rem;">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <div class="section-header reveal">
+      <div class="section-tag">Business Communication</div>
+      <h2 class="section-title">Executive Memo Highlights</h2>
+      <p class="section-desc">Diagnosis and priority actions for the simulated supply chain</p>
+    </div>
+
+    <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-card); padding:1.5rem 2rem; margin-bottom:1.5rem;" class="reveal">
+      <table style="width:100%; border-collapse:collapse; font-size:0.9rem;">
+        <thead>
+          <tr style="border-bottom:1px solid var(--border);">
+            <th style="text-align:left; padding:0.75rem 0.5rem; color:var(--text-secondary); font-weight:600; font-size:0.8rem; text-transform:uppercase; letter-spacing:0.05em;">KPI</th>
+            <th style="text-align:right; padding:0.75rem 0.5rem; color:var(--text-secondary); font-weight:600; font-size:0.8rem; text-transform:uppercase; letter-spacing:0.05em;">Actual</th>
+            <th style="text-align:right; padding:0.75rem 0.5rem; color:var(--text-secondary); font-weight:600; font-size:0.8rem; text-transform:uppercase; letter-spacing:0.05em;">Target</th>
+            <th style="text-align:left; padding:0.75rem 0.5rem; color:var(--text-secondary); font-weight:600; font-size:0.8rem; text-transform:uppercase; letter-spacing:0.05em;">Signal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.03);">
+            <td style="padding:0.75rem 0.5rem; font-weight:500;">Fill Rate (unit)</td>
+            <td style="padding:0.75rem 0.5rem; text-align:right; color:var(--accent-red); font-weight:700; font-family:'JetBrains Mono',monospace;">74.15%</td>
+            <td style="padding:0.75rem 0.5rem; text-align:right; color:var(--text-secondary); font-family:'JetBrains Mono',monospace;">≥ 85%</td>
+            <td style="padding:0.75rem 0.5rem; color:var(--accent-red);">⚠ Below target</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.03);">
+            <td style="padding:0.75rem 0.5rem; font-weight:500;">OTIF (order)</td>
+            <td style="padding:0.75rem 0.5rem; text-align:right; color:var(--accent-red); font-weight:700; font-family:'JetBrains Mono',monospace;">42.90%</td>
+            <td style="padding:0.75rem 0.5rem; text-align:right; color:var(--text-secondary); font-family:'JetBrains Mono',monospace;">≥ 60%</td>
+            <td style="padding:0.75rem 0.5rem; color:var(--accent-red);">⚠ Critical gap</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.03);">
+            <td style="padding:0.75rem 0.5rem; font-weight:500;">Supplier OTD</td>
+            <td style="padding:0.75rem 0.5rem; text-align:right; color:var(--accent-amber); font-weight:700; font-family:'JetBrains Mono',monospace;">35.95%</td>
+            <td style="padding:0.75rem 0.5rem; text-align:right; color:var(--text-secondary); font-family:'JetBrains Mono',monospace;">≥ 70%</td>
+            <td style="padding:0.75rem 0.5rem; color:var(--accent-amber);">⚠ Highest risk</td>
+          </tr>
+          <tr>
+            <td style="padding:0.75rem 0.5rem; font-weight:500;">Stockout Snapshot Share</td>
+            <td style="padding:0.75rem 0.5rem; text-align:right; color:var(--accent-amber); font-weight:700; font-family:'JetBrains Mono',monospace;">14.31%</td>
+            <td style="padding:0.75rem 0.5rem; text-align:right; color:var(--text-secondary); font-family:'JetBrains Mono',monospace;">≤ 8%</td>
+            <td style="padding:0.75rem 0.5rem; color:var(--accent-amber);">⚠ Concentrated</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="memo-grid">
+      <div class="memo-card red reveal">
+        <div class="memo-label">🔴 Priority 1 — Strongest Signal</div>
+        <h3>Upstream Supply Reliability</h3>
+        <p>Supplier OTD of 35.95% is the most acute upstream risk. When POs arrive late, safety stock erodes faster than it replenishes — directly causing stockouts on fast-moving SKUs. Begin with weekly PO exception tracking and SLA review for bottom-2 OTD suppliers.</p>
+      </div>
+      <div class="memo-card amber reveal">
+        <div class="memo-label">🟡 Priority 2 — Structural Signal</div>
+        <h3>Inventory Positioning</h3>
+        <p>14.31% stockout snapshot share is concentrated in specific SKU-warehouse combinations — 68/144 combos below 95% ROP threshold. Recalibrate reorder points for top-20 Unserved Order Value SKUs at 95% service level target. Pilot one warehouse before rollout.</p>
+      </div>
+      <div class="memo-card blue reveal">
+        <div class="memo-label">🔵 Priority 3 — Secondary Signal</div>
+        <h3>Last-Mile Delivery Execution</h3>
+        <p>848 orders (17%) were complete but delivered late. Carrier performance review should compare on-time %, freight cost per shipped order, and volume per route to identify renegotiation or reallocation opportunities with underperforming providers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section>
+  <div class="section-header reveal">
+    <div class="section-tag">Tools & Methods</div>
+    <h2 class="section-title">Tech Stack</h2>
+  </div>
+  <div class="tech-grid">
+    <div class="tech-badge reveal"><div class="tech-dot" style="background:#4479A1;"></div> SQLite · 16 Queries</div>
+    <div class="tech-badge reveal"><div class="tech-dot" style="background:#3776AB;"></div> Python 3 · Standard Library</div>
+    <div class="tech-badge reveal"><div class="tech-dot" style="background:#F2C811;"></div> Power BI · DAX + Star Schema</div>
+    <div class="tech-badge reveal"><div class="tech-dot" style="background:#3b82f6;"></div> Chart.js · Interactive Charts</div>
+    <div class="tech-badge reveal"><div class="tech-dot" style="background:#239120;"></div> GitHub · Version Control</div>
+    <div class="tech-badge reveal"><div class="tech-dot" style="background:#10b981;"></div> ROP · Safety Stock Modeling</div>
+    <div class="tech-badge reveal"><div class="tech-dot" style="background:#8b5cf6;"></div> ABC Analysis · Pareto</div>
+    <div class="tech-badge reveal"><div class="tech-dot" style="background:#f59e0b;"></div> WAPE · Forecast Backtest</div>
+  </div>
+</section>
+
+<!-- FOOTER / CONTACT -->
+<footer id="contact">
+  <h2>Pandu Pramana</h2>
+  <p>Data Analyst · Supply Chain Analytics · FMCG Domain</p>
+  <div class="footer-links">
+    <a href="mailto:apandoop@gmail.com" class="btn btn-primary">📧 apandoop@gmail.com</a>
+    <a href="https://github.com/pandupramana" target="_blank" class="btn btn-secondary">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+      github.com/pandupramana
+    </a>
+  </div>
+  <div class="footer-disclaimer">
+    ⚠️ <strong>Synthetic Data Disclaimer:</strong> All data, company names, supplier names, customer names, orders, and financial figures in this project are entirely fictional and generated for educational purposes. This is a portfolio demonstration artifact only — not an operational business document or industry benchmark.
+  </div>
+</footer>
+
+<script>
+  // ─── KPI COUNTER ANIMATION ───────────────────────────────
+  function animateCounter(el, target, suffix, duration = 1800, decimals = 0, prefix = '') {
+    const start = performance.now();
+    const update = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const value = target * eased;
+      el.textContent = prefix + value.toFixed(decimals) + suffix;
+      if (progress < 1) requestAnimationFrame(update);
+    };
+    requestAnimationFrame(update);
+  }
+
+  window.addEventListener('load', () => {
+    animateCounter(document.getElementById('kpi-fillrate'), 74.15, '%', 1800, 2);
+    animateCounter(document.getElementById('kpi-otif'), 42.90, '%', 1800, 2);
+    animateCounter(document.getElementById('kpi-otd'), 35.95, '%', 1800, 2);
+    animateCounter(document.getElementById('kpi-stockout'), 14.31, '%', 1800, 2);
+    animateCounter(document.getElementById('kpi-revenue'), 3.32, 'B', 1800, 2, 'Rp');
+    animateCounter(document.getElementById('kpi-orders'), 4925, '', 1800, 0);
+  });
+
+  // ─── SCROLL REVEAL ────────────────────────────────────────
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ─── CHART DEFAULTS ───────────────────────────────────────
+  Chart.defaults.color = '#94a3b8';
+  Chart.defaults.borderColor = 'rgba(59,130,246,0.1)';
+  Chart.defaults.font.family = "'Inter', sans-serif";
+  Chart.defaults.font.size = 11;
+
+  // ─── CHART 1: Fill Rate & OTIF per Warehouse ─────────────
+  new Chart(document.getElementById('chartWarehouse'), {
+    type: 'bar',
+    data: {
+      labels: ['Warehouse A\n(Jakarta)', 'Warehouse B\n(Surabaya)', 'Warehouse C\n(Bandung)'],
+      datasets: [
+        {
+          label: 'Fill Rate %',
+          data: [71.4, 76.3, 74.9],
+          backgroundColor: 'rgba(59,130,246,0.7)',
+          borderColor: '#3b82f6', borderWidth: 1, borderRadius: 6,
+        },
+        {
+          label: 'OTIF %',
+          data: [39.5, 46.2, 43.1],
+          backgroundColor: 'rgba(239,68,68,0.6)',
+          borderColor: '#ef4444', borderWidth: 1, borderRadius: 6,
+        },
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'bottom' } },
+      scales: {
+        y: { beginAtZero: true, max: 100, grid: { color: 'rgba(255,255,255,0.05)' },
+             ticks: { callback: v => v + '%' } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+
+  // ─── CHART 2: OTIF Decomposition Doughnut ────────────────
+  new Chart(document.getElementById('chartOTIF'), {
+    type: 'doughnut',
+    data: {
+      labels: ['OTIF ✅', 'On-time, Not Full', 'Full, Not On-time', 'Both Failed'],
+      datasets: [{
+        data: [2113, 1022, 848, 942],
+        backgroundColor: ['#10b981','#3b82f6','#f59e0b','#ef4444'],
+        borderColor: '#131d35', borderWidth: 3,
+        hoverOffset: 8,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false, cutout: '65%',
+      plugins: {
+        legend: { position: 'bottom', labels: { padding: 16 } },
+        tooltip: { callbacks: {
+          label: ctx => `${ctx.label}: ${ctx.parsed.toLocaleString()} orders (${((ctx.parsed/4925)*100).toFixed(1)}%)`
+        }}
+      }
+    }
+  });
+
+  // ─── CHART 3: Supplier OTD ───────────────────────────────
+  new Chart(document.getElementById('chartSupplier'), {
+    type: 'bar',
+    data: {
+      labels: ['Supplier H','Supplier G','Supplier F','Supplier E','Supplier D','Supplier C','Supplier B','Supplier A'],
+      datasets: [{
+        label: 'OTD %',
+        data: [18.2, 24.5, 29.8, 35.1, 38.7, 44.2, 51.6, 58.3],
+        backgroundColor: ctx => ctx.parsed.y < 35 ? 'rgba(239,68,68,0.7)' : ctx.parsed.y < 50 ? 'rgba(245,158,11,0.7)' : 'rgba(16,185,129,0.7)',
+        borderRadius: 6,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { beginAtZero: true, max: 100, grid: { color: 'rgba(255,255,255,0.05)' },
+             ticks: { callback: v => v + '%' } },
+        y: { grid: { display: false } }
+      }
+    }
+  });
+
+  // ─── CHART 4: ABC Classification ─────────────────────────
+  new Chart(document.getElementById('chartABC'), {
+    type: 'pie',
+    data: {
+      labels: ['Class A (top 80% rev)', 'Class B (80–95%)', 'Class C (bottom 5%)'],
+      datasets: [{
+        data: [19, 14, 15],
+        backgroundColor: ['rgba(59,130,246,0.8)','rgba(139,92,246,0.8)','rgba(100,116,139,0.6)'],
+        borderColor: '#131d35', borderWidth: 3,
+        hoverOffset: 8,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'bottom' },
+        tooltip: { callbacks: {
+          label: ctx => `${ctx.label}: ${ctx.parsed} SKUs`
+        }}
+      }
+    }
+  });
+
+  // ─── CHART 5: Monthly Revenue ────────────────────────────
+  const months = ['Apr 2026','May 2026','Jun 2026','Jul 2026','Aug 2026','Sep 2026'];
+  new Chart(document.getElementById('chartRevenue'), {
+    type: 'line',
+    data: {
+      labels: months,
+      datasets: [
+        {
+          label: 'Revenue (Rp M)',
+          data: [512.3, 548.6, 561.2, 573.8, 549.4, 579.3],
+          borderColor: '#3b82f6', backgroundColor: 'rgba(59,130,246,0.1)',
+          borderWidth: 2.5, tension: 0.4, fill: true,
+          pointBackgroundColor: '#3b82f6', pointRadius: 4,
+        },
+        {
+          label: 'COGS (Rp M)',
+          data: [340.2, 365.1, 374.5, 382.7, 366.2, 388.1],
+          borderColor: '#8b5cf6', backgroundColor: 'rgba(139,92,246,0.05)',
+          borderWidth: 2, tension: 0.4, fill: true,
+          pointBackgroundColor: '#8b5cf6', pointRadius: 4,
+        },
+        {
+          label: 'Gross Profit (Rp M)',
+          data: [172.1, 183.5, 186.7, 191.1, 183.2, 191.2],
+          borderColor: '#10b981', backgroundColor: 'rgba(16,185,129,0.05)',
+          borderWidth: 2, tension: 0.4, fill: false,
+          pointBackgroundColor: '#10b981', pointRadius: 4,
+          borderDash: [4, 4],
+        },
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'bottom' } },
+      scales: {
+        y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { callback: v => 'Rp ' + v + 'M' } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+
+  // ─── SQL TABS ─────────────────────────────────────────────
+  function showSQL(index, btn) {
+    document.querySelectorAll('.sql-block').forEach((b, i) => {
+      b.classList.toggle('active', i === index);
+    });
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  // ─── SYNTAX HIGHLIGHT ─────────────────────────────────────
+  document.addEventListener('DOMContentLoaded', () => hljs.highlightAll());
+</script>
+</body>
+</html>
