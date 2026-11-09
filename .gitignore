@@ -29,3 +29,4 @@ desktop.ini
 # Power BI temp files
 *.pbix.lock
 .tmp/
+.playwright-mcp/
