@@ -26,3 +26,15 @@ Investigates 31.25% gap between Unit Fill Rate (74.15%) and OTIF (42.90%).
 - Verify notebook execution: `python 04_Python_Notebooks/verify_cells.py`
 - Re-generate SCM analysis summaries: `python SCM_Portfolio_Starter/04_Python/analyze_scm.py`
 - Re-run replenishment scenarios: `python SCM_Portfolio_Starter/04_Python/replenishment_scenarios.py`
+
+<!-- antislop:start -->
+## antislop
+For UI, copy, people, mobile layout, or code comments work, read these installed skill files directly (use these paths even if a same-named global skill exists):
+- Core filter, always on: `antislop`: `.agents/skills/antislop/SKILL.md`
+- UI / visual: `antislop-ui`: `.agents/skills/antislop-ui/SKILL.md`
+- Copy & text: `antislop-copywriting`: `.agents/skills/antislop-copywriting/SKILL.md`
+- People: `antislop-human`: `.agents/skills/antislop-human/SKILL.md`
+- Mobile / responsive: `antislop-layoutmobile`: `.agents/skills/antislop-layoutmobile/SKILL.md`
+- Code comments: `antislop-code`: `.agents/skills/antislop-code/SKILL.md`
+<!-- antislop:end -->
+
