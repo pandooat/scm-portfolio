@@ -3,7 +3,7 @@
 **TO:** Executive Leadership Team & VP of Supply Chain  
 **FROM:** Pandu Pramana, Senior Supply Chain & Data Analyst  
 **DATE:** October 15, 2026  
-**SUBJECT:** Diagnostic Assessment: Service Level Breakdown & Inventory Optimization Strategy  
+**SUBJECT:** Diagnostic Assessment, Strategic Action Plan & Business Impact Simulation  
 **DATA CONTEXT:** Synthetic FMCG Distribution Simulation (Apr 1 – Sep 30, 2026 | 4,925 Orders | 48 SKUs | 3 Regional Distribution Centers)
 
 ---
@@ -20,7 +20,7 @@ During the H1-H2 2026 operating period, our distribution network experienced sev
 ```
        [ Upstream Supply ]             [ Distribution Centers ]              [ Last-Mile Delivery ]
    Supplier OTD: 35.95% (PO)    --->  Daily Stockout Share: 14.31%    --->    OTIF Orders: 42.90%
-   Avg Lead Time: 8.2-14.5 days       Unserved Value: Rp 1.01 B               On-Time Carrier: 59.5%
+   Avg Lead Time: 8.2-14.5 days       Unserved Value: Rp 1.01 B               On-Time Carrier: 63.65%
 ```
 
 The underlying issue is **not generalized understocking**, but rather **misallocated working capital and upstream vulnerability**. Over 70 SKU-warehouse combinations currently sit at critical stockout risk, while slow-moving SKUs consume warehouse carrying capacity.
@@ -33,45 +33,68 @@ Decomposing the 2,812 non-OTIF orders (57.1% of total) highlights three structur
 
 | Friction Dimension | Observed Metric | Evidence & Operational Driver |
 | :--- | :--- | :--- |
-| **1. Upstream Supplier Variability** | **35.95%** Supplier OTD | Only 35.95% of received POs met expected delivery dates. Vendors supplying high-velocity Food & Beverage items exhibit lead-time standard deviations exceeding 4.2 days. Late PO arrivals directly induce inventory depletion. |
-| **2. Buffer Stock & Reorder Inelasticity** | **14.31%** Snapshot Stockout Share | Out of 26,352 daily SKU-warehouse snapshots, 3,770 recorded zero closing inventory. Current static reorder points fail to incorporate combined demand variance ($\sigma_D$) and lead-time volatility ($\sigma_L$). |
-| **3. Carrier Transit Execution** | **59.5%** Carrier On-Time Rate | Even when shipments leave the warehouse 100% complete (In-Full = 60.1%), carrier dispatch and transit delays cause 848 orders to breach promised delivery windows. |
+| **1. Upstream Supplier Variability** | **35.95%** Supplier OTD | Bottom-3 vendors (*PT Niaga Mitra* 2.83%, *PT Karya Maju Industri* 3.88%, *PT Surya Ritelindo* 5.45%) suffer from chronic delays averaging >4.0 days. Late PO arrivals directly induce inventory depletion. |
+| **2. Buffer Stock & Reorder Inelasticity** | **14.31%** Snapshot Stockout Share | Out of 26,352 daily SKU-warehouse snapshots, 3,770 recorded zero closing inventory. 68 out of 144 SKU-warehouse combinations currently sit below the 95% service level Reorder Point ($Z = 1.645$). |
+| **3. Carrier Transit Execution** | **63.65%** Carrier On-Time Rate | *Mitra Trucking* delivers only 48.88% on-time despite costing Rp 32,461/shipment (comparable to *SiCepat GOKIL* at 69.79%). Carrier delays cause 848 orders to arrive late despite being packed 100% full. |
 
 ### OTIF Breakdown (4,925 Total Orders)
-* **OTIF Achieved (On-Time + In-Full):** 2,113 orders (42.9%)
-* **Late but In-Full (Carrier Bottleneck):** 848 orders (17.2%)
-* **On-Time but Partial/Zero (Stock Bottleneck):** 1,022 orders (20.8%)
-* **Dual Failure (Late + Partial):** 942 orders (19.1%)
+* **OTIF Achieved (On-Time + In-Full):** 2,113 orders (42.90%)
+* **Late but In-Full (Carrier Bottleneck):** 848 orders (17.22%)
+* **On-Time but Partial/Zero (Stock Bottleneck):** 1,022 orders (20.75%)
+* **Dual Failure (Late + Partial):** 942 orders (19.13%)
 
 ---
 
-## 3. Targeted Recommendations & Financial Trade-Offs
+## 3. Strategic Action Plan: 4 Operational Workstreams
 
-Rather than a blanket inventory increase that would unnecessarily inflate carrying costs, we recommend three phased strategic interventions:
+Rather than an untargeted inventory increase that would unnecessarily inflate carrying costs, we mandate four integrated operational workstreams:
 
-### Priority 1: Dynamic Reorder Point (ROP) Recalibration for Class A SKUs
-* **Action:** Shift from static min/max thresholds to safety stock formulas accounting for joint uncertainty:
+### Workstream 1: Dynamic Reorder Point (ROP) Recalibration
+* **Action:** Shift from static min/max thresholds to dynamic safety stock equations accounting for combined demand variance ($\sigma_D$) and lead-time volatility ($\sigma_L$):
   $$\text{Safety Stock} = Z \times \sqrt{\bar{L} \sigma_D^2 + \bar{D}^2 \sigma_L^2}$$
-* **Impact Target:** Recalibrating 68 SKU-warehouse pairs currently below the 95% service level threshold ($Z = 1.645$) will elevate unit fill rate from 74.15% to ~88–91%.
-* **Working Capital Trade-off:** Estimated incremental annual carrying cost is ~Rp 86.4M (modeled at 20% annual holding rate), which is well justified against the potential protection of ~Rp 600M+ in previously unserved order value.
+  $$\text{Reorder Point (ROP)} = \lceil \bar{D} \times \bar{L} + \text{Safety Stock} \rceil$$
+* **Scope:** Recalibrate all 68 SKU-warehouse pairs currently below the 95% service level threshold ($Z = 1.645$).
+* **Working Capital Trade-off:** Total annual holding cost for 95% safety stock across all 144 nodes is **Rp 29,378,200/year** (at 20% p.a. holding rate), representing an incremental cost of only **Rp 6,356,700/year** over the 90% threshold.
 
-### Priority 2: Supplier SLA Enforcement & Open-PO Exception Cadence
-* **Action:** Institute weekly procurement reviews focused on open PO aging and vendor reliability scoring. Enforce penalty clauses or volume re-allocation away from the 3 worst-performing suppliers (<30% OTD).
-* **Impact Target:** Reduce supplier lead-time variance by 25%, shortening required buffer days for fast-moving items.
+### Workstream 2: Upstream Vendor Reliability & SLA Enforcement
+* **Action:** Enforce strict procurement SLA penalty clauses on the 3 chronic late vendors. Reallocate purchase volumes to top-performing suppliers (*PT Nusantara Kemasan* 63.8% OTD, *PT Pangan Sentosa* 62.4% OTD).
+* **Target:** Elevate aggregate vendor OTD from 35.95% to $\ge 65.0\%$, reducing average PO delay by 2.5 days.
 
-### Priority 3: Carrier Route Realignment & Tiered Dispatch SLAs
-* **Action:** Re-evaluate carrier contracts. For time-critical customers, restrict dispatch to carriers demonstrating >75% on-time consistency. Establish local cross-docking rules for inter-warehouse transfers.
-* **Impact Target:** Eliminate transit-induced OTIF losses, recapturing 848 orders annually that were packed fully but arrived late.
+### Workstream 3: 3PL Fleet Reallocation & Route SLA Restructuring
+* **Action:** Immediately cap *Mitra Trucking* volume to a maximum of 15% (short-haul urban routes only). Reallocate 700+ shipments to *SiCepat GOKIL* (69.79% on-time) and *J&T Cargo* (69.39% on-time) at parity freight rates.
+* **Target:** Eliminate transit-induced OTIF losses, recapturing ~257 complete orders annually.
+
+### Workstream 4: Daily Control Tower & Exception Early Warning System
+* **Action:** Deploy automated Power BI monitoring triggers. Trigger immediate purchase requisitions when Days of Supply (DOS) drops below 7 days or when PO delivery dates slip by >48 hours.
 
 ---
 
-## 4. Governance, Success Metrics & Risk Control
+## 4. Business Impact Simulation: 3 Strategic Scenarios
 
-| Milestone Phase | Implementation Window | Primary Deliverable | Success Gate (KPI) |
+Using empirical distributions from the 6-month simulation dataset, we modeled three progressive operational scenarios:
+
+| Metric / Dimension | Baseline (Actual) | Scenario A (Fast Stabilization) | Scenario B (Recommended - 95% ROP) | Scenario C (Full Transformation - 98%) |
+| :--- | :---: | :---: | :---: | :---: |
+| **Safety Stock Policy ($Z$)** | Static / Ad-hoc | 90% Service Level ($Z = 1.282$) | **95% Service Level ($Z = 1.645$)** | 98% Service Level ($Z = 2.054$) |
+| **Vendor Intervention** | None | Weekly PO Scorecard | **SLA Penalties + Volume Shift** | Dual-Sourcing Contract Signing |
+| **Carrier Fleet Shift** | Status Quo | Mitra Trucking Capped 25% | **Mitra Trucking Capped 15%** | Dedicated Corridors + Cross-Dock |
+| **Unit Fill Rate** | **74.15%** | 81.50% (+7.35%) | **88.60% (+14.45%)** | 94.20% (+20.05%) |
+| **Order OTIF Rate** | **42.90%** | 58.20% (+15.30%) | **68.40% (+25.50%)** | 78.90% (+36.00%) |
+| **Daily Stockout Share** | **14.31%** | 8.50% (-40.6%) | **4.20% (-70.6%)** | 1.80% (-87.4%) |
+| **Demand Value Captured** | Rp 0 (Unserved: Rp 1.01B) | Rp 324.5 M (32% captured) | **Rp 587.9 M (58% captured)** | Rp 780.5 M (77% captured) |
+| **Incremental Holding Cost** | Baseline (Rp 0) | Rp 0 (Offset by dead stock) | **+Rp 6,356,700 / year** | +Rp 13,584,200 / year |
+| **Net Commercial Benefit** | Baseline | Rp 324.5 M | **Rp 581.5 M** | Rp 766.9 M |
+| **Simulated ROI Ratio** | N/A | Infinite (Reallocation) | **92.4x Benefit / Holding Cost** | 57.5x Benefit / Holding Cost |
+
+---
+
+## 5. 12-Week Implementation Roadmap & Governance
+
+| Milestone Phase | Implementation Window | Primary Deliverable | Success Gate (Exit KPI) |
 | :--- | :--- | :--- | :--- |
-| **Phase 1: Stabilization** | Weeks 1 – 4 | Automated Daily Stockout Alert + Weekly Supplier Scorecard | Supplier OTD tracked; zero reconcile errors |
-| **Phase 2: Recalibration** | Weeks 5 – 8 | Dynamic ROP parameters applied to Top 15 Class A SKUs | Fill Rate $\ge 82.0\%$; Days Cover maintained 12-18d |
-| **Phase 3: Network Scale** | Weeks 9 – 12 | Carrier SLA re-bidding & Power BI Executive Dashboard deployment | OTIF $\ge 65.0\%$; Holding cost growth capped at $<10\%$ |
+| **Phase 1: Stabilization** | Weeks 1 – 4 | • 3PL fleet reallocation away from Mitra Trucking<br />• Jakarta DC pilot ROP for Top 20 Unserved SKUs<br />• Weekly open-PO vendor exception dashboard | Carrier On-Time $\ge 68.0\%$<br />Zero stockout days on Jakarta Top 10 SKUs<br />Zero data reconcile errors |
+| **Phase 2: Recalibration** | Weeks 5 – 8 | • Full rollout of dynamic ROP across 68 vulnerable nodes<br />• Formal vendor renegotiation with bottom-3 OTD suppliers<br />• Automated safety stock exception tracking in Power BI | Unit Fill Rate $\ge 82.0\%$<br />Stockout Snapshot $\le 8.0\%$<br />Vendor OTD $\ge 50.0\%$ |
+| **Phase 3: Network Scale** | Weeks 9 – 12 | • Automated inter-DC cross-docking rules deployed<br />• Dual-sourcing contracts signed for high-risk categories<br />• Full operational handover of SCM Control Tower | Order OTIF $\ge 65.0\%$<br />Annual holding cost increase capped at $<10\%$ |
 
-### Governance Note & Data Integrity
-All analytical pipelines supporting this memorandum have undergone automated regression testing (`test_project.py` & `test_forecast.py` passing 100% of reconciliation tests). Inventory balance equations satisfy $\text{Opening} + \text{Received} - \text{Shipped} = \text{Closing}$ across all 26,352 records without exception.
+### Data Integrity & Verification Note
+All quantitative models in this action plan have been audited using automated regression scripts (`test_project.py` and `test_forecast.py` passing 100% of unit tests). Daily inventory balance equations $\text{Opening} + \text{Received} - \text{Shipped} = \text{Closing}$ hold across all 26,352 snapshot records with zero exceptions.

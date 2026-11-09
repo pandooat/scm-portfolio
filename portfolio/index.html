@@ -64,7 +64,7 @@
       align-items: center;
       gap: 1.5rem;
     }
-    .nav-links { display: flex; gap: 1.8rem; list-style: none; }
+    .nav-links { display: flex; gap: 1.6rem; list-style: none; }
     .nav-links a {
       color: var(--text-secondary); text-decoration: none;
       font-size: 0.875rem; font-weight: 500;
@@ -122,7 +122,6 @@
         radial-gradient(ellipse 60% 40% at 80% 80%, rgba(139,92,246,0.08) 0%, transparent 60%),
         radial-gradient(ellipse 40% 30% at 20% 60%, rgba(6,182,212,0.06) 0%, transparent 60%);
     }
-    /* animated grid lines */
     .hero-grid {
       position: absolute; inset: 0; z-index: 0;
       background-image:
@@ -130,7 +129,7 @@
         linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px);
       background-size: 60px 60px;
     }
-    .hero-content { position: relative; z-index: 1; max-width: 820px; }
+    .hero-content { position: relative; z-index: 1; max-width: 840px; }
     .hero-badge {
       display: inline-block;
       background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.3);
@@ -152,7 +151,7 @@
     }
     .hero-subtitle {
       font-size: 1.12rem; color: var(--text-secondary);
-      max-width: 640px; margin: 0 auto 2.5rem;
+      max-width: 650px; margin: 0 auto 2.5rem;
       animation: fadeInUp 0.6s 0.2s ease both;
     }
     .hero-cta {
@@ -225,7 +224,7 @@
       font-size: clamp(1.75rem, 4vw, 2.5rem);
       font-weight: 700; line-height: 1.2;
     }
-    .section-desc { color: var(--text-secondary); max-width: 600px; margin: 0.75rem auto 0; font-size: 0.95rem; }
+    .section-desc { color: var(--text-secondary); max-width: 640px; margin: 0.75rem auto 0; font-size: 0.95rem; }
 
     /* ─── CHARTS GRID ────────────────────────── */
     .charts-grid {
@@ -296,20 +295,6 @@
       display: flex; gap: 0.5rem; align-items: flex-start;
     }
 
-    /* ─── TECH STACK ─────────────────────────── */
-    .tech-grid {
-      display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
-    }
-    .tech-badge {
-      display: flex; align-items: center; gap: 0.6rem;
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: 100px; padding: 10px 20px;
-      font-size: 0.875rem; font-weight: 600;
-      transition: all 0.25s ease;
-    }
-    .tech-badge:hover { border-color: var(--border-hover); transform: translateY(-2px); }
-    .tech-dot { width: 10px; height: 10px; border-radius: 50%; }
-
     /* ─── MEMO SECTION ───────────────────────── */
     .memo-grid {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -330,6 +315,204 @@
     .memo-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.5rem; }
     .memo-card p { font-size: 0.83rem; color: var(--text-secondary); line-height: 1.65; }
 
+    /* ─── STRATEGY & SIMULATOR SECTION ──────── */
+    .sim-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 2rem;
+      margin-bottom: 2.5rem;
+      box-shadow: var(--glow-blue);
+    }
+    .scenario-selector {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+      justify-content: center;
+    }
+    .scenario-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 10px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .scenario-btn.active, .scenario-btn:hover {
+      background: linear-gradient(135deg, rgba(59,130,246,0.25), rgba(6,182,212,0.25));
+      border-color: var(--accent-cyan);
+      color: #ffffff;
+      box-shadow: 0 4px 15px rgba(6, 182, 212, 0.2);
+    }
+    .sim-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+    .sim-card {
+      background: rgba(10, 14, 26, 0.6);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 1.25rem 1rem;
+      text-align: center;
+      position: relative;
+    }
+    .sim-card-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    .sim-val-wrap {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 6px;
+    }
+    .sim-val-old {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      text-decoration: line-through;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .sim-val-new {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--accent-green);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .sim-badge {
+      display: inline-block;
+      margin-top: 0.4rem;
+      font-size: 0.72rem;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-weight: 700;
+    }
+    .sim-badge.positive {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--accent-green);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    .sim-badge.neutral {
+      background: rgba(59, 130, 246, 0.15);
+      color: var(--accent-blue);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+
+    /* Pillars Grid */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .pillar-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 1.75rem 1.5rem;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .pillar-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+      box-shadow: var(--glow-blue);
+    }
+    .pillar-number {
+      font-size: 2rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1;
+      margin-bottom: 0.75rem;
+    }
+    .pillar-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.6rem;
+    }
+    .pillar-desc {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    .pillar-meta {
+      font-size: 0.78rem;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 0.6rem 0.8rem;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--accent-cyan);
+    }
+
+    /* 12-Week Roadmap Table */
+    .roadmap-table-wrap {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 1.5rem;
+      overflow-x: auto;
+    }
+    .roadmap-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+    .roadmap-table th {
+      text-align: left;
+      padding: 0.75rem 0.6rem;
+      color: var(--text-secondary);
+      font-weight: 600;
+      border-bottom: 1px solid var(--border);
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+    .roadmap-table td {
+      padding: 0.85rem 0.6rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      color: var(--text-secondary);
+    }
+    .roadmap-phase-tag {
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      display: inline-block;
+    }
+    .phase-1 { background: rgba(239, 68, 68, 0.15); color: var(--accent-red); }
+    .phase-2 { background: rgba(245, 158, 11, 0.15); color: var(--accent-amber); }
+    .phase-3 { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); }
+
+    /* ─── TECH STACK ─────────────────────────── */
+    .tech-grid {
+      display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+    }
+    .tech-badge {
+      display: flex; align-items: center; gap: 0.6rem;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 100px; padding: 10px 20px;
+      font-size: 0.875rem; font-weight: 600;
+      transition: all 0.25s ease;
+    }
+    .tech-badge:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+    .tech-dot { width: 10px; height: 10px; border-radius: 50%; }
+
     /* ─── FOOTER ─────────────────────────────── */
     footer {
       background: var(--bg-secondary); border-top: 1px solid var(--border);
@@ -340,7 +523,7 @@
     .footer-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
     .footer-disclaimer {
       font-size: 0.75rem; color: var(--text-muted);
-      max-width: 620px; margin: 2rem auto 0;
+      max-width: 640px; margin: 2rem auto 0;
       border-top: 1px solid var(--border); padding-top: 1.5rem;
       line-height: 1.6;
     }
@@ -357,7 +540,7 @@
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
     /* ─── RESPONSIVE ─────────────────────────── */
-    @media (max-width: 768px) {
+    @media (max-width: 860px) {
       .nav-links { display: none; }
       .charts-grid { grid-template-columns: 1fr; }
       nav { padding: 0 1rem; }
@@ -381,6 +564,7 @@
       <li><a href="#charts" data-i18n="nav_charts">Analysis</a></li>
       <li><a href="#sql" data-i18n="nav_sql">SQL</a></li>
       <li><a href="#memo" data-i18n="nav_memo">Memo</a></li>
+      <li><a href="#strategy" data-i18n="nav_strategy">Strategy & Impact</a></li>
       <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
     </ul>
     <!-- Language Toggle Switcher -->
@@ -408,6 +592,7 @@
     </p>
     <div class="hero-cta">
       <a href="#overview" class="btn btn-primary" data-i18n="hero_cta_analysis">View Analysis ↓</a>
+      <a href="#strategy" class="btn btn-secondary" data-i18n="hero_cta_strategy">Strategic Plan 🚀</a>
       <a href="https://github.com/pandooat/scm-portfolio" target="_blank" class="btn btn-secondary">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
         GitHub
@@ -745,6 +930,174 @@ ORDER BY m.ym;</code></pre>
   </div>
 </section>
 
+<!-- STRATEGIC ACTION PLAN & BUSINESS IMPACT SIMULATION -->
+<section id="strategy">
+  <div class="section-header reveal">
+    <div class="section-tag" data-i18n="strat_tag">Strategic Roadmap & Quantified Value</div>
+    <h2 class="section-title" data-i18n="strat_title">Strategic Action Plan & Business Impact Simulation</h2>
+    <p class="section-desc" data-i18n="strat_desc">A 12-week data-driven transformation model translating diagnostic analytics into quantified ROI, service-level recovery, and operational resilience.</p>
+  </div>
+
+  <!-- INTERACTIVE IMPACT SIMULATOR -->
+  <div class="sim-container reveal">
+    <div style="text-align:center; margin-bottom:1.5rem;">
+      <span style="font-size:0.78rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--accent-cyan); font-weight:700;" data-i18n="sim_select_title">🎮 Select Strategic Simulation Scenario</span>
+      <h3 style="font-size:1.2rem; margin-top:0.3rem;" data-i18n="sim_select_desc">Interactive Supply Chain Impact Calculator</h3>
+    </div>
+
+    <!-- Scenario Buttons -->
+    <div class="scenario-selector" role="group">
+      <button class="scenario-btn active" id="btn-scen-rec" onclick="applyScenario('rec')">
+        <span>⭐</span> <span data-i18n="scen_rec_btn">Scenario B: Recommended (95% ROP + SLA Restructuring)</span>
+      </button>
+      <button class="scenario-btn" id="btn-scen-quick" onclick="applyScenario('quick')">
+        <span>⚡</span> <span data-i18n="scen_quick_btn">Scenario A: Fast Stabilization (90% ROP + Carrier Fix)</span>
+      </button>
+      <button class="scenario-btn" id="btn-scen-agg" onclick="applyScenario('agg')">
+        <span>🚀</span> <span data-i18n="scen_agg_btn">Scenario C: Full Scale Transformation (98% ROP + Dual Sourcing)</span>
+      </button>
+    </div>
+
+    <!-- Simulator Metrics Grid -->
+    <div class="sim-grid">
+      <div class="sim-card">
+        <div class="sim-card-title" data-i18n="sim_lbl_fillrate">Projected Fill Rate</div>
+        <div class="sim-val-wrap">
+          <span class="sim-val-old">74.15%</span>
+          <span class="sim-val-new" id="sim-val-fillrate">88.60%</span>
+        </div>
+        <span class="sim-badge positive" id="sim-badge-fillrate">+14.45% Gain</span>
+      </div>
+
+      <div class="sim-card">
+        <div class="sim-card-title" data-i18n="sim_lbl_otif">Projected Order OTIF</div>
+        <div class="sim-val-wrap">
+          <span class="sim-val-old">42.90%</span>
+          <span class="sim-val-new" id="sim-val-otif">68.40%</span>
+        </div>
+        <span class="sim-badge positive" id="sim-badge-otif">+25.50% Recovery</span>
+      </div>
+
+      <div class="sim-card">
+        <div class="sim-card-title" data-i18n="sim_lbl_revenue">Recoverable Revenue</div>
+        <div class="sim-val-wrap">
+          <span class="sim-val-new" id="sim-val-revenue">Rp 587.9 M</span>
+        </div>
+        <span class="sim-badge positive" id="sim-badge-revenue">58% Demand Captured</span>
+      </div>
+
+      <div class="sim-card">
+        <div class="sim-card-title" data-i18n="sim_lbl_carry">Incremental Carrying Cost</div>
+        <div class="sim-val-wrap">
+          <span class="sim-val-new" id="sim-val-carry" style="color:var(--accent-amber);">+Rp 6.36 M</span>
+        </div>
+        <span class="sim-badge neutral" data-i18n="sim_badge_carry">20% Annual Holding Rate</span>
+      </div>
+
+      <div class="sim-card">
+        <div class="sim-card-title" data-i18n="sim_lbl_roi">Commercial ROI Ratio</div>
+        <div class="sim-val-wrap">
+          <span class="sim-val-new" id="sim-val-roi" style="color:var(--accent-cyan);">92.4x</span>
+        </div>
+        <span class="sim-badge positive" data-i18n="sim_badge_roi">Benefit / Holding Cost</span>
+      </div>
+
+      <div class="sim-card">
+        <div class="sim-card-title" data-i18n="sim_lbl_stockout">Daily Stockout Share</div>
+        <div class="sim-val-wrap">
+          <span class="sim-val-old">14.31%</span>
+          <span class="sim-val-new" id="sim-val-stockout">4.20%</span>
+        </div>
+        <span class="sim-badge positive" id="sim-badge-stockout">-70.6% Stockout Days</span>
+      </div>
+    </div>
+
+    <!-- Scenario Summary Note -->
+    <div style="margin-top:1.5rem; background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.2); border-radius:var(--radius-sm); padding:1rem 1.25rem; font-size:0.85rem; color:var(--text-secondary);" id="sim-narrative" data-i18n-html="scen_rec_narrative">
+      💡 <strong>Strategic Rationale:</strong> By calibrating the 68 SKU-warehouse combinations currently below the 95% service level threshold ($Z = 1.645$) and enforcing supplier SLAs on the bottom-3 vendors (<6% OTD), the business protects an estimated ~Rp 587.9M in demand for a modest inventory holding investment of Rp 6.36M/year. Reallocating freight from underperforming Mitra Trucking (48.88% On-Time) recaptures ~257 complete shipments.
+    </div>
+  </div>
+
+  <!-- 4 STRATEGIC PILLARS -->
+  <div style="margin-bottom:2rem; text-align:center;">
+    <span style="font-size:0.78rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--accent-cyan); font-weight:700;" data-i18n="strat_pillars_tag">Four Operational Workstreams</span>
+    <h3 style="font-size:1.6rem; margin-top:0.3rem;" data-i18n="strat_pillars_title">Pillars of Execution</h3>
+  </div>
+
+  <div class="pillars-grid">
+    <!-- Pillar 1 -->
+    <div class="pillar-card reveal">
+      <div class="pillar-number">01</div>
+      <div class="pillar-title" data-i18n="p1_title">Dynamic ROP & Buffer Recalibration</div>
+      <p class="pillar-desc" data-i18n="p1_desc">Upgrade static reorder points to dynamic equations accounting for both daily demand variance (σD) and lead time volatility (σL). Target the 68 identified vulnerable SKU-warehouse pairs at a 95% service level threshold ($Z = 1.645$).</p>
+      <div class="pillar-meta" data-i18n="p1_meta">🎯 Impact: Unit Fill Rate 74.15% ➔ ~88.6% | Stockout Share 14.31% ➔ <4.5%</div>
+    </div>
+
+    <!-- Pillar 2 -->
+    <div class="pillar-card reveal">
+      <div class="pillar-number">02</div>
+      <div class="pillar-title" data-i18n="p2_title">Upstream Vendor SLA Enforcement</div>
+      <p class="pillar-desc" data-i18n="p2_desc">Address bottom-3 suppliers (PT Niaga Mitra, PT Karya Maju Industri, PT Surya Ritelindo) suffering from <6% OTD and 4+ days average delay. Institute weekly open-PO exception audits, progressive delay penalties, and volume reallocation to tier-1 suppliers.</p>
+      <div class="pillar-meta" data-i18n="p2_meta">🎯 Impact: Vendor OTD 35.95% ➔ ~65.0% | Lead Time Variance reduced by 35%</div>
+    </div>
+
+    <!-- Pillar 3 -->
+    <div class="pillar-card reveal">
+      <div class="pillar-number">03</div>
+      <div class="pillar-title" data-i18n="p3_title">3PL Fleet Reallocation & Route SLA</div>
+      <p class="pillar-desc" data-i18n="p3_desc">Mitra Trucking delivers only 48.88% on-time despite costing Rp 32,461/shipment (comparable to SiCepat GOKIL at 69.79%). Reallocate 70% of Mitra Trucking's volume to high-performing carriers and confine them to short-haul inner-city routes.</p>
+      <div class="pillar-meta" data-i18n="p3_meta">🎯 Impact: Carrier On-Time 63.65% ➔ ~72.0% | 848 Late-but-Full orders recovered</div>
+    </div>
+
+    <!-- Pillar 4 -->
+    <div class="pillar-card reveal">
+      <div class="pillar-number">04</div>
+      <div class="pillar-title" data-i18n="p4_title">Daily Control Tower & Early Warning Triggers</div>
+      <p class="pillar-desc" data-i18n="p4_desc">Deploy automated daily alerting across all 144 SKU-warehouse nodes. Trigger automated purchase requisitions whenever Days of Supply (DOS) drops below 7 days or when PO receipt dates slip by >48 hours past expected window.</p>
+      <div class="pillar-meta" data-i18n="p4_meta">🎯 Impact: Zero unmonitored stockout days | 100% data reconcile integrity</div>
+    </div>
+  </div>
+
+  <!-- 12-WEEK ROADMAP -->
+  <div style="margin-bottom:1.5rem; text-align:center;">
+    <span style="font-size:0.78rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--accent-cyan); font-weight:700;" data-i18n="strat_roadmap_tag">Phased Execution Timeline</span>
+    <h3 style="font-size:1.6rem; margin-top:0.3rem;" data-i18n="strat_roadmap_title">12-Week Strategic Implementation Roadmap</h3>
+  </div>
+
+  <div class="roadmap-table-wrap reveal">
+    <table class="roadmap-table">
+      <thead>
+        <tr>
+          <th style="width:14%;" data-i18n="th_phase">Phase & Horizon</th>
+          <th style="width:26%;" data-i18n="th_workstream">Primary Workstream</th>
+          <th style="width:36%;" data-i18n="th_milestone">Key Deliverables & Actions</th>
+          <th style="width:24%;" data-i18n="th_kpi_gate">Exit Gate (Target KPI)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="roadmap-phase-tag phase-1" data-i18n="p_tag_1">Phase 1 (W1–W4)</span><br /><small style="color:var(--text-muted);" data-i18n="p_name_1">Quick Wins & Stabilize</small></td>
+          <td style="font-weight:600; color:var(--text-primary);" data-i18n="w_stream_1">Fleet Realignment & High-Risk Buffer Pilot</td>
+          <td data-i18n="w_action_1">• Reallocate 500+ orders from Mitra Trucking to SiCepat/J&T.<br />• Deploy pilot ROP for Top 20 Unserved Value SKUs at Jakarta DC.<br />• Implement weekly supplier open-PO scorecard.</td>
+          <td><strong style="color:var(--accent-green);" data-i18n="w_gate_1">Carrier On-Time ≥ 68%<br />Zero balance reconcile errors</strong></td>
+        </tr>
+        <tr>
+          <td><span class="roadmap-phase-tag phase-2" data-i18n="p_tag_2">Phase 2 (W5–W8)</span><br /><small style="color:var(--text-muted);" data-i18n="p_name_2">Systematic Recalibration</small></td>
+          <td style="font-weight:600; color:var(--text-primary);" data-i18n="w_stream_2">Dynamic ROP Scale & Supplier SLA Enforce</td>
+          <td data-i18n="w_action_2">• Scale dynamic ROP to all 68 below-threshold SKU-warehouse pairs.<br />• Execute renegotiation meetings with bottom-3 OTD suppliers.<br />• Introduce automated safety stock monitoring in Power BI.</td>
+          <td><strong style="color:var(--accent-green);" data-i18n="w_gate_2">Fill Rate ≥ 82%<br />Stockout Snapshot ≤ 8%</strong></td>
+        </tr>
+        <tr>
+          <td><span class="roadmap-phase-tag phase-3" data-i18n="p_tag_3">Phase 3 (W9–W12)</span><br /><small style="color:var(--text-muted);" data-i18n="p_name_3">Scale & Network Governance</small></td>
+          <td style="font-weight:600; color:var(--text-primary);" data-i18n="w_stream_3">Network-Wide Optimization & Control Tower</td>
+          <td data-i18n="w_action_3">• Deploy automated cross-docking rules between 3 distribution centers.<br />• Dual-sourcing contracts signed for critical Class A categories.<br />• Handover of executive dashboard & operational SOPs.</td>
+          <td><strong style="color:var(--accent-green);" data-i18n="w_gate_3">OTIF ≥ 65%<br />Carrying cost growth < 10%</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
 <!-- TECH STACK -->
 <section>
   <div class="section-header reveal">
@@ -788,11 +1141,13 @@ ORDER BY m.ym;</code></pre>
       nav_charts: "Analysis",
       nav_sql: "SQL",
       nav_memo: "Memo",
+      nav_strategy: "Strategy & Impact",
       nav_contact: "Contact",
       hero_badge: "📦 Supply Chain Analytics Portfolio",
       hero_title: "FMCG Supply Chain<br /><span>Performance Analysis</span>",
       hero_subtitle: "End-to-end supply chain analytics on a synthetic FMCG dataset — diagnosing fulfillment failures across 4,925 orders using SQL, Python, and Power BI.",
       hero_cta_analysis: "View Analysis ↓",
+      hero_cta_strategy: "Strategic Plan 🚀",
       kpi_fillrate: "Fill Rate (Unit)",
       kpi_otif: "OTIF (Order)",
       kpi_otd: "Supplier OTD",
@@ -864,6 +1219,60 @@ ORDER BY m.ym;</code></pre>
       memo_card3_label: "🔵 Priority 3 — Secondary Signal",
       memo_card3_title: "Last-Mile Delivery Execution",
       memo_card3_body: "848 orders (17%) were complete but delivered late. Carrier performance review should compare on-time %, freight cost per shipped order, and volume per route to identify renegotiation or reallocation opportunities with underperforming providers.",
+      strat_tag: "Strategic Roadmap & Quantified Value",
+      strat_title: "Strategic Action Plan & Business Impact Simulation",
+      strat_desc: "A 12-week data-driven transformation model translating diagnostic analytics into quantified ROI, service-level recovery, and operational resilience.",
+      sim_select_title: "🎮 Select Strategic Simulation Scenario",
+      sim_select_desc: "Interactive Supply Chain Impact Calculator",
+      scen_rec_btn: "Scenario B: Recommended (95% ROP + SLA Restructuring)",
+      scen_quick_btn: "Scenario A: Fast Stabilization (90% ROP + Carrier Fix)",
+      scen_agg_btn: "Scenario C: Full Scale Transformation (98% ROP + Dual Sourcing)",
+      sim_lbl_fillrate: "Projected Fill Rate",
+      sim_lbl_otif: "Projected Order OTIF",
+      sim_lbl_revenue: "Recoverable Revenue",
+      sim_lbl_carry: "Incremental Carrying Cost",
+      sim_lbl_roi: "Commercial ROI Ratio",
+      sim_lbl_stockout: "Daily Stockout Share",
+      sim_badge_carry: "20% Annual Holding Rate",
+      sim_badge_roi: "Benefit / Holding Cost",
+      scen_rec_narrative: "💡 <strong>Strategic Rationale:</strong> By calibrating the 68 SKU-warehouse combinations currently below the 95% service level threshold ($Z = 1.645$) and enforcing supplier SLAs on the bottom-3 vendors (<6% OTD), the business protects an estimated ~Rp 587.9M in demand for a modest inventory holding investment of Rp 6.36M/year. Reallocating freight from underperforming Mitra Trucking (48.88% On-Time) recaptures ~257 complete shipments.",
+      scen_quick_narrative: "⚡ <strong>Strategic Rationale:</strong> Scenario A focuses on low-capital rapid recovery: reallocating shipments away from Mitra Trucking immediately to SiCepat and J&T Cargo, combined with minimum buffer stock at 90% service level ($Z = 1.282$). Minimizes capital commitment while solving last-mile delays.",
+      scen_agg_narrative: "🚀 <strong>Strategic Rationale:</strong> Scenario C targets industry-leading SLA reliability: dual-sourcing contracts for chronic late vendors, dedicated freight line haul, and 98% service level safety stocks ($Z = 2.054$). Captures maximal unserved value (~Rp 780M) with manageable carrying cost of Rp 13.58M/year.",
+      strat_pillars_tag: "Four Operational Workstreams",
+      strat_pillars_title: "Pillars of Execution",
+      p1_title: "Dynamic ROP & Buffer Recalibration",
+      p1_desc: "Upgrade static reorder points to dynamic equations accounting for both daily demand variance (σD) and lead time volatility (σL). Target the 68 identified vulnerable SKU-warehouse pairs at a 95% service level threshold ($Z = 1.645$).",
+      p1_meta: "🎯 Impact: Unit Fill Rate 74.15% ➔ ~88.6% | Stockout Share 14.31% ➔ <4.5%",
+      p2_title: "Upstream Vendor SLA Enforcement",
+      p2_desc: "Address bottom-3 suppliers (PT Niaga Mitra, PT Karya Maju Industri, PT Surya Ritelindo) suffering from <6% OTD and 4+ days average delay. Institute weekly open-PO exception audits, progressive delay penalties, and volume reallocation to tier-1 suppliers.",
+      p2_meta: "🎯 Impact: Vendor OTD 35.95% ➔ ~65.0% | Lead Time Variance reduced by 35%",
+      p3_title: "3PL Fleet Reallocation & Route SLA",
+      p3_desc: "Mitra Trucking delivers only 48.88% on-time despite costing Rp 32,461/shipment (comparable to SiCepat GOKIL at 69.79%). Reallocate 70% of Mitra Trucking's volume to high-performing carriers and confine them to short-haul inner-city routes.",
+      p3_meta: "🎯 Impact: Carrier On-Time 63.65% ➔ ~72.0% | 848 Late-but-Full orders recovered",
+      p4_title: "Daily Control Tower & Early Warning Triggers",
+      p4_desc: "Deploy automated daily alerting across all 144 SKU-warehouse nodes. Trigger automated purchase requisitions whenever Days of Supply (DOS) drops below 7 days or when PO receipt dates slip by >48 hours past expected window.",
+      p4_meta: "🎯 Impact: Zero unmonitored stockout days | 100% data reconcile integrity",
+      strat_roadmap_tag: "Phased Execution Timeline",
+      strat_roadmap_title: "12-Week Strategic Implementation Roadmap",
+      th_phase: "Phase & Horizon",
+      th_workstream: "Primary Workstream",
+      th_milestone: "Key Deliverables & Actions",
+      th_kpi_gate: "Exit Gate (Target KPI)",
+      p_tag_1: "Phase 1 (W1–W4)",
+      p_name_1: "Quick Wins & Stabilize",
+      w_stream_1: "Fleet Realignment & High-Risk Buffer Pilot",
+      w_action_1: "• Reallocate 500+ orders from Mitra Trucking to SiCepat/J&T.<br />• Deploy pilot ROP for Top 20 Unserved Value SKUs at Jakarta DC.<br />• Implement weekly supplier open-PO scorecard.",
+      w_gate_1: "Carrier On-Time ≥ 68%<br />Zero balance reconcile errors",
+      p_tag_2: "Phase 2 (W5–W8)",
+      p_name_2: "Systematic Recalibration",
+      w_stream_2: "Dynamic ROP Scale & Supplier SLA Enforce",
+      w_action_2: "• Scale dynamic ROP to all 68 below-threshold SKU-warehouse pairs.<br />• Execute renegotiation meetings with bottom-3 OTD suppliers.<br />• Introduce automated safety stock monitoring in Power BI.",
+      w_gate_2: "Fill Rate ≥ 82%<br />Stockout Snapshot ≤ 8%",
+      p_tag_3: "Phase 3 (W9–W12)",
+      p_name_3: "Scale & Network Governance",
+      w_stream_3: "Network-Wide Optimization & Control Tower",
+      w_action_3: "• Deploy automated cross-docking rules between 3 distribution centers.<br />• Dual-sourcing contracts signed for critical Class A categories.<br />• Handover of executive dashboard & operational SOPs.",
+      w_gate_3: "OTIF ≥ 65%<br />Carrying cost growth < 10%",
       tech_tag: "Tools & Methods",
       tech_title: "Tech Stack",
       footer_role: "Data Analyst · Supply Chain Analytics · FMCG Domain",
@@ -875,11 +1284,13 @@ ORDER BY m.ym;</code></pre>
       nav_charts: "Analisis Data",
       nav_sql: "Kueri SQL",
       nav_memo: "Memo Eksekutif",
+      nav_strategy: "Strategi & Dampak",
       nav_contact: "Kontak",
       hero_badge: "📦 Portofolio Analisis Rantai Pasok",
       hero_title: "Rantai Pasok FMCG<br /><span>Analisis Kinerja & Pemenuhan</span>",
       hero_subtitle: "Analisis rantai pasok end-to-end berbasis dataset sintetis FMCG — mendiagnosis kegagalan fulfillment pada 4.925 pesanan menggunakan SQL, Python, dan Power BI.",
       hero_cta_analysis: "Lihat Analisis ↓",
+      hero_cta_strategy: "Rencana Strategis 🚀",
       kpi_fillrate: "Fill Rate (Unit)",
       kpi_otif: "OTIF (Pesanan)",
       kpi_otd: "OTD Pemasok",
@@ -951,6 +1362,60 @@ ORDER BY m.ym;</code></pre>
       memo_card3_label: "🔵 Prioritas 3 — Sinyal Sekunder",
       memo_card3_title: "Eksekusi Pengiriman Last-Mile",
       memo_card3_body: "848 pesanan (17%) dikemas lengkap namun tiba terlambat. Evaluasi performa ekspedisi perlu membandingkan persentase ketepatan waktu, biaya ongkir per pesanan terkirim, serta volume rute guna menegosiasikan ulang kontrak atau mengalihkan volume ke ekspedisi berkinerja unggul.",
+      strat_tag: "Roadmap Strategis & Kuantifikasi Nilai",
+      strat_title: "Rencana Aksi Strategis & Simulasi Dampak Bisnis",
+      strat_desc: "Model transformasi berbasis data 12 minggu yang menerjemahkan diagnosis analitik menjadi estimasi ROI terukur, pemulihan service level, dan ketahanan operasional.",
+      sim_select_title: "🎮 Pilih Skenario Simulasi Strategis",
+      sim_select_desc: "Kalkulator Interaktif Dampak Rantai Pasok",
+      scen_rec_btn: "Skenario B: Rekomendasi Utama (ROP 95% + Restrukturisasi SLA)",
+      scen_quick_btn: "Skenario A: Stabilisasi Cepat (ROP 90% + Perbaikan Ekspedisi)",
+      scen_agg_btn: "Skenario C: Transformasi Skala Penuh (ROP 98% + Dual Sourcing)",
+      sim_lbl_fillrate: "Proyeksi Fill Rate",
+      sim_lbl_otif: "Proyeksi Order OTIF",
+      sim_lbl_revenue: "Estimasi Pendapatan Diselamatkan",
+      sim_lbl_carry: "Biaya Simpan Tambahan (Holding Cost)",
+      sim_lbl_roi: "Rasio ROI Komersial",
+      sim_lbl_stockout: "Pangsa Habis Stok Harian",
+      sim_badge_carry: "Asumsi 20% Biaya Simpan Tahunan",
+      sim_badge_roi: "Rasio Manfaat / Biaya Simpan",
+      scen_rec_narrative: "💡 <strong>Rasional Strategis:</strong> Mengkalibrasi 68 kombinasi SKU-gudang yang saat ini di bawah ambang batas level layanan 95% ($Z = 1,645$) dan menegakkan SLA untuk 3 pemasok terbawah (OTD <6%) memproteksi estimasi permintaan senilai ~Rp 587,9 Juta dengan investasi holding persediaan hanya Rp 6,36 Juta/tahun. Mengalihkan pengiriman dari Mitra Trucking (On-Time 48,88%) memulihkan ~257 pesanan tiba tepat waktu.",
+      scen_quick_narrative: "⚡ <strong>Rasional Strategis:</strong> Skenario A memprioritaskan pemulihan cepat dengan modal minimal: realokasi pengiriman dari Mitra Trucking ke SiCepat dan J&T Cargo secara langsung, dikombinasikan dengan batas stok pengaman 90% ($Z = 1,282$). Menghindari komitmen modal berlebih sambil mengeliminasi keterlambatan last-mile.",
+      scen_agg_narrative: "🚀 <strong>Rasional Strategis:</strong> Skenario C menargetkan standar keandalan pasar tertinggi: kontrak dual-sourcing untuk pemasok kronis, jalur pengiriman khusus antarkota, dan stok pengaman 98% ($Z = 2,054$). Memulihkan potensi permintaan maksimal (~Rp 780 Juta) dengan biaya simpan yang tetap efisien di Rp 13,58 Juta/tahun.",
+      strat_pillars_tag: "Empat Pilar Operasional",
+      strat_pillars_title: "Pilar Eksekusi Strategis",
+      p1_title: "Kalibrasi Ulang ROP Dinamis & Stok Pengaman",
+      p1_desc: "Tingkatkan titik pemesanan ulang statis ke rumus dinamis yang memperhitungkan variansi permintaan harian (σD) dan volatilitas lead time (σL). Terapkan pada 68 kombinasi SKU-gudang rentan pada ambang batas service level 95% ($Z = 1,645$).",
+      p1_meta: "🎯 Dampak: Fill Rate 74,15% ➔ ~88,6% | Habis Stok 14,31% ➔ <4,5%",
+      p2_title: "Penegakan SLA Pemasok Hulu & Audit Deviasi",
+      p2_desc: "Tangani 3 pemasok terbawah (PT Niaga Mitra, PT Karya Maju Industri, PT Surya Ritelindo) dengan OTD <6% dan rata-rata keterlambatan 4+ hari. Berlakukan audit PO terbuka mingguan, penalti progresif, dan pengalihan alokasi volume ke pemasok andal.",
+      p2_meta: "🎯 Dampak: OTD Pemasok 35,95% ➔ ~65,0% | Variansi Lead Time berkurang 35%",
+      p3_title: "Realokasi Armada 3PL & SLA Rute Pengiriman",
+      p3_desc: "Mitra Trucking hanya mencatat 48,88% ketepatan waktu dengan biaya Rp 32.461/pesanan (setara SiCepat GOKIL di 69,79%). Alihkan 70% volume pesanan Mitra Trucking ke ekspedisi berkinerja tinggi dan batasi rute mereka hanya pada jarak dekat.",
+      p3_meta: "🎯 Dampak: On-Time Ekspedisi 63,65% ➔ ~72,0% | 848 pesanan tertunda diselamatkan",
+      p4_title: "Control Tower Harian & Pemicu Peringatan Dini",
+      p4_desc: "Pasang sistem peringatan otomatis harian di seluruh 144 node SKU-gudang. Memicu order pembelian darurat otomatis saat Days of Supply (DOS) jatuh di bawah 7 hari atau ketika jadwal PO terlambat melampaui 48 jam.",
+      p4_meta: "🎯 Dampak: Nol hari kehabisan stok tanpa terpantau | Integritas rekonsiliasi data 100%",
+      strat_roadmap_tag: "Jadwal Eksekusi Bertahap",
+      strat_roadmap_title: "Roadmap Implementasi Strategis 12 Minggu",
+      th_phase: "Fase & Horizon",
+      th_workstream: "Fokus Kerja Utama",
+      th_milestone: "Aksi & Deliverable Kunci",
+      th_kpi_gate: "Target Gerbang Keluar (KPI)",
+      p_tag_1: "Fase 1 (M1–M4)",
+      p_name_1: "Kemenangan Cepat & Stabilisasi",
+      w_stream_1: "Realokasi Armada & Pilot Stok Risiko Tinggi",
+      w_action_1: "• Alihkan 500+ pesanan dari Mitra Trucking ke SiCepat/J&T.<br />• Luncurkan pilot ROP untuk 20 SKU Unserved Value teratas di Gudang Jakarta.<br />• Terapkan scorecard PO terbuka mingguan untuk seluruh pemasok.",
+      w_gate_1: "On-Time Ekspedisi ≥ 68%<br />Nol error saldo rekonsiliasi",
+      p_tag_2: "Fase 2 (M5–M8)",
+      p_name_2: "Rekalibrasi Sistematis",
+      w_stream_2: "Skalasi ROP Dinamis & Penegakan SLA Pemasok",
+      w_action_2: "• Skalakan ROP dinamis ke seluruh 68 pasangan SKU-gudang rentan.<br />• Lakukan negosiasi ulang kontrak dengan 3 pemasok ber-OTD terendah.<br />• Luncurkan pemantauan otomatis stok pengaman di Power BI.",
+      w_gate_2: "Fill Rate ≥ 82%<br />Pangsa Habis Stok ≤ 8%",
+      p_tag_3: "Fase 3 (M9–M12)",
+      p_name_3: "Skalasi & Tata Kelola Jaringan",
+      w_stream_3: "Optimalisasi Jaringan & Menara Kendali (Control Tower)",
+      w_action_3: "• Terapkan aturan cross-docking otomatis antar 3 pusat distribusi regional.<br />• Finalisasi kontrak dual-sourcing untuk kategori kritis Kelas A.<br />• Serah terima dashboard eksekutif dan SOP operasional terstandarisasi.",
+      w_gate_3: "OTIF ≥ 65%<br />Pertumbuhan biaya simpan < 10%",
       tech_tag: "Perangkat & Metodologi",
       tech_title: "Stack Teknologi",
       footer_role: "Data Analyst · Analisis Rantai Pasok · Sektor FMCG",
@@ -959,6 +1424,80 @@ ORDER BY m.ym;</code></pre>
   };
 
   let currentLang = 'en';
+
+  // ─── SCENARIO DATA FOR INTERACTIVE SIMULATOR ──────────────
+  const scenarios = {
+    rec: {
+      fillrate: "88.60%",
+      fillrateBadge: "+14.45% Gain",
+      otif: "68.40%",
+      otifBadge: "+25.50% Recovery",
+      revenue: "Rp 587.9 M",
+      revenueBadge: "58% Demand Captured",
+      carry: "+Rp 6.36 M",
+      roi: "92.4x",
+      stockout: "4.20%",
+      stockoutBadge: "-70.6% Stockout Days",
+      narrativeKey: "scen_rec_narrative"
+    },
+    quick: {
+      fillrate: "81.50%",
+      fillrateBadge: "+7.35% Gain",
+      otif: "58.20%",
+      otifBadge: "+15.30% Recovery",
+      revenue: "Rp 324.5 M",
+      revenueBadge: "32% Demand Captured",
+      carry: "+Rp 0 M (Reallocated)",
+      roi: "Direct Profit",
+      stockout: "8.50%",
+      stockoutBadge: "-40.6% Stockout Days",
+      narrativeKey: "scen_quick_narrative"
+    },
+    agg: {
+      fillrate: "94.20%",
+      fillrateBadge: "+20.05% Gain",
+      otif: "78.90%",
+      otifBadge: "+36.00% Recovery",
+      revenue: "Rp 780.5 M",
+      revenueBadge: "77% Demand Captured",
+      carry: "+Rp 13.58 M",
+      roi: "57.5x",
+      stockout: "1.80%",
+      stockoutBadge: "-87.4% Stockout Days",
+      narrativeKey: "scen_agg_narrative"
+    }
+  };
+
+  let activeScenario = 'rec';
+
+  function applyScenario(scenKey) {
+    activeScenario = scenKey;
+    const scen = scenarios[scenKey];
+    if (!scen) return;
+
+    // Toggle scenario button UI
+    document.querySelectorAll('.scenario-btn').forEach(btn => btn.classList.remove('active'));
+    const activeBtn = document.getElementById(`btn-scen-${scenKey}`);
+    if (activeBtn) activeBtn.classList.add('active');
+
+    // Update values
+    document.getElementById('sim-val-fillrate').textContent = scen.fillrate;
+    document.getElementById('sim-badge-fillrate').textContent = scen.fillrateBadge;
+    document.getElementById('sim-val-otif').textContent = scen.otif;
+    document.getElementById('sim-badge-otif').textContent = scen.otifBadge;
+    document.getElementById('sim-val-revenue').textContent = scen.revenue;
+    document.getElementById('sim-badge-revenue').textContent = scen.revenueBadge;
+    document.getElementById('sim-val-carry').textContent = scen.carry;
+    document.getElementById('sim-val-roi').textContent = scen.roi;
+    document.getElementById('sim-val-stockout').textContent = scen.stockout;
+    document.getElementById('sim-badge-stockout').textContent = scen.stockoutBadge;
+
+    // Update narrative
+    const narrEl = document.getElementById('sim-narrative');
+    if (narrEl && i18n[currentLang][scen.narrativeKey]) {
+      narrEl.innerHTML = i18n[currentLang][scen.narrativeKey];
+    }
+  }
 
   // ─── KPI COUNTER ANIMATION ───────────────────────────────
   function animateCounter(el, target, suffix, duration = 1800, decimals = 0, prefix = '') {
@@ -1167,7 +1706,10 @@ ORDER BY m.ym;</code></pre>
     document.getElementById('lang-btn-en').classList.toggle('active', lang === 'en');
     document.documentElement.lang = lang;
 
-    // 4. Update Charts
+    // 4. Update Scenario Narrative
+    applyScenario(activeScenario);
+
+    // 5. Update Charts
     if (chartWarehouse) {
       chartWarehouse.data.labels = (lang === 'id')
         ? ['Gudang A\n(Jakarta)', 'Gudang B\n(Surabaya)', 'Gudang C\n(Bandung)']
@@ -1208,7 +1750,7 @@ ORDER BY m.ym;</code></pre>
       chartRevenue.update();
     }
 
-    // 5. Save preference
+    // 6. Save preference
     localStorage.setItem('preferred_lang', lang);
   }
 

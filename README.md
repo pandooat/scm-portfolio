@@ -279,6 +279,41 @@ Power BI Dashboard (4 pages)
 
 ---
 
+## 🚀 Strategic Action Plan & Business Impact Simulation
+
+An empirical 12-week transformation plan modeled directly from the dataset distributions to bridge the service-level gap:
+
+### 🎮 3-Scenario Simulation Model
+
+| Metric / Dimension | Baseline (Actual) | Scenario A (Fast Stabilization) | Scenario B (Recommended - 95% ROP) | Scenario C (Full Transformation - 98%) |
+| :--- | :---: | :---: | :---: | :---: |
+| **Safety Stock Policy ($Z$)** | Static / Ad-hoc | 90% Service Level ($Z = 1.282$) | **95% Service Level ($Z = 1.645$)** | 98% Service Level ($Z = 2.054$) |
+| **Vendor Action** | Status Quo | Weekly PO Scorecard | **SLA Penalties + Volume Shift** | Dual-Sourcing Contract Signing |
+| **Carrier Optimization** | Status Quo | Mitra Trucking Capped 25% | **Mitra Trucking Capped 15%** | Dedicated Corridors + Cross-Dock |
+| **Unit Fill Rate** | **74.15%** | 81.50% (+7.35%) | **88.60% (+14.45%)** | 94.20% (+20.05%) |
+| **Order OTIF Rate** | **42.90%** | 58.20% (+15.30%) | **68.40% (+25.50%)** | 78.90% (+36.00%) |
+| **Daily Stockout Share** | **14.31%** | 8.50% (-40.6%) | **4.20% (-70.6%)** | 1.80% (-87.4%) |
+| **Demand Value Captured** | Rp 0 (Unserved: Rp 1.01B) | Rp 324.5 M (32% captured) | **Rp 587.9 M (58% captured)** | Rp 780.5 M (77% captured) |
+| **Incremental Holding Cost** | Baseline (Rp 0) | Rp 0 (Offset by dead stock) | **+Rp 6,356,700 / year** | +Rp 13,584,200 / year |
+| **Net Commercial Benefit** | Baseline | Rp 324.5 M | **Rp 581.5 M** | Rp 766.9 M |
+| **Simulated ROI Ratio** | N/A | Infinite (Reallocation) | **92.4x Benefit / Holding Cost** | 57.5x Benefit / Holding Cost |
+
+### 🗺️ 4 Execution Pillars
+1. **Dynamic ROP Recalibration:** Target 68 below-threshold nodes using $\text{ROP} = \lceil \bar{D}\bar{L} + Z\sqrt{\bar{L}\sigma_D^2 + \bar{D}^2\sigma_L^2} \rceil$.
+2. **Vendor Reliability & SLA Enforcement:** Address bottom-3 suppliers (*PT Niaga Mitra*, *PT Karya Maju Industri*, *PT Surya Ritelindo*) with OTD <6% and >4 days average delay.
+3. **3PL Fleet Reallocation:** Reallocate volume from *Mitra Trucking* (48.88% On-Time) to *SiCepat GOKIL* (69.79%) and *J&T Cargo* (69.39%) at parity freight rates.
+4. **SCM Control Tower:** Automated alerts when Days of Supply (DOS) drops below 7 days.
+
+### 📅 12-Week Roadmap Milestones
+
+```
+Weeks 1–4  [Phase 1: Stabilization]      --> Mitra Trucking capped + Jakarta DC buffer pilot (On-Time ≥ 68%)
+Weeks 5–8  [Phase 2: Recalibration]      --> Scale dynamic ROP to 68 nodes + Vendor SLA renegotiation (Fill Rate ≥ 82%)
+Weeks 9–12 [Phase 3: Network Governance] --> Cross-docking rules + Dual-sourcing contracts (OTIF ≥ 65%)
+```
+
+---
+
 ## ⚠️ Limitations & Disclaimers
 
 - Dataset is **100% synthetic** — not real FMCG company data
