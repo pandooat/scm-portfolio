@@ -1,0 +1,94 @@
+table dim_calendar
+	lineageTag: 4ed4c558-c3e6-42d7-9929-0b69c0c61495
+
+	column date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: cc579176-1bc1-4082-82ca-8adf76516f48
+		summarizeBy: none
+		sourceColumn: date
+
+		variation Variation
+			isDefault
+			relationship: 62bc6d66-4622-417f-a8e6-9e62b3616ec6
+			defaultHierarchy: LocalDateTable_45fdb7f7-8c96-4585-9723-777f98479caf.'Hierarki Tanggal'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column year
+		dataType: int64
+		formatString: 0
+		lineageTag: 8b6e5c8f-12b0-4334-a1ba-04961ec06209
+		summarizeBy: sum
+		sourceColumn: year
+
+		annotation SummarizationSetBy = Automatic
+
+	column month
+		dataType: int64
+		formatString: 0
+		lineageTag: 386c15c8-12df-4ad9-ab83-3ea77f357784
+		summarizeBy: sum
+		sourceColumn: month
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_name
+		dataType: string
+		lineageTag: b3790dfb-beba-4ead-9cdf-399d53737eba
+		summarizeBy: none
+		sourceColumn: month_name
+		sortByColumn: month
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column year_month
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 33cd219e-7603-4a38-9814-82f7514b7e6e
+		summarizeBy: none
+		sourceColumn: year_month
+
+		variation Variation
+			isDefault
+			relationship: a25003d7-8a23-4582-ab02-8cafc3613cf2
+			defaultHierarchy: LocalDateTable_e2f6d85a-1abe-4ac7-98d5-5e629bceb9e8.'Hierarki Tanggal'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column quarter
+		dataType: string
+		lineageTag: 582046eb-60c2-4b48-b554-0ed8c6a634df
+		summarizeBy: none
+		sourceColumn: quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column weekday_name
+		dataType: string
+		lineageTag: 76056c5d-1abb-4fe6-86d7-b45750a4489c
+		summarizeBy: none
+		sourceColumn: weekday_name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_calendar = m
+		mode: import
+		source =
+				let
+				    Sumber = Csv.Document(File.Contents("D:\DSG Project\SCM Project\SCM_Portfolio_Starter\01_Data\dim_calendar.csv"),[Delimiter=",", Columns=7, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Header yang Ditingkatkan" = Table.PromoteHeaders(Sumber, [PromoteAllScalars=true]),
+				    #"Jenis yang Diubah" = Table.TransformColumnTypes(#"Header yang Ditingkatkan",{{"date", type date}, {"year", Int64.Type}, {"month", Int64.Type}, {"month_name", type text}, {"year_month", type date}, {"quarter", type text}, {"weekday_name", type text}})
+				in
+				    #"Jenis yang Diubah"
+
+	annotation PBI_NavigationStepName = Navigasi
+
+	annotation PBI_ResultType = Table
+

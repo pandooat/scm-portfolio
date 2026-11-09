@@ -1,0 +1,190 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "bbaaf3438a3a94db9c7c",
+  "position": {
+    "x": 466,
+    "y": 547,
+    "z": 6000,
+    "height": 260,
+    "width": 280,
+    "tabOrder": 5000
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "PropertyVariationSource": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "dim_calendar"
+                            }
+                          },
+                          "Name": "Variation",
+                          "Property": "year_month"
+                        }
+                      },
+                      "Hierarchy": "Hierarki Tanggal"
+                    }
+                  },
+                  "Level": "Bulan"
+                }
+              },
+              "queryRef": "dim_calendar.year_month.Variation.Hierarki Tanggal.Bulan",
+              "nativeQueryRef": "year_month Bulan",
+              "active": true
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "PropertyVariationSource": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "dim_calendar"
+                            }
+                          },
+                          "Name": "Variation",
+                          "Property": "year_month"
+                        }
+                      },
+                      "Hierarchy": "Hierarki Tanggal"
+                    }
+                  },
+                  "Level": "Hari"
+                }
+              },
+              "queryRef": "dim_calendar.year_month.Variation.Hierarki Tanggal.Hari",
+              "nativeQueryRef": "year_month Hari",
+              "active": false
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "OTIF %"
+                }
+              },
+              "queryRef": "_Measures.OTIF %",
+              "nativeQueryRef": "OTIF %"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Fill Rate %"
+                }
+              },
+              "queryRef": "_Measures.Fill Rate %",
+              "nativeQueryRef": "Fill Rate %"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "abc9d85c7681947b80de",
+        "field": {
+          "HierarchyLevel": {
+            "Expression": {
+              "Hierarchy": {
+                "Expression": {
+                  "PropertyVariationSource": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "dim_calendar"
+                      }
+                    },
+                    "Name": "Variation",
+                    "Property": "year_month"
+                  }
+                },
+                "Hierarchy": "Hierarki Tanggal"
+              }
+            },
+            "Level": "Bulan"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "65643d4bbdd3b4670614",
+        "field": {
+          "HierarchyLevel": {
+            "Expression": {
+              "Hierarchy": {
+                "Expression": {
+                  "PropertyVariationSource": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "dim_calendar"
+                      }
+                    },
+                    "Name": "Variation",
+                    "Property": "year_month"
+                  }
+                },
+                "Hierarchy": "Hierarki Tanggal"
+              }
+            },
+            "Level": "Hari"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "6b320d75ce73860b39d1",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "OTIF %"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "dda51a79580a620064b1",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Fill Rate %"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

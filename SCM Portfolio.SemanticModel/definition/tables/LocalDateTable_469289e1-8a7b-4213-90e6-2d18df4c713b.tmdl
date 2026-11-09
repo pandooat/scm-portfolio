@@ -1,0 +1,116 @@
+table LocalDateTable_469289e1-8a7b-4213-90e6-2d18df4c713b
+	isHidden
+	showAsVariationsOnly
+	lineageTag: 857cccfb-4ddb-4dd5-b670-e50aad2faca1
+
+	column Date
+		dataType: dateTime
+		isHidden
+		formatString: General Date
+		lineageTag: c0603d4a-24ef-4e85-b63d-d59b46d9866e
+		dataCategory: PaddedDateTableDates
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		annotation SummarizationSetBy = User
+
+	column Tahun = YEAR([Date])
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 0747a4ce-a120-487a-a25a-d8ac863fc26a
+		dataCategory: Years
+		summarizeBy: none
+
+		annotation SummarizationSetBy = User
+
+		annotation TemplateId = Year
+
+	column MonthNo = MONTH([Date])
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 7c9c4080-115d-441b-a54c-aca4c62ecc0e
+		dataCategory: MonthOfYear
+		summarizeBy: none
+
+		annotation SummarizationSetBy = User
+
+		annotation TemplateId = MonthNumber
+
+	column Bulan = FORMAT([Date], "MMMM")
+		dataType: string
+		isHidden
+		lineageTag: 9703a9ac-1433-4400-9016-49f1a4aa6d3b
+		dataCategory: Months
+		summarizeBy: none
+		sortByColumn: MonthNo
+
+		annotation SummarizationSetBy = User
+
+		annotation TemplateId = Month
+
+	column QuarterNo = INT(([MonthNo] + 2) / 3)
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: ed9aed5b-b345-49a3-a8bc-43ad946b12f8
+		dataCategory: QuarterOfYear
+		summarizeBy: none
+
+		annotation SummarizationSetBy = User
+
+		annotation TemplateId = QuarterNumber
+
+	column Kuartal = "Qtr " & [QuarterNo]
+		dataType: string
+		isHidden
+		lineageTag: af7d75d2-0006-4ecd-9a42-e80e4bb52c01
+		dataCategory: Quarters
+		summarizeBy: none
+		sortByColumn: QuarterNo
+
+		annotation SummarizationSetBy = User
+
+		annotation TemplateId = Quarter
+
+	column Hari = DAY([Date])
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 27cf50d2-135b-4e36-8fea-a3dd3e22a911
+		dataCategory: DayOfMonth
+		summarizeBy: none
+
+		annotation SummarizationSetBy = User
+
+		annotation TemplateId = Day
+
+	hierarchy 'Hierarki Tanggal'
+		lineageTag: f21a3822-4a38-4974-8ba7-1afd3e2913de
+
+		level Tahun
+			lineageTag: ca11b0a5-67b8-4051-866d-31c4860349aa
+			column: Tahun
+
+		level Kuartal
+			lineageTag: aa450d41-12c8-4257-8e39-9bc23dbf707a
+			column: Kuartal
+
+		level Bulan
+			lineageTag: 0cbd8d18-366e-4751-aa66-194ecae3c0ca
+			column: Bulan
+
+		level Hari
+			lineageTag: 5bdcb3d9-ea09-48f4-9639-0b614c8f9ca5
+			column: Hari
+
+		annotation TemplateId = DateHierarchy
+
+	partition LocalDateTable_469289e1-8a7b-4213-90e6-2d18df4c713b = calculated
+		mode: import
+		source = Calendar(Date(Year(MIN('fact_purchase_order_lines'[order_date])), 1, 1), Date(Year(MAX('fact_purchase_order_lines'[order_date])), 12, 31))
+
+	annotation __PBI_LocalDateTable = true
+

@@ -1,0 +1,7 @@
+﻿warehouse,forecast_method,points,total_actual_ordered_units,sum_absolute_error_units,WAPE_pct
+Warehouse Jakarta,ma14,1440,4800,6639.07,138.31
+Warehouse Jakarta,snaive7,1440,4800,7709.0,160.6
+Warehouse Bandung,ma14,1440,5185,6726.21,129.72
+Warehouse Bandung,snaive7,1440,5185,7846.0,151.32
+Warehouse Surabaya,ma14,1440,4539,6503.07,143.27
+Warehouse Surabaya,snaive7,1440,4539,7530.0,165.9

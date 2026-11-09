@@ -1,0 +1,9 @@
+﻿supplier_id,supplier_name,reliability_segment,total_purchase_orders,received_pos,on_time_pos,supplier_otd_pct,actual_lead_days,ordered_procurement_value_rp
+8,PT Niaga Mitra (Simulasi),rendah,113,106,3,2.8,13.0,208083600
+6,PT Karya Maju Industri (Simulasi),rendah,107,103,4,3.9,14.0,141346300
+4,PT Surya Ritelindo (Simulasi),rendah,119,110,6,5.5,12.2,273657400
+2,PT Sejahtera Distribusi (Simulasi),sedang,124,120,37,30.8,8.5,245262700
+5,PT Prima Produk Harian (Simulasi),sedang,122,121,42,34.7,7.5,345951800
+7,PT Bersih Lestari (Simulasi),tinggi,133,126,78,61.9,5.5,323270100
+1,PT Pangan Sentosa (Simulasi),tinggi,143,141,88,62.4,5.5,383391000
+3,PT Nusantara Kemasan (Simulasi),tinggi,142,141,90,63.8,4.5,447838300

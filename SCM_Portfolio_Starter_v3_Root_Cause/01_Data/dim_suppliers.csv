@@ -1,0 +1,9 @@
+﻿supplier_id,supplier_name,province,promised_lead_days,reliability_segment
+1,PT Pangan Sentosa (Simulasi),Jawa Barat,5,tinggi
+2,PT Sejahtera Distribusi (Simulasi),Jawa Timur,7,sedang
+3,PT Nusantara Kemasan (Simulasi),DKI Jakarta,4,tinggi
+4,PT Surya Ritelindo (Simulasi),Jawa Tengah,8,rendah
+5,PT Prima Produk Harian (Simulasi),Banten,6,sedang
+6,PT Karya Maju Industri (Simulasi),Jawa Timur,10,rendah
+7,PT Bersih Lestari (Simulasi),Jawa Barat,5,tinggi
+8,PT Niaga Mitra (Simulasi),Jawa Tengah,9,rendah

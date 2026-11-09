@@ -1,0 +1,50 @@
+table dim_customers
+	lineageTag: afa13d71-ef19-4e2b-a6a1-aab4183d868e
+
+	column customer_id
+		dataType: int64
+		formatString: 0
+		lineageTag: c56a5c31-aaac-4aaa-b6cb-8b43a433d3a9
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_name
+		dataType: string
+		lineageTag: 26f7653f-5633-4ecb-8acb-204a7ea758ca
+		summarizeBy: none
+		sourceColumn: customer_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_segment
+		dataType: string
+		lineageTag: b7ca279b-2fa0-4639-8758-ab7647d624d8
+		summarizeBy: none
+		sourceColumn: customer_segment
+
+		annotation SummarizationSetBy = Automatic
+
+	column city
+		dataType: string
+		lineageTag: 36b5ed4f-33ba-461c-983b-3405d6a6a367
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_customers = m
+		mode: import
+		source =
+				let
+				    Sumber = Csv.Document(File.Contents("D:\DSG Project\SCM Project\SCM_Portfolio_Starter\01_Data\dim_customers.csv"),[Delimiter=",", Columns=4, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Header yang Ditingkatkan" = Table.PromoteHeaders(Sumber, [PromoteAllScalars=true]),
+				    #"Jenis yang Diubah" = Table.TransformColumnTypes(#"Header yang Ditingkatkan",{{"customer_id", Int64.Type}, {"customer_name", type text}, {"customer_segment", type text}, {"city", type text}})
+				in
+				    #"Jenis yang Diubah"
+
+	annotation PBI_NavigationStepName = Navigasi
+
+	annotation PBI_ResultType = Table
+

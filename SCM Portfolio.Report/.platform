@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "SCM Portfolio"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "124f6e63-0664-4429-8fae-7d683a1eb044"
+  }
+}

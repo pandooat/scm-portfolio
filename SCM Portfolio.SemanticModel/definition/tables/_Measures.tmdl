@@ -1,0 +1,142 @@
+table _Measures
+	lineageTag: e83a2164-10fa-4e78-9844-38a8cf7da110
+
+	measure 'Total Orders' = COUNTROWS(fact_shipments)
+		formatString: #,##0
+		lineageTag: a1c9b2d3-1111-4000-8000-000000000001
+
+	measure 'Units Requested' = SUM(fact_sales_order_lines[ordered_qty])
+		formatString: #,##0
+		lineageTag: a1c9b2d3-1111-4000-8000-000000000002
+
+	measure 'Units Fulfilled' = SUM(fact_sales_order_lines[fulfilled_qty])
+		formatString: #,##0
+		lineageTag: a1c9b2d3-1111-4000-8000-000000000003
+
+	measure 'Unfulfilled Units' = [Units Requested] - [Units Fulfilled]
+		formatString: #,##0
+		lineageTag: a1c9b2d3-1111-4000-8000-000000000004
+
+	measure 'Fill Rate %' = DIVIDE([Units Fulfilled], [Units Requested], 0)
+		formatString: 0.00%
+		lineageTag: a1c9b2d3-1111-4000-8000-000000000005
+
+	measure 'OTIF Orders' = SUM(fact_shipments[otif_flag])
+		formatString: #,##0
+		lineageTag: a1c9b2d3-1111-4000-8000-000000000006
+
+	measure 'OTIF %' = DIVIDE([OTIF Orders], [Total Orders], 0)
+		formatString: 0.00%
+		lineageTag: a1c9b2d3-1111-4000-8000-000000000007
+
+	measure 'On-Time Orders' = SUM(fact_shipments[on_time_flag])
+		formatString: #,##0
+		lineageTag: a1c9b2d3-1111-4000-8000-000000000008
+
+	measure 'On-Time %' = DIVIDE([On-Time Orders], [Total Orders], 0)
+		formatString: 0.00%
+		lineageTag: a1c9b2d3-1111-4000-8000-000000000009
+
+	measure 'In-Full Orders' = SUM(fact_shipments[in_full_flag])
+		formatString: #,##0
+		lineageTag: a1c9b2d3-1111-4000-8000-000000000010
+
+	measure 'In-Full %' = DIVIDE([In-Full Orders], [Total Orders], 0)
+		formatString: 0.00%
+		lineageTag: a1c9b2d3-1111-4000-8000-000000000011
+
+	measure 'Revenue IDR' = SUM(fact_sales_order_lines[revenue])
+		formatString: "Rp"#,##0
+		lineageTag: a1c9b2d3-1111-4000-8000-000000000012
+
+	measure 'COGS IDR' = SUM(fact_sales_order_lines[cogs])
+		formatString: "Rp"#,##0
+		lineageTag: a1c9b2d3-1111-4000-8000-000000000013
+
+	measure 'Gross Profit IDR' = [Revenue IDR] - [COGS IDR]
+		formatString: "Rp"#,##0
+		lineageTag: a1c9b2d3-1111-4000-8000-000000000014
+
+	measure 'Gross Margin %' = DIVIDE([Gross Profit IDR], [Revenue IDR], 0)
+		formatString: 0.00%
+		lineageTag: a1c9b2d3-1111-4000-8000-000000000015
+
+	measure 'Freight Cost IDR' = SUM(fact_shipments[freight_cost])
+		formatString: "Rp"#,##0
+		lineageTag: a1c9b2d3-1111-4000-8000-000000000016
+
+	measure 'Freight to Revenue %' = DIVIDE([Freight Cost IDR], [Revenue IDR], 0)
+		formatString: 0.00%
+		lineageTag: a1c9b2d3-1111-4000-8000-000000000017
+
+	measure 'Unserved Order Value IDR' = SUMX(fact_sales_order_lines, (fact_sales_order_lines[ordered_qty] - fact_sales_order_lines[fulfilled_qty]) * fact_sales_order_lines[unit_price])
+		formatString: "Rp"#,##0
+		lineageTag: a1c9b2d3-1111-4000-8000-000000000018
+
+	measure 'Stockout SKU Warehouse Days' = SUM(fact_inventory_daily[stockout_flag])
+		formatString: #,##0
+		lineageTag: a1c9b2d3-1111-4000-8000-000000000019
+
+	measure 'Stockout Snapshot %' = DIVIDE([Stockout SKU Warehouse Days], COUNTROWS(fact_inventory_daily), 0)
+		formatString: 0.00%
+		lineageTag: a1c9b2d3-1111-4000-8000-000000000020
+
+	measure 'Inventory Value IDR' = SUM(fact_inventory_daily[inventory_value])
+		formatString: "Rp"#,##0
+		lineageTag: a1c9b2d3-1111-4000-8000-000000000021
+
+	measure 'Avg Daily Inventory Value IDR' = AVERAGEX(VALUES(dim_calendar[date]), CALCULATE([Inventory Value IDR]))
+		formatString: "Rp"#,##0
+		lineageTag: a1c9b2d3-1111-4000-8000-000000000022
+
+	measure 'End Period Inventory Value IDR' = CALCULATE([Inventory Value IDR], LASTDATE(dim_calendar[date]))
+		formatString: "Rp"#,##0
+		lineageTag: a1c9b2d3-1111-4000-8000-000000000023
+
+	measure 'Inventory Turnover Selected Period' = DIVIDE([COGS IDR], [Avg Daily Inventory Value IDR], 0)
+		formatString: 0.00
+		lineageTag: a1c9b2d3-1111-4000-8000-000000000024
+
+	measure 'Supplier POs Received' = CALCULATE(COUNTROWS(fact_purchase_order_lines), FILTER(fact_purchase_order_lines, NOT ISBLANK(fact_purchase_order_lines[actual_receipt_date])))
+		formatString: #,##0
+		lineageTag: a1c9b2d3-1111-4000-8000-000000000025
+
+	measure 'Supplier POs On Time' = CALCULATE(COUNTROWS(fact_purchase_order_lines), FILTER(fact_purchase_order_lines, NOT ISBLANK(fact_purchase_order_lines[actual_receipt_date]) && fact_purchase_order_lines[actual_receipt_date] <= fact_purchase_order_lines[expected_date]))
+		formatString: #,##0
+		lineageTag: a1c9b2d3-1111-4000-8000-000000000026
+
+	measure 'Supplier OTD %' = DIVIDE([Supplier POs On Time], [Supplier POs Received], 0)
+		formatString: 0.00%
+		lineageTag: a1c9b2d3-1111-4000-8000-000000000027
+
+	measure 'Avg Supplier Lead Days' = AVERAGEX(FILTER(fact_purchase_order_lines, NOT ISBLANK(fact_purchase_order_lines[actual_receipt_date])), DATEDIFF(fact_purchase_order_lines[order_date], fact_purchase_order_lines[actual_receipt_date], DAY))
+		formatString: 0.0
+		lineageTag: a1c9b2d3-1111-4000-8000-000000000028
+
+	measure 'Avg Delivery Days' = AVERAGEX(FILTER(fact_shipments, NOT ISBLANK(fact_shipments[delivered_date])), DATEDIFF(fact_shipments[shipped_date], fact_shipments[delivered_date], DAY))
+		formatString: 0.0
+		lineageTag: a1c9b2d3-1111-4000-8000-000000000029
+
+	measure 'Shipped Orders' = CALCULATE(COUNTROWS(fact_shipments), fact_shipments[shipped_qty] > 0)
+		formatString: #,##0
+		lineageTag: a1c9b2d3-1111-4000-8000-000000000030
+
+	measure 'Avg Freight per Shipped Order IDR' = DIVIDE([Freight Cost IDR], [Shipped Orders], 0)
+		formatString: "Rp"#,##0
+		lineageTag: a1c9b2d3-1111-4000-8000-000000000031
+
+	column Value
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a1c9b2d3-1111-4000-8000-000000000032
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Value]
+
+	partition _Measures = calculated
+		mode: import
+		source = { 0 }
+
+	annotation PBI_Id = 999999999999999
+

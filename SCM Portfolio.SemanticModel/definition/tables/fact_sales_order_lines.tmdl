@@ -1,0 +1,130 @@
+table fact_sales_order_lines
+	lineageTag: 01dac5d7-0dcf-4e50-8ff2-3ae9aede1a3b
+
+	column sales_line_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 496a830c-c1af-4dd3-8aa2-cb169cc7ce05
+		summarizeBy: sum
+		sourceColumn: sales_line_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_id
+		dataType: string
+		lineageTag: 2f0e82fb-8338-454a-acb8-30e4713aa2b1
+		summarizeBy: none
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 0187fc32-b35f-428a-8252-bd551e45989a
+		summarizeBy: none
+		sourceColumn: order_date
+
+		variation Variation
+			isDefault
+			relationship: 154ad020-7195-4247-863e-c9895d7ba1d1
+			defaultHierarchy: LocalDateTable_881b8f8c-1dfe-42df-a406-532af769796c.'Hierarki Tanggal'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column customer_id
+		dataType: int64
+		formatString: 0
+		lineageTag: b75ae99a-db89-4168-8d11-ff5223baefe9
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column warehouse_id
+		dataType: int64
+		formatString: 0
+		lineageTag: de1b532b-6632-4490-8324-aaf29576777a
+		summarizeBy: sum
+		sourceColumn: warehouse_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_id
+		dataType: int64
+		formatString: 0
+		lineageTag: bfaf34cd-2d53-4c7d-9ae5-277651af494b
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column ordered_qty
+		dataType: int64
+		formatString: 0
+		lineageTag: 12b4ecaa-2cda-4b8f-bde6-53553d864069
+		summarizeBy: sum
+		sourceColumn: ordered_qty
+
+		annotation SummarizationSetBy = Automatic
+
+	column fulfilled_qty
+		dataType: int64
+		formatString: 0
+		lineageTag: 1fea78da-a8fa-4ceb-b63e-f9a7807c6cb1
+		summarizeBy: sum
+		sourceColumn: fulfilled_qty
+
+		annotation SummarizationSetBy = Automatic
+
+	column unit_price
+		dataType: int64
+		formatString: 0
+		lineageTag: 84a699cd-afb4-4732-b4fc-873f82907366
+		summarizeBy: sum
+		sourceColumn: unit_price
+
+		annotation SummarizationSetBy = Automatic
+
+	column revenue
+		dataType: int64
+		formatString: 0
+		lineageTag: 59bb1299-f515-4b08-b890-04bb90cc3629
+		summarizeBy: sum
+		sourceColumn: revenue
+
+		annotation SummarizationSetBy = Automatic
+
+	column cogs
+		dataType: int64
+		formatString: 0
+		lineageTag: f03fb71c-34fb-4088-bf57-c2647329f715
+		summarizeBy: sum
+		sourceColumn: cogs
+
+		annotation SummarizationSetBy = Automatic
+
+	column line_status
+		dataType: string
+		lineageTag: ad9e7cda-31cc-4e87-8b0f-54814ce5e15d
+		summarizeBy: none
+		sourceColumn: line_status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_sales_order_lines = m
+		mode: import
+		source =
+				let
+				    Sumber = Csv.Document(File.Contents("D:\DSG Project\SCM Project\SCM_Portfolio_Starter\01_Data\fact_sales_order_lines.csv"),[Delimiter=",", Columns=12, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Header yang Ditingkatkan" = Table.PromoteHeaders(Sumber, [PromoteAllScalars=true]),
+				    #"Jenis yang Diubah" = Table.TransformColumnTypes(#"Header yang Ditingkatkan",{{"sales_line_id", Int64.Type}, {"order_id", type text}, {"order_date", type date}, {"customer_id", Int64.Type}, {"warehouse_id", Int64.Type}, {"product_id", Int64.Type}, {"ordered_qty", Int64.Type}, {"fulfilled_qty", Int64.Type}, {"unit_price", Int64.Type}, {"revenue", Int64.Type}, {"cogs", Int64.Type}, {"line_status", type text}})
+				in
+				    #"Jenis yang Diubah"
+
+	annotation PBI_NavigationStepName = Navigasi
+
+	annotation PBI_ResultType = Table
+

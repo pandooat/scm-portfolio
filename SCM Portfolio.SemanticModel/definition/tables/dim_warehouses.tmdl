@@ -1,0 +1,50 @@
+table dim_warehouses
+	lineageTag: a01ef459-e631-4342-8a85-1eb4bf767457
+
+	column warehouse_id
+		dataType: int64
+		formatString: 0
+		lineageTag: ccf17953-e893-4574-b959-b526394e7211
+		summarizeBy: none
+		sourceColumn: warehouse_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column warehouse_name
+		dataType: string
+		lineageTag: df8032e4-6ba7-42a6-bf3c-824e0e10f578
+		summarizeBy: none
+		sourceColumn: warehouse_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column city
+		dataType: string
+		lineageTag: 2034f204-eacd-467f-aa66-deb060d58704
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	column province
+		dataType: string
+		lineageTag: b00c2042-4671-4f3f-8686-8f5c11a20c49
+		summarizeBy: none
+		sourceColumn: province
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_warehouses = m
+		mode: import
+		source =
+				let
+				    Sumber = Csv.Document(File.Contents("D:\DSG Project\SCM Project\SCM_Portfolio_Starter\01_Data\dim_warehouses.csv"),[Delimiter=",", Columns=4, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Header yang Ditingkatkan" = Table.PromoteHeaders(Sumber, [PromoteAllScalars=true]),
+				    #"Jenis yang Diubah" = Table.TransformColumnTypes(#"Header yang Ditingkatkan",{{"warehouse_id", Int64.Type}, {"warehouse_name", type text}, {"city", type text}, {"province", type text}})
+				in
+				    #"Jenis yang Diubah"
+
+	annotation PBI_NavigationStepName = Navigasi
+
+	annotation PBI_ResultType = Table
+

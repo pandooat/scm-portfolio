@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "SCM Portfolio"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "8d18c04b-17d9-4ecd-a0ac-aa76edf2d156"
+  }
+}

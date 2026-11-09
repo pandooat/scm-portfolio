@@ -1,0 +1,76 @@
+-- POWER BI DAX MEASURES | FMCG SCM (SEMUA DATA SINTETIS)
+-- Buat measures ini SATU PER SATU melalui Modeling > New measure.
+-- Ketik hanya definisi measure, tanpa baris komentar (--).
+-- Pastikan kolom *_date dan dim_calendar[date] bertipe Date, dan angka bertipe Whole number.
+
+Total Orders = COUNTROWS(fact_shipments)
+
+Units Requested = SUM(fact_sales_order_lines[ordered_qty])
+
+Units Fulfilled = SUM(fact_sales_order_lines[fulfilled_qty])
+
+Unfulfilled Units = [Units Requested] - [Units Fulfilled]
+
+Fill Rate % = DIVIDE([Units Fulfilled], [Units Requested], 0)
+
+OTIF Orders = SUM(fact_shipments[otif_flag])
+
+OTIF % = DIVIDE([OTIF Orders], [Total Orders], 0)
+
+On-Time Orders = SUM(fact_shipments[on_time_flag])
+
+On-Time % = DIVIDE([On-Time Orders], [Total Orders], 0)
+
+In-Full Orders = SUM(fact_shipments[in_full_flag])
+
+In-Full % = DIVIDE([In-Full Orders], [Total Orders], 0)
+
+Revenue IDR = SUM(fact_sales_order_lines[revenue])
+
+COGS IDR = SUM(fact_sales_order_lines[cogs])
+
+Gross Profit IDR = [Revenue IDR] - [COGS IDR]
+
+Gross Margin % = DIVIDE([Gross Profit IDR], [Revenue IDR], 0)
+
+Freight Cost IDR = SUM(fact_shipments[freight_cost])
+
+Freight to Revenue % = DIVIDE([Freight Cost IDR], [Revenue IDR], 0)
+
+Unserved Order Value IDR = SUMX(fact_sales_order_lines, (fact_sales_order_lines[ordered_qty] - fact_sales_order_lines[fulfilled_qty]) * fact_sales_order_lines[unit_price])
+
+Stockout SKU Warehouse Days = SUM(fact_inventory_daily[stockout_flag])
+
+Stockout Snapshot % = DIVIDE([Stockout SKU Warehouse Days], COUNTROWS(fact_inventory_daily), 0)
+
+Inventory Value IDR = SUM(fact_inventory_daily[inventory_value])
+
+Avg Daily Inventory Value IDR = AVERAGEX(VALUES(dim_calendar[date]), CALCULATE([Inventory Value IDR]))
+
+End Period Inventory Value IDR = CALCULATE([Inventory Value IDR], LASTDATE(dim_calendar[date]))
+
+Inventory Turnover Selected Period = DIVIDE([COGS IDR], [Avg Daily Inventory Value IDR], 0)
+
+Supplier POs Received = CALCULATE(COUNTROWS(fact_purchase_order_lines), FILTER(fact_purchase_order_lines, NOT ISBLANK(fact_purchase_order_lines[actual_receipt_date])))
+
+Supplier POs On Time = CALCULATE(COUNTROWS(fact_purchase_order_lines), FILTER(fact_purchase_order_lines, NOT ISBLANK(fact_purchase_order_lines[actual_receipt_date]) && fact_purchase_order_lines[actual_receipt_date] <= fact_purchase_order_lines[expected_date]))
+
+Supplier OTD % = DIVIDE([Supplier POs On Time], [Supplier POs Received], 0)
+
+Avg Supplier Lead Days = AVERAGEX(FILTER(fact_purchase_order_lines, NOT ISBLANK(fact_purchase_order_lines[actual_receipt_date])), DATEDIFF(fact_purchase_order_lines[order_date], fact_purchase_order_lines[actual_receipt_date], DAY))
+
+Avg Delivery Days = AVERAGEX(FILTER(fact_shipments, NOT ISBLANK(fact_shipments[delivered_date])), DATEDIFF(fact_shipments[shipped_date], fact_shipments[delivered_date], DAY))
+
+Shipped Orders = CALCULATE(COUNTROWS(fact_shipments),fact_shipments[shipped_qty] > 0)
+
+Avg Freight per Shipped Order IDR = DIVIDE([Freight Cost IDR], [Shipped Orders], 0)
+
+-- IMPORTANT NOTE:
+-- 1. Semua persentase: format Measure tools > Percentage, mis. 2 decimals.
+-- 2. Value berbasis IDR: format currency/integer Indonesia sesuai preferensi.
+-- 3. Tidak boleh SUM(fact_inventory_daily[inventory_value]) tanpa konteks tanggal
+--    untuk menunjukkan nilai persediaan SAAT INI, karena itu menjumlah stok seluruh hari.
+--    Gunakan 'End Period Inventory Value IDR' untuk saldo akhir.
+-- 4. Inventory Turnover Selected Period berlaku pada periode filter, bukan langsung angka tahunan.
+-- 5. Supplier OTD berdasarkan PO sudah diterima; PO masih open tidak menjadi penyebut.
+-- 6. Gunakan satu jalur relasi dimensi-fakta untuk menghindari ambigu/double count.

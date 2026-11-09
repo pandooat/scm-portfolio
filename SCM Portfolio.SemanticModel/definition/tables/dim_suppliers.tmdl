@@ -1,0 +1,59 @@
+table dim_suppliers
+	lineageTag: 63e6759c-5b47-4e09-a36a-b44681068106
+
+	column supplier_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 63ddc804-cd48-4cae-9075-1e9ac35df03f
+		summarizeBy: none
+		sourceColumn: supplier_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column supplier_name
+		dataType: string
+		lineageTag: 79243eee-ffa1-4f2a-bff0-728560c7a475
+		summarizeBy: none
+		sourceColumn: supplier_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column province
+		dataType: string
+		lineageTag: 053466c9-ce77-4e62-a5eb-9c76edadeebf
+		summarizeBy: none
+		sourceColumn: province
+
+		annotation SummarizationSetBy = Automatic
+
+	column promised_lead_days
+		dataType: int64
+		formatString: 0
+		lineageTag: ac05308d-f5ed-4a92-a8ba-32f3e34c0aa1
+		summarizeBy: sum
+		sourceColumn: promised_lead_days
+
+		annotation SummarizationSetBy = Automatic
+
+	column reliability_segment
+		dataType: string
+		lineageTag: d4a75b68-e55c-4d81-baf9-49bf5c112ca4
+		summarizeBy: none
+		sourceColumn: reliability_segment
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_suppliers = m
+		mode: import
+		source =
+				let
+				    Sumber = Csv.Document(File.Contents("D:\DSG Project\SCM Project\SCM_Portfolio_Starter\01_Data\dim_suppliers.csv"),[Delimiter=",", Columns=5, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Header yang Ditingkatkan" = Table.PromoteHeaders(Sumber, [PromoteAllScalars=true]),
+				    #"Jenis yang Diubah" = Table.TransformColumnTypes(#"Header yang Ditingkatkan",{{"supplier_id", Int64.Type}, {"supplier_name", type text}, {"province", type text}, {"promised_lead_days", Int64.Type}, {"reliability_segment", type text}})
+				in
+				    #"Jenis yang Diubah"
+
+	annotation PBI_NavigationStepName = Navigasi
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,144 @@
+table fact_purchase_order_lines
+	lineageTag: 87fd9540-0940-460b-a447-6f5c448467c5
+
+	column po_line_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 8155a0f0-7d8f-418f-b5cc-ae8c65a87202
+		summarizeBy: sum
+		sourceColumn: po_line_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column po_id
+		dataType: string
+		lineageTag: 38ebd99b-467c-46dd-8c8d-fb4bd2ecb9b0
+		summarizeBy: none
+		sourceColumn: po_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: dd8c655c-ac8f-449a-a2db-5e62d4134a7c
+		summarizeBy: none
+		sourceColumn: order_date
+
+		variation Variation
+			isDefault
+			relationship: 084d445b-5b5f-449e-9f40-8770be1de248
+			defaultHierarchy: LocalDateTable_469289e1-8a7b-4213-90e6-2d18df4c713b.'Hierarki Tanggal'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column supplier_id
+		dataType: int64
+		formatString: 0
+		lineageTag: bdfca992-d286-4fcb-bc5c-da37f5bc21fe
+		summarizeBy: none
+		sourceColumn: supplier_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column warehouse_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 5d4f3eed-7dfb-448d-85d5-0414e16b73ce
+		summarizeBy: none
+		sourceColumn: warehouse_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_id
+		dataType: int64
+		formatString: 0
+		lineageTag: d423b473-4150-428d-8525-4759cb56c3d5
+		summarizeBy: sum
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column ordered_qty
+		dataType: int64
+		formatString: 0
+		lineageTag: f8dd3cf9-ffb4-43b1-b402-4424e2af4794
+		summarizeBy: sum
+		sourceColumn: ordered_qty
+
+		annotation SummarizationSetBy = Automatic
+
+	column received_qty
+		dataType: int64
+		formatString: 0
+		lineageTag: e2494bbe-750b-4f77-9fde-23b56d9454ad
+		summarizeBy: sum
+		sourceColumn: received_qty
+
+		annotation SummarizationSetBy = Automatic
+
+	column unit_cost
+		dataType: int64
+		formatString: 0
+		lineageTag: ce3be1b5-e89a-4cf2-bc74-05a7a2b561b0
+		summarizeBy: sum
+		sourceColumn: unit_cost
+
+		annotation SummarizationSetBy = Automatic
+
+	column expected_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 1eeb65df-430e-4e3f-a4c4-b3a85996fcf6
+		summarizeBy: none
+		sourceColumn: expected_date
+
+		variation Variation
+			isDefault
+			relationship: 27a54c98-3491-4ed3-95e1-23c46b257db6
+			defaultHierarchy: LocalDateTable_7f502f5f-a72c-4655-88ea-2d0152dd9401.'Hierarki Tanggal'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column actual_receipt_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ea720a0e-f708-4704-a45a-d002b9534374
+		summarizeBy: none
+		sourceColumn: actual_receipt_date
+
+		variation Variation
+			isDefault
+			relationship: 62b1ce69-05eb-45fa-b067-8ea02eedfb5e
+			defaultHierarchy: LocalDateTable_c79f0265-b935-433a-b6af-2824939481d3.'Hierarki Tanggal'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column status
+		dataType: string
+		lineageTag: db7e1ee9-823b-418b-bed6-c297ca59a119
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_purchase_order_lines = m
+		mode: import
+		source =
+				let
+				    Sumber = Csv.Document(File.Contents("D:\DSG Project\SCM Project\SCM_Portfolio_Starter\01_Data\fact_purchase_order_lines.csv"),[Delimiter=",", Columns=12, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Header yang Ditingkatkan" = Table.PromoteHeaders(Sumber, [PromoteAllScalars=true]),
+				    #"Jenis yang Diubah" = Table.TransformColumnTypes(#"Header yang Ditingkatkan",{{"po_line_id", Int64.Type}, {"po_id", type text}, {"order_date", type date}, {"supplier_id", Int64.Type}, {"warehouse_id", Int64.Type}, {"product_id", Int64.Type}, {"ordered_qty", Int64.Type}, {"received_qty", Int64.Type}, {"unit_cost", Int64.Type}, {"expected_date", type date}, {"actual_receipt_date", type date}, {"status", type text}})
+				in
+				    #"Jenis yang Diubah"
+
+	annotation PBI_NavigationStepName = Navigasi
+
+	annotation PBI_ResultType = Table
+

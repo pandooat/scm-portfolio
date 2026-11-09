@@ -1,0 +1,85 @@
+table dim_products
+	lineageTag: f66ec239-b193-4755-b4d1-bdd9db4037a8
+
+	column product_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 808a79d7-0c26-4c70-bad0-b553ae40df1b
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku
+		dataType: string
+		lineageTag: 1e1042be-fefd-4fce-924c-4bae0b52b2cd
+		summarizeBy: none
+		sourceColumn: sku
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_name
+		dataType: string
+		lineageTag: 1ebff434-7c8a-4410-be94-c7f271b1ad92
+		summarizeBy: none
+		sourceColumn: product_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column category
+		dataType: string
+		lineageTag: 54bcd9e9-44c8-4cbc-9d08-4968fdeea5d8
+		summarizeBy: none
+		sourceColumn: category
+
+		annotation SummarizationSetBy = Automatic
+
+	column supplier_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 44afb821-9b15-40cf-8797-b602c905a7e3
+		summarizeBy: none
+		sourceColumn: supplier_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column unit_cost
+		dataType: int64
+		formatString: 0
+		lineageTag: 17c5c993-8ead-4ce5-9891-8de05105fa20
+		summarizeBy: sum
+		sourceColumn: unit_cost
+
+		annotation SummarizationSetBy = Automatic
+
+	column unit_price
+		dataType: int64
+		formatString: 0
+		lineageTag: f611668a-24db-4ed1-9a08-8e32c3731f98
+		summarizeBy: sum
+		sourceColumn: unit_price
+
+		annotation SummarizationSetBy = Automatic
+
+	column demand_segment
+		dataType: string
+		lineageTag: e3d917f9-ae8e-40d4-8c9f-826b201a58b7
+		summarizeBy: none
+		sourceColumn: demand_segment
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_products = m
+		mode: import
+		source =
+				let
+				    Sumber = Csv.Document(File.Contents("D:\DSG Project\SCM Project\SCM_Portfolio_Starter\01_Data\dim_products.csv"),[Delimiter=",", Columns=8, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Header yang Ditingkatkan" = Table.PromoteHeaders(Sumber, [PromoteAllScalars=true]),
+				    #"Jenis yang Diubah" = Table.TransformColumnTypes(#"Header yang Ditingkatkan",{{"product_id", Int64.Type}, {"sku", type text}, {"product_name", type text}, {"category", type text}, {"supplier_id", Int64.Type}, {"unit_cost", Int64.Type}, {"unit_price", Int64.Type}, {"demand_segment", type text}})
+				in
+				    #"Jenis yang Diubah"
+
+	annotation PBI_NavigationStepName = Navigasi
+
+	annotation PBI_ResultType = Table
+

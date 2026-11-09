@@ -1,0 +1,111 @@
+relationship 62bc6d66-4622-417f-a8e6-9e62b3616ec6
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_calendar.date
+	toColumn: LocalDateTable_45fdb7f7-8c96-4585-9723-777f98479caf.Date
+
+relationship a25003d7-8a23-4582-ab02-8cafc3613cf2
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_calendar.year_month
+	toColumn: LocalDateTable_e2f6d85a-1abe-4ac7-98d5-5e629bceb9e8.Date
+
+relationship 581b4fb4-4db0-4dbb-9b0a-5299f2b808b9
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_inventory_daily.snapshot_date
+	toColumn: LocalDateTable_a738beb5-7650-4011-a805-c32ff6b5505a.Date
+
+relationship 084d445b-5b5f-449e-9f40-8770be1de248
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_purchase_order_lines.order_date
+	toColumn: LocalDateTable_469289e1-8a7b-4213-90e6-2d18df4c713b.Date
+
+relationship 27a54c98-3491-4ed3-95e1-23c46b257db6
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_purchase_order_lines.expected_date
+	toColumn: LocalDateTable_7f502f5f-a72c-4655-88ea-2d0152dd9401.Date
+
+relationship 62b1ce69-05eb-45fa-b067-8ea02eedfb5e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_purchase_order_lines.actual_receipt_date
+	toColumn: LocalDateTable_c79f0265-b935-433a-b6af-2824939481d3.Date
+
+relationship 154ad020-7195-4247-863e-c9895d7ba1d1
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_sales_order_lines.order_date
+	toColumn: LocalDateTable_881b8f8c-1dfe-42df-a406-532af769796c.Date
+
+relationship 51791c0d-4f63-4b4f-9a31-7ba67fc0437c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_shipments.order_date
+	toColumn: LocalDateTable_37dcd58f-75e9-4057-afa3-98454f3a4d0f.Date
+
+relationship e6e4ea89-93e3-442d-a6c5-e22767d1f310
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_shipments.promised_date
+	toColumn: LocalDateTable_db240599-db70-4447-b216-b4c93b336470.Date
+
+relationship ff3793ec-d1d5-43a4-92b1-351c8a3f3477
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_shipments.shipped_date
+	toColumn: LocalDateTable_c2cf4b1d-3ef3-4035-9999-80c229a81404.Date
+
+relationship 3a695579-e965-4cca-a8cc-db55f15591f8
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_shipments.delivered_date
+	toColumn: LocalDateTable_1c5f8907-8e84-42e4-bb46-1e8e34be6fa4.Date
+
+relationship rel_dim_products_to_fact_sales_order_lines
+	fromColumn: fact_sales_order_lines.product_id
+	toColumn: dim_products.product_id
+
+relationship rel_dim_products_to_fact_purchase_order_lines
+	fromColumn: fact_purchase_order_lines.product_id
+	toColumn: dim_products.product_id
+
+relationship rel_dim_products_to_fact_inventory_daily
+	fromColumn: fact_inventory_daily.product_id
+	toColumn: dim_products.product_id
+
+relationship rel_dim_warehouses_to_fact_sales_order_lines
+	fromColumn: fact_sales_order_lines.warehouse_id
+	toColumn: dim_warehouses.warehouse_id
+
+relationship rel_dim_warehouses_to_fact_shipments
+	fromColumn: fact_shipments.warehouse_id
+	toColumn: dim_warehouses.warehouse_id
+
+relationship rel_dim_warehouses_to_fact_purchase_order_lines
+	fromColumn: fact_purchase_order_lines.warehouse_id
+	toColumn: dim_warehouses.warehouse_id
+
+relationship rel_dim_warehouses_to_fact_inventory_daily
+	fromColumn: fact_inventory_daily.warehouse_id
+	toColumn: dim_warehouses.warehouse_id
+
+relationship rel_dim_suppliers_to_fact_purchase_order_lines
+	fromColumn: fact_purchase_order_lines.supplier_id
+	toColumn: dim_suppliers.supplier_id
+
+relationship rel_dim_customers_to_fact_sales_order_lines
+	fromColumn: fact_sales_order_lines.customer_id
+	toColumn: dim_customers.customer_id
+
+relationship rel_dim_customers_to_fact_shipments
+	fromColumn: fact_shipments.customer_id
+	toColumn: dim_customers.customer_id
+
+relationship rel_dim_calendar_to_fact_sales_order_lines
+	fromColumn: fact_sales_order_lines.order_date
+	toColumn: dim_calendar.date
+
+relationship rel_dim_calendar_to_fact_shipments
+	fromColumn: fact_shipments.order_date
+	toColumn: dim_calendar.date
+
+relationship rel_dim_calendar_to_fact_purchase_order_lines
+	fromColumn: fact_purchase_order_lines.order_date
+	toColumn: dim_calendar.date
+
+relationship rel_dim_calendar_to_fact_inventory_daily
+	fromColumn: fact_inventory_daily.snapshot_date
+	toColumn: dim_calendar.date
+

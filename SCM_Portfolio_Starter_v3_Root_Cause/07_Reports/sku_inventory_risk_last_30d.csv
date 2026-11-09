@@ -1,0 +1,145 @@
+﻿warehouse_name,sku,product_name,category,warehouse_id,product_id,stockout_days,avg_closing_qty,last_closing_qty,requested_qty_30d,fulfilled_qty_30d,days_of_cover_using_fulfilled_demand,risk_segment
+Warehouse Bandung,SKU0027,Pembersih Lantai Varian 03,Home Care,2,27,20,14.3,0,265,85,0.0,HIGH
+Warehouse Surabaya,SKU0027,Pembersih Lantai Varian 03,Home Care,3,27,18,18.2,84,251,81,31.1,HIGH
+Warehouse Jakarta,SKU0009,Minuman Serbuk Varian 09,Food,1,9,16,15.0,54,72,19,85.3,HIGH
+Warehouse Jakarta,SKU0015,Pasta Gigi Varian 03,Personal Care,1,15,16,21.5,0,223,75,0.0,HIGH
+Warehouse Surabaya,SKU0039,Minuman Isotonik Varian 03,Beverage,3,39,16,31.6,0,224,127,0.0,HIGH
+Warehouse Surabaya,SKU0004,Saus Varian 04,Food,3,4,15,26.5,34,175,142,7.2,HIGH
+Warehouse Bandung,SKU0001,Biskuit Varian 01,Food,2,1,14,25.0,7,341,156,1.3,HIGH
+Warehouse Jakarta,SKU0003,Sereal Varian 03,Food,1,3,14,27.9,0,149,84,0.0,HIGH
+Warehouse Bandung,SKU0015,Pasta Gigi Varian 03,Personal Care,2,15,13,29.8,60,184,119,15.1,HIGH
+Warehouse Bandung,SKU0025,Deterjen Varian 01,Home Care,2,25,13,27.2,43,210,112,11.5,HIGH
+Warehouse Surabaya,SKU0003,Sereal Varian 03,Food,3,3,13,32.5,67,185,96,20.9,HIGH
+Warehouse Jakarta,SKU0027,Pembersih Lantai Varian 03,Home Care,1,27,12,28.2,0,258,167,0.0,HIGH
+Warehouse Jakarta,SKU0041,Soda Varian 05,Beverage,1,41,12,31.3,73,78,32,68.4,HIGH
+Warehouse Surabaya,SKU0013,Sampo Varian 01,Personal Care,3,13,12,33.8,27,237,155,5.2,HIGH
+Warehouse Bandung,SKU0003,Sereal Varian 03,Food,2,3,11,19.5,25,185,150,5.0,HIGH
+Warehouse Bandung,SKU0004,Saus Varian 04,Food,2,4,11,37.7,72,167,88,24.5,HIGH
+Warehouse Bandung,SKU0035,Pewangi Mobil Varian 11,Home Care,2,35,11,28.0,54,78,55,29.5,HIGH
+Warehouse Bandung,SKU0038,Teh Botol Varian 02,Beverage,2,38,11,29.0,68,354,234,8.7,HIGH
+Warehouse Jakarta,SKU0025,Deterjen Varian 01,Home Care,1,25,11,31.2,78,245,79,29.6,HIGH
+Warehouse Surabaya,SKU0025,Deterjen Varian 01,Home Care,3,25,11,31.5,20,104,67,9.0,HIGH
+Warehouse Bandung,SKU0029,Pembersih Kaca Varian 05,Home Care,2,29,10,32.8,65,119,75,26.0,HIGH
+Warehouse Bandung,SKU0040,Jus Buah Varian 04,Beverage,2,40,10,40.4,105,228,175,18.0,HIGH
+Warehouse Bandung,SKU0041,Soda Varian 05,Beverage,2,41,10,25.0,51,87,65,23.5,HIGH
+Warehouse Jakarta,SKU0037,Air Mineral Varian 01,Beverage,1,37,10,29.8,60,206,158,11.4,HIGH
+Warehouse Surabaya,SKU0037,Air Mineral Varian 01,Beverage,3,37,10,37.3,45,214,126,10.7,HIGH
+Warehouse Bandung,SKU0013,Sampo Varian 01,Personal Care,2,13,9,38.9,0,199,158,0.0,HIGH
+Warehouse Bandung,SKU0039,Minuman Isotonik Varian 03,Beverage,2,39,9,34.8,0,92,87,0.0,HIGH
+Warehouse Jakarta,SKU0028,Sabun Cuci Piring Varian 04,Home Care,1,28,9,29.3,36,281,215,5.0,HIGH
+Warehouse Surabaya,SKU0015,Pasta Gigi Varian 03,Personal Care,3,15,9,27.1,73,105,92,23.8,HIGH
+Warehouse Bandung,SKU0014,Sabun Mandi Varian 02,Personal Care,2,14,8,29.8,0,245,170,0.0,HIGH
+Warehouse Bandung,SKU0019,Sikat Gigi Varian 07,Personal Care,2,19,8,35.7,49,98,80,18.4,HIGH
+Warehouse Bandung,SKU0031,Pel Lantai Varian 07,Home Care,2,31,8,34.8,23,61,55,12.5,HIGH
+Warehouse Jakarta,SKU0043,Susu Kedelai Varian 07,Beverage,1,43,8,31.2,49,102,63,23.3,HIGH
+Warehouse Bandung,SKU0011,Susu UHT Varian 11,Food,2,11,7,18.6,0,31,28,0.0,HIGH
+Warehouse Jakarta,SKU0038,Teh Botol Varian 02,Beverage,1,38,7,30.7,64,261,214,9.0,HIGH
+Warehouse Jakarta,SKU0040,Jus Buah Varian 04,Beverage,1,40,7,42.9,51,206,132,11.6,HIGH
+Warehouse Jakarta,SKU0048,Yogurt Drink Varian 12,Beverage,1,48,7,20.8,29,61,55,15.8,HIGH
+Warehouse Surabaya,SKU0005,Kopi Varian 05,Food,3,5,7,48.8,59,56,52,34.0,HIGH
+Warehouse Surabaya,SKU0007,Gula Varian 07,Food,3,7,7,31.1,24,142,84,8.6,HIGH
+Warehouse Surabaya,SKU0011,Susu UHT Varian 11,Food,3,11,7,17.5,43,27,20,64.5,HIGH
+Warehouse Surabaya,SKU0028,Sabun Cuci Piring Varian 04,Home Care,3,28,7,45.8,58,167,108,16.1,HIGH
+Warehouse Bandung,SKU0045,Air Kelapa Varian 09,Beverage,2,45,6,36.4,40,54,46,26.1,HIGH
+Warehouse Jakarta,SKU0001,Biskuit Varian 01,Food,1,1,6,30.5,0,207,156,0.0,HIGH
+Warehouse Surabaya,SKU0040,Jus Buah Varian 04,Beverage,3,40,6,32.0,85,205,161,15.8,HIGH
+Warehouse Surabaya,SKU0048,Yogurt Drink Varian 12,Beverage,3,48,6,46.4,52,21,15,104.0,HIGH
+Warehouse Bandung,SKU0008,Tepung Varian 08,Food,2,8,5,41.2,61,43,39,46.9,HIGH
+Warehouse Bandung,SKU0020,Sabun Cuci Tangan Varian 08,Personal Care,2,20,5,34.1,30,95,72,12.5,HIGH
+Warehouse Bandung,SKU0026,Pewangi Pakaian Varian 02,Home Care,2,26,5,32.3,67,331,296,6.8,HIGH
+Warehouse Bandung,SKU0033,Spons Varian 09,Home Care,2,33,5,23.0,36,37,35,30.9,HIGH
+Warehouse Bandung,SKU0037,Air Mineral Varian 01,Beverage,2,37,5,32.3,77,193,140,16.5,HIGH
+Warehouse Bandung,SKU0043,Susu Kedelai Varian 07,Beverage,2,43,5,29.1,48,90,70,20.6,HIGH
+Warehouse Jakarta,SKU0004,Saus Varian 04,Food,1,4,5,45.8,65,189,152,12.8,HIGH
+Warehouse Jakarta,SKU0014,Sabun Mandi Varian 02,Personal Care,1,14,5,40.9,71,222,193,11.0,HIGH
+Warehouse Surabaya,SKU0001,Biskuit Varian 01,Food,3,1,5,38.8,65,158,116,16.8,HIGH
+Warehouse Surabaya,SKU0014,Sabun Mandi Varian 02,Personal Care,3,14,5,37.7,27,219,188,4.3,HIGH
+Warehouse Surabaya,SKU0016,Pelembap Varian 04,Personal Care,3,16,5,54.8,22,242,173,3.8,HIGH
+Warehouse Surabaya,SKU0020,Sabun Cuci Tangan Varian 08,Personal Care,3,20,5,36.5,68,77,61,33.4,HIGH
+Warehouse Surabaya,SKU0032,Pewangi Ruang Varian 08,Home Care,3,32,5,36.3,54,110,97,16.7,HIGH
+Warehouse Jakarta,SKU0019,Sikat Gigi Varian 07,Personal Care,1,19,3,28.4,0,55,44,0.0,HIGH
+Warehouse Jakarta,SKU0026,Pewangi Pakaian Varian 02,Home Care,1,26,3,35.0,9,182,168,1.6,HIGH
+Warehouse Surabaya,SKU0029,Pembersih Kaca Varian 05,Home Care,3,29,3,27.8,2,75,61,1.0,HIGH
+Warehouse Jakarta,SKU0039,Minuman Isotonik Varian 03,Beverage,1,39,2,26.9,15,149,149,3.0,HIGH
+Warehouse Surabaya,SKU0002,Mi Instan Varian 02,Food,3,2,2,47.7,48,212,209,6.9,HIGH
+Warehouse Jakarta,SKU0007,Gula Varian 07,Food,1,7,1,34.0,0,64,64,0.0,HIGH
+Warehouse Bandung,SKU0006,Teh Varian 06,Food,2,6,0,27.5,8,42,42,5.7,HIGH
+Warehouse Bandung,SKU0021,Kapas Varian 09,Personal Care,2,21,0,20.5,3,21,21,4.3,HIGH
+Warehouse Jakarta,SKU0006,Teh Varian 06,Food,1,6,0,38.5,16,116,116,4.1,HIGH
+Warehouse Jakarta,SKU0008,Tepung Varian 08,Food,1,8,0,28.8,15,151,151,3.0,HIGH
+Warehouse Surabaya,SKU0030,Kantong Sampah Varian 06,Home Care,3,30,0,38.4,14,68,68,6.2,HIGH
+Warehouse Surabaya,SKU0038,Teh Botol Varian 02,Beverage,3,38,0,34.4,19,205,205,2.8,HIGH
+Warehouse Bandung,SKU0028,Sabun Cuci Piring Varian 04,Home Care,2,28,4,45.2,83,190,168,14.8,MEDIUM
+Warehouse Jakarta,SKU0002,Mi Instan Varian 02,Food,1,2,4,48.0,68,198,190,10.7,MEDIUM
+Warehouse Jakarta,SKU0013,Sampo Varian 01,Personal Care,1,13,4,31.8,87,158,134,19.5,MEDIUM
+Warehouse Jakarta,SKU0018,Tisu Wajah Varian 06,Personal Care,1,18,4,47.8,82,104,82,30.0,MEDIUM
+Warehouse Surabaya,SKU0019,Sikat Gigi Varian 07,Personal Care,3,19,4,36.7,62,77,63,29.5,MEDIUM
+Warehouse Surabaya,SKU0031,Pel Lantai Varian 07,Home Care,3,31,4,49.2,32,43,43,22.3,MEDIUM
+Warehouse Bandung,SKU0002,Mi Instan Varian 02,Food,2,2,3,53.2,79,189,179,13.2,MEDIUM
+Warehouse Jakarta,SKU0030,Kantong Sampah Varian 06,Home Care,1,30,3,43.5,15,65,61,7.4,MEDIUM
+Warehouse Surabaya,SKU0009,Minuman Serbuk Varian 09,Food,3,9,3,23.3,13,37,37,10.5,MEDIUM
+Warehouse Surabaya,SKU0026,Pewangi Pakaian Varian 02,Home Care,3,26,3,51.4,56,163,159,10.6,MEDIUM
+Warehouse Surabaya,SKU0044,Minuman Herbal Varian 08,Beverage,3,44,3,28.0,27,76,71,11.4,MEDIUM
+Warehouse Bandung,SKU0018,Tisu Wajah Varian 06,Personal Care,2,18,2,45.6,51,42,42,36.4,MEDIUM
+Warehouse Surabaya,SKU0008,Tepung Varian 08,Food,3,8,2,40.2,70,97,77,27.3,MEDIUM
+Warehouse Surabaya,SKU0042,Kopi Kaleng Varian 06,Beverage,3,42,2,59.9,45,37,37,36.5,MEDIUM
+Warehouse Bandung,SKU0016,Pelembap Varian 04,Personal Care,2,16,1,52.1,67,193,183,11.0,LOW
+Warehouse Jakarta,SKU0016,Pelembap Varian 04,Personal Care,1,16,1,45.2,36,132,126,8.6,LOW
+Warehouse Jakarta,SKU0029,Pembersih Kaca Varian 05,Home Care,1,29,1,39.0,23,57,48,14.4,LOW
+Warehouse Surabaya,SKU0018,Tisu Wajah Varian 06,Personal Care,3,18,1,38.3,59,118,118,15.0,LOW
+Warehouse Bandung,SKU0005,Kopi Varian 05,Food,2,5,0,40.6,30,79,79,11.4,LOW
+Warehouse Bandung,SKU0007,Gula Varian 07,Food,2,7,0,49.5,16,45,45,10.7,LOW
+Warehouse Bandung,SKU0009,Minuman Serbuk Varian 09,Food,2,9,0,56.4,34,26,26,39.2,LOW
+Warehouse Bandung,SKU0010,Camilan Varian 10,Food,2,10,0,31.8,23,25,25,27.6,LOW
+Warehouse Bandung,SKU0012,Selai Varian 12,Food,2,12,0,36.0,34,15,15,68.0,LOW
+Warehouse Bandung,SKU0017,Deodoran Varian 05,Personal Care,2,17,0,40.0,55,47,47,35.1,LOW
+Warehouse Bandung,SKU0022,Pembersih Wajah Varian 10,Personal Care,2,22,0,33.4,58,23,23,75.7,LOW
+Warehouse Bandung,SKU0023,Hand Lotion Varian 11,Personal Care,2,23,0,29.7,53,37,37,43.0,LOW
+Warehouse Bandung,SKU0024,Conditioner Varian 12,Personal Care,2,24,0,57.1,49,9,9,163.3,LOW
+Warehouse Bandung,SKU0030,Kantong Sampah Varian 06,Home Care,2,30,0,42.4,47,82,82,17.2,LOW
+Warehouse Bandung,SKU0032,Pewangi Ruang Varian 08,Home Care,2,32,0,51.1,80,66,66,36.4,LOW
+Warehouse Bandung,SKU0034,Pembersih Toilet Varian 10,Home Care,2,34,0,31.6,50,41,41,36.6,LOW
+Warehouse Bandung,SKU0036,Sikat Rumah Varian 12,Home Care,2,36,0,37.9,33,12,12,82.5,LOW
+Warehouse Bandung,SKU0042,Kopi Kaleng Varian 06,Beverage,2,42,0,57.6,77,66,66,35.0,LOW
+Warehouse Bandung,SKU0044,Minuman Herbal Varian 08,Beverage,2,44,0,35.9,36,60,60,18.0,LOW
+Warehouse Bandung,SKU0046,Minuman Jahe Varian 10,Beverage,2,46,0,32.7,17,26,26,19.6,LOW
+Warehouse Bandung,SKU0047,Minuman Cokelat Varian 11,Beverage,2,47,0,38.7,48,4,4,360.0,LOW
+Warehouse Bandung,SKU0048,Yogurt Drink Varian 12,Beverage,2,48,0,35.0,26,58,58,13.4,LOW
+Warehouse Jakarta,SKU0005,Kopi Varian 05,Food,1,5,0,48.8,54,45,45,36.0,LOW
+Warehouse Jakarta,SKU0010,Camilan Varian 10,Food,1,10,0,32.0,32,0,0,,LOW
+Warehouse Jakarta,SKU0011,Susu UHT Varian 11,Food,1,11,0,39.1,30,27,27,33.3,LOW
+Warehouse Jakarta,SKU0012,Selai Varian 12,Food,1,12,0,30.3,24,31,31,23.2,LOW
+Warehouse Jakarta,SKU0017,Deodoran Varian 05,Personal Care,1,17,0,42.9,32,37,37,25.9,LOW
+Warehouse Jakarta,SKU0020,Sabun Cuci Tangan Varian 08,Personal Care,1,20,0,38.6,65,22,22,88.6,LOW
+Warehouse Jakarta,SKU0021,Kapas Varian 09,Personal Care,1,21,0,24.0,29,45,45,19.3,LOW
+Warehouse Jakarta,SKU0022,Pembersih Wajah Varian 10,Personal Care,1,22,0,30.1,14,40,40,10.5,LOW
+Warehouse Jakarta,SKU0023,Hand Lotion Varian 11,Personal Care,1,23,0,28.3,54,8,8,202.5,LOW
+Warehouse Jakarta,SKU0024,Conditioner Varian 12,Personal Care,1,24,0,29.3,17,43,43,11.9,LOW
+Warehouse Jakarta,SKU0031,Pel Lantai Varian 07,Home Care,1,31,0,49.4,16,41,41,11.7,LOW
+Warehouse Jakarta,SKU0032,Pewangi Ruang Varian 08,Home Care,1,32,0,42.8,63,35,35,54.0,LOW
+Warehouse Jakarta,SKU0033,Spons Varian 09,Home Care,1,33,0,42.5,34,15,15,68.0,LOW
+Warehouse Jakarta,SKU0034,Pembersih Toilet Varian 10,Home Care,1,34,0,45.0,41,19,19,64.7,LOW
+Warehouse Jakarta,SKU0035,Pewangi Mobil Varian 11,Home Care,1,35,0,31.2,43,22,22,58.6,LOW
+Warehouse Jakarta,SKU0036,Sikat Rumah Varian 12,Home Care,1,36,0,27.0,11,20,20,16.5,LOW
+Warehouse Jakarta,SKU0042,Kopi Kaleng Varian 06,Beverage,1,42,0,54.2,53,29,29,54.8,LOW
+Warehouse Jakarta,SKU0044,Minuman Herbal Varian 08,Beverage,1,44,0,43.7,77,68,68,34.0,LOW
+Warehouse Jakarta,SKU0045,Air Kelapa Varian 09,Beverage,1,45,0,38.8,21,39,39,16.2,LOW
+Warehouse Jakarta,SKU0046,Minuman Jahe Varian 10,Beverage,1,46,0,32.2,60,12,12,150.0,LOW
+Warehouse Jakarta,SKU0047,Minuman Cokelat Varian 11,Beverage,1,47,0,47.0,41,11,11,111.8,LOW
+Warehouse Surabaya,SKU0006,Teh Varian 06,Food,3,6,0,45.7,82,18,18,136.7,LOW
+Warehouse Surabaya,SKU0010,Camilan Varian 10,Food,3,10,0,35.1,60,43,43,41.9,LOW
+Warehouse Surabaya,SKU0012,Selai Varian 12,Food,3,12,0,48.5,45,4,4,337.5,LOW
+Warehouse Surabaya,SKU0017,Deodoran Varian 05,Personal Care,3,17,0,39.8,34,44,44,23.2,LOW
+Warehouse Surabaya,SKU0021,Kapas Varian 09,Personal Care,3,21,0,43.7,35,10,10,105.0,LOW
+Warehouse Surabaya,SKU0022,Pembersih Wajah Varian 10,Personal Care,3,22,0,38.3,30,13,13,69.2,LOW
+Warehouse Surabaya,SKU0023,Hand Lotion Varian 11,Personal Care,3,23,0,35.3,42,18,18,70.0,LOW
+Warehouse Surabaya,SKU0024,Conditioner Varian 12,Personal Care,3,24,0,49.8,32,28,28,34.3,LOW
+Warehouse Surabaya,SKU0033,Spons Varian 09,Home Care,3,33,0,36.1,35,16,16,65.6,LOW
+Warehouse Surabaya,SKU0034,Pembersih Toilet Varian 10,Home Care,3,34,0,44.3,35,25,25,42.0,LOW
+Warehouse Surabaya,SKU0035,Pewangi Mobil Varian 11,Home Care,3,35,0,22.0,16,57,57,8.4,LOW
+Warehouse Surabaya,SKU0036,Sikat Rumah Varian 12,Home Care,3,36,0,34.4,25,15,15,50.0,LOW
+Warehouse Surabaya,SKU0041,Soda Varian 05,Beverage,3,41,0,25.9,43,48,48,26.9,LOW
+Warehouse Surabaya,SKU0043,Susu Kedelai Varian 07,Beverage,3,43,0,42.7,41,6,6,205.0,LOW
+Warehouse Surabaya,SKU0045,Air Kelapa Varian 09,Beverage,3,45,0,22.8,16,28,28,17.1,LOW
+Warehouse Surabaya,SKU0046,Minuman Jahe Varian 10,Beverage,3,46,0,27.3,60,22,22,81.8,LOW
+Warehouse Surabaya,SKU0047,Minuman Cokelat Varian 11,Beverage,3,47,0,34.6,29,17,17,51.2,LOW

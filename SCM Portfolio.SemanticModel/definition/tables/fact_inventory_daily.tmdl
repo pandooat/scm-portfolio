@@ -1,0 +1,114 @@
+table fact_inventory_daily
+	lineageTag: e3f1b209-c16b-4a3f-85d1-056993a748ba
+
+	column inventory_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 4442c801-6281-4b63-9045-3fcc81c5249b
+		summarizeBy: sum
+		sourceColumn: inventory_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column snapshot_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: f1e2ed2c-cb58-4906-ac4d-aa0f61af5fb3
+		summarizeBy: none
+		sourceColumn: snapshot_date
+
+		variation Variation
+			isDefault
+			relationship: 581b4fb4-4db0-4dbb-9b0a-5299f2b808b9
+			defaultHierarchy: LocalDateTable_a738beb5-7650-4011-a805-c32ff6b5505a.'Hierarki Tanggal'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column warehouse_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 0b848d84-f638-40d2-85a8-679e60977a6f
+		summarizeBy: none
+		sourceColumn: warehouse_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 64de8ba6-c5c7-4aae-87a7-9adeb9f62a0d
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column opening_qty
+		dataType: int64
+		formatString: 0
+		lineageTag: 9e4922d2-fa1f-4cf3-b43e-f2c61d9a156d
+		summarizeBy: sum
+		sourceColumn: opening_qty
+
+		annotation SummarizationSetBy = Automatic
+
+	column received_qty
+		dataType: int64
+		formatString: 0
+		lineageTag: a5ba3fd0-8dc4-4de4-858d-68a6b852e841
+		summarizeBy: sum
+		sourceColumn: received_qty
+
+		annotation SummarizationSetBy = Automatic
+
+	column shipped_qty
+		dataType: int64
+		formatString: 0
+		lineageTag: ca3345b8-5084-4098-b7bb-579c347e6620
+		summarizeBy: sum
+		sourceColumn: shipped_qty
+
+		annotation SummarizationSetBy = Automatic
+
+	column closing_qty
+		dataType: int64
+		formatString: 0
+		lineageTag: 6cbbc25f-5f0a-4a9c-a1e5-51cb76aef8e4
+		summarizeBy: sum
+		sourceColumn: closing_qty
+
+		annotation SummarizationSetBy = Automatic
+
+	column inventory_value
+		dataType: int64
+		formatString: 0
+		lineageTag: 18130e6d-744a-4b33-907d-2e57f4ee7ce2
+		summarizeBy: sum
+		sourceColumn: inventory_value
+
+		annotation SummarizationSetBy = Automatic
+
+	column stockout_flag
+		dataType: int64
+		formatString: 0
+		lineageTag: 4fa66a78-3676-4b97-9d28-df6fbef963b0
+		summarizeBy: sum
+		sourceColumn: stockout_flag
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_inventory_daily = m
+		mode: import
+		source =
+				let
+				    Sumber = Csv.Document(File.Contents("D:\DSG Project\SCM Project\SCM_Portfolio_Starter\01_Data\fact_inventory_daily.csv"),[Delimiter=",", Columns=10, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Header yang Ditingkatkan" = Table.PromoteHeaders(Sumber, [PromoteAllScalars=true]),
+				    #"Jenis yang Diubah" = Table.TransformColumnTypes(#"Header yang Ditingkatkan",{{"inventory_id", Int64.Type}, {"snapshot_date", type date}, {"warehouse_id", Int64.Type}, {"product_id", Int64.Type}, {"opening_qty", Int64.Type}, {"received_qty", Int64.Type}, {"shipped_qty", Int64.Type}, {"closing_qty", Int64.Type}, {"inventory_value", Int64.Type}, {"stockout_flag", Int64.Type}})
+				in
+				    #"Jenis yang Diubah"
+
+	annotation PBI_NavigationStepName = Navigasi
+
+	annotation PBI_ResultType = Table
+

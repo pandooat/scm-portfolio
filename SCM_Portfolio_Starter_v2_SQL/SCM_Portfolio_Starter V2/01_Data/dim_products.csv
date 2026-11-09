@@ -1,0 +1,49 @@
+﻿product_id,sku,product_name,category,supplier_id,unit_cost,unit_price,demand_segment
+1,SKU0001,Biskuit Varian 01,Food,6,13500,18500,Fast
+2,SKU0002,Mi Instan Varian 02,Food,3,38500,58500,Fast
+3,SKU0003,Sereal Varian 03,Food,8,12500,20500,Fast
+4,SKU0004,Saus Varian 04,Food,5,44000,66500,Fast
+5,SKU0005,Kopi Varian 05,Food,2,32500,51500,Medium
+6,SKU0006,Teh Varian 06,Food,7,41000,66000,Medium
+7,SKU0007,Gula Varian 07,Food,4,37000,58000,Medium
+8,SKU0008,Tepung Varian 08,Food,1,43500,62000,Medium
+9,SKU0009,Minuman Serbuk Varian 09,Food,6,6000,9000,Slow
+10,SKU0010,Camilan Varian 10,Food,3,13000,17500,Slow
+11,SKU0011,Susu UHT Varian 11,Food,8,12000,17000,Slow
+12,SKU0012,Selai Varian 12,Food,5,49500,71500,Slow
+13,SKU0013,Sampo Varian 01,Personal Care,2,26000,34000,Fast
+14,SKU0014,Sabun Mandi Varian 02,Personal Care,7,22000,30500,Fast
+15,SKU0015,Pasta Gigi Varian 03,Personal Care,4,28500,45500,Fast
+16,SKU0016,Pelembap Varian 04,Personal Care,1,38500,58500,Fast
+17,SKU0017,Deodoran Varian 05,Personal Care,6,27500,34500,Medium
+18,SKU0018,Tisu Wajah Varian 06,Personal Care,3,40000,54000,Medium
+19,SKU0019,Sikat Gigi Varian 07,Personal Care,8,35000,45000,Medium
+20,SKU0020,Sabun Cuci Tangan Varian 08,Personal Care,5,47000,72500,Medium
+21,SKU0021,Kapas Varian 09,Personal Care,2,42500,58000,Slow
+22,SKU0022,Pembersih Wajah Varian 10,Personal Care,7,29500,41000,Slow
+23,SKU0023,Hand Lotion Varian 11,Personal Care,4,33000,41500,Slow
+24,SKU0024,Conditioner Varian 12,Personal Care,1,43000,63500,Slow
+25,SKU0025,Deterjen Varian 01,Home Care,6,13000,18500,Fast
+26,SKU0026,Pewangi Pakaian Varian 02,Home Care,3,44000,71500,Fast
+27,SKU0027,Pembersih Lantai Varian 03,Home Care,8,31000,51000,Fast
+28,SKU0028,Sabun Cuci Piring Varian 04,Home Care,5,22500,36000,Fast
+29,SKU0029,Pembersih Kaca Varian 05,Home Care,2,42000,69000,Medium
+30,SKU0030,Kantong Sampah Varian 06,Home Care,7,36500,53000,Medium
+31,SKU0031,Pel Lantai Varian 07,Home Care,4,7500,11000,Medium
+32,SKU0032,Pewangi Ruang Varian 08,Home Care,1,14000,22500,Medium
+33,SKU0033,Spons Varian 09,Home Care,6,39000,63500,Slow
+34,SKU0034,Pembersih Toilet Varian 10,Home Care,3,12500,19500,Slow
+35,SKU0035,Pewangi Mobil Varian 11,Home Care,8,33000,47500,Slow
+36,SKU0036,Sikat Rumah Varian 12,Home Care,5,36500,59500,Slow
+37,SKU0037,Air Mineral Varian 01,Beverage,2,13500,20500,Fast
+38,SKU0038,Teh Botol Varian 02,Beverage,7,35000,53500,Fast
+39,SKU0039,Minuman Isotonik Varian 03,Beverage,4,40500,54000,Fast
+40,SKU0040,Jus Buah Varian 04,Beverage,1,31500,48000,Fast
+41,SKU0041,Soda Varian 05,Beverage,6,25500,37500,Medium
+42,SKU0042,Kopi Kaleng Varian 06,Beverage,3,47000,68000,Medium
+43,SKU0043,Susu Kedelai Varian 07,Beverage,8,36500,58000,Medium
+44,SKU0044,Minuman Herbal Varian 08,Beverage,5,31500,44500,Medium
+45,SKU0045,Air Kelapa Varian 09,Beverage,2,24500,39500,Slow
+46,SKU0046,Minuman Jahe Varian 10,Beverage,7,6500,8000,Slow
+47,SKU0047,Minuman Cokelat Varian 11,Beverage,4,47500,77000,Slow
+48,SKU0048,Yogurt Drink Varian 12,Beverage,1,35000,55500,Slow

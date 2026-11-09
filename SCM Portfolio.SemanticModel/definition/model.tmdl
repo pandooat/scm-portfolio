@@ -1,0 +1,40 @@
+model Model
+	culture: id-ID
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["dim_calendar","dim_customers","dim_suppliers","dim_warehouses","fact_inventory_daily","fact_purchase_order_lines","fact_sales_order_lines","fact_shipments","dim_products"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table dim_calendar
+ref table DateTableTemplate_d1ede16c-1511-4722-a3fb-d9af21d136b9
+ref table LocalDateTable_45fdb7f7-8c96-4585-9723-777f98479caf
+ref table LocalDateTable_e2f6d85a-1abe-4ac7-98d5-5e629bceb9e8
+ref table dim_customers
+ref table dim_suppliers
+ref table dim_warehouses
+ref table fact_inventory_daily
+ref table LocalDateTable_a738beb5-7650-4011-a805-c32ff6b5505a
+ref table fact_purchase_order_lines
+ref table LocalDateTable_469289e1-8a7b-4213-90e6-2d18df4c713b
+ref table LocalDateTable_7f502f5f-a72c-4655-88ea-2d0152dd9401
+ref table LocalDateTable_c79f0265-b935-433a-b6af-2824939481d3
+ref table fact_sales_order_lines
+ref table LocalDateTable_881b8f8c-1dfe-42df-a406-532af769796c
+ref table fact_shipments
+ref table LocalDateTable_37dcd58f-75e9-4057-afa3-98454f3a4d0f
+ref table LocalDateTable_db240599-db70-4447-b216-b4c93b336470
+ref table LocalDateTable_c2cf4b1d-3ef3-4035-9999-80c229a81404
+ref table LocalDateTable_1c5f8907-8e84-42e4-bb46-1e8e34be6fa4
+ref table dim_products
+ref table _Measures
+
+ref cultureInfo id-ID
+

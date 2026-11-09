@@ -1,0 +1,178 @@
+table fact_shipments
+	lineageTag: 4db56574-f5e7-48cf-923d-825eb1944d41
+
+	column shipment_id
+		dataType: int64
+		formatString: 0
+		lineageTag: fc04f9b4-9c78-445d-bad4-39151fc8022c
+		summarizeBy: sum
+		sourceColumn: shipment_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_id
+		dataType: string
+		lineageTag: 4a99e245-ea64-4c9d-b1bd-b72f7e44e26f
+		summarizeBy: none
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 16e6ffcc-e27d-45f7-aa4c-3f0f6cab6c4e
+		summarizeBy: none
+		sourceColumn: order_date
+
+		variation Variation
+			isDefault
+			relationship: 51791c0d-4f63-4b4f-9a31-7ba67fc0437c
+			defaultHierarchy: LocalDateTable_37dcd58f-75e9-4057-afa3-98454f3a4d0f.'Hierarki Tanggal'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column customer_id
+		dataType: int64
+		formatString: 0
+		lineageTag: e0f76523-f7d0-4391-ab0a-91d247c0339a
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column warehouse_id
+		dataType: int64
+		formatString: 0
+		lineageTag: c8c868c9-2db7-431b-8859-6513b53ffcc0
+		summarizeBy: sum
+		sourceColumn: warehouse_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column carrier_name
+		dataType: string
+		lineageTag: fee486ed-8442-4e99-a233-ad55219e5202
+		summarizeBy: none
+		sourceColumn: carrier_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column promised_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: a2c68e0b-4a4b-42b4-af32-47fde5fff4ff
+		summarizeBy: none
+		sourceColumn: promised_date
+
+		variation Variation
+			isDefault
+			relationship: e6e4ea89-93e3-442d-a6c5-e22767d1f310
+			defaultHierarchy: LocalDateTable_db240599-db70-4447-b216-b4c93b336470.'Hierarki Tanggal'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column shipped_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ba9818d9-645c-40bc-99b3-897c2aff7707
+		summarizeBy: none
+		sourceColumn: shipped_date
+
+		variation Variation
+			isDefault
+			relationship: ff3793ec-d1d5-43a4-92b1-351c8a3f3477
+			defaultHierarchy: LocalDateTable_c2cf4b1d-3ef3-4035-9999-80c229a81404.'Hierarki Tanggal'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column delivered_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 58525e53-31cd-41ca-b876-4926aed68159
+		summarizeBy: none
+		sourceColumn: delivered_date
+
+		variation Variation
+			isDefault
+			relationship: 3a695579-e965-4cca-a8cc-db55f15591f8
+			defaultHierarchy: LocalDateTable_1c5f8907-8e84-42e4-bb46-1e8e34be6fa4.'Hierarki Tanggal'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ordered_qty
+		dataType: int64
+		formatString: 0
+		lineageTag: 04d740bc-3257-4c26-8e56-3a849f0d36c3
+		summarizeBy: sum
+		sourceColumn: ordered_qty
+
+		annotation SummarizationSetBy = Automatic
+
+	column shipped_qty
+		dataType: int64
+		formatString: 0
+		lineageTag: 8ed0e3ea-3b49-4ae3-b8b2-b6e8fce424c7
+		summarizeBy: sum
+		sourceColumn: shipped_qty
+
+		annotation SummarizationSetBy = Automatic
+
+	column on_time_flag
+		dataType: int64
+		formatString: 0
+		lineageTag: f1331a76-3738-4991-bcd5-9631e6aae8b8
+		summarizeBy: sum
+		sourceColumn: on_time_flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column in_full_flag
+		dataType: int64
+		formatString: 0
+		lineageTag: fef32ba9-4814-4c9a-a643-f4ab5fa9203a
+		summarizeBy: sum
+		sourceColumn: in_full_flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column otif_flag
+		dataType: int64
+		formatString: 0
+		lineageTag: 50999281-ec21-4e91-8491-36cad87b76f3
+		summarizeBy: sum
+		sourceColumn: otif_flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column freight_cost
+		dataType: int64
+		formatString: 0
+		lineageTag: 6c82fb00-d2b5-46ec-b309-2e37b508c1ae
+		summarizeBy: sum
+		sourceColumn: freight_cost
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_shipments = m
+		mode: import
+		source =
+				let
+				    Sumber = Csv.Document(File.Contents("D:\DSG Project\SCM Project\SCM_Portfolio_Starter\01_Data\fact_shipments.csv"),[Delimiter=",", Columns=15, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Header yang Ditingkatkan" = Table.PromoteHeaders(Sumber, [PromoteAllScalars=true]),
+				    #"Jenis yang Diubah" = Table.TransformColumnTypes(#"Header yang Ditingkatkan",{{"shipment_id", Int64.Type}, {"order_id", type text}, {"order_date", type date}, {"customer_id", Int64.Type}, {"warehouse_id", Int64.Type}, {"carrier_name", type text}, {"promised_date", type date}, {"shipped_date", type date}, {"delivered_date", type date}, {"ordered_qty", Int64.Type}, {"shipped_qty", Int64.Type}, {"on_time_flag", Int64.Type}, {"in_full_flag", Int64.Type}, {"otif_flag", Int64.Type}, {"freight_cost", Int64.Type}})
+				in
+				    #"Jenis yang Diubah"
+
+	annotation PBI_NavigationStepName = Navigasi
+
+	annotation PBI_ResultType = Table
+
